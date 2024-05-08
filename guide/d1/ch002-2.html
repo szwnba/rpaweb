@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RPA简介_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a><ol class="toc"><li id="toc-li-3"><a href="ch002-1.html?version=0.6422463797095322#rpa基础知识"><span class="section-header-number">1.1</span> RPA基础知识</a></li><li id="toc-li-4"><a href="ch002-1.html?version=0.6422463797095322#rpa平台介绍"><span class="section-header-number">1.2</span> RPA平台介绍</a></li><li id="toc-li-5"><a href="ch002-1.html?version=0.6422463797095322#uibot发展历程"><span class="section-header-number">1.3</span> UiBot发展历程</a></li><li id="toc-li-6"><a href="ch002-1.html?version=0.6422463797095322#rpa和ai"><span class="section-header-number">1.4</span> RPA和AI</a></li><li id="toc-li-7"><a href="ch002-1.html?version=0.6422463797095322#后续内容"><span class="section-header-number">1.5</span> 后续内容</a></li></ol></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="rpa简介">
+<h1><span class="header-section-number">1</span> RPA简介</h1>
+<p>欢迎您选择使用UiBot！</p>
+<p>如果您听说过RPA，或者做过RPA方面的项目，那么恭喜您做出了一个明智的选择！因为截至发稿时间为止，在诸多国内RPA平台中，UiBot的设计理念和技术实现都处于遥遥领先的地位，即使与国外产品相比也不遑多让。如果您对RPA已经比较熟悉，您可以跳过本章，直接开始感受UiBot的魅力。</p>
+<p>如果您没有听说过RPA，俗话说：磨刀不误砍柴功，那就先通过本章，了解一下RPA吧！</p>
+<section class="level2" id="rpa基础知识">
+<h2><span class="header-section-number">1.1</span> RPA基础知识</h2>
+<p>我们平时在使用计算机软件时，常常遇到大量机械重复而又繁琐的操作。如果都依靠人工来操作，不仅很容易感到疲劳和厌烦，还经常会出错。比如，对于财务工作人员来说，常常需要使用网上银行，给很多客户转账，转一笔账也许并不算麻烦，但如果每天要转成百上千笔账，那就是一件摧残人性的工作了。更可怕的是，有时候头晕眼花，在“金额”一栏中多输入一个零……不必吃惊，这样的事情已经发生过很多次了。</p>
+<p>为了应对财务领域这种简单重复的体力劳动，在2017年，作为财务方面的绝对权威，国际著名的四大会计师事务所（安永、普华永道、德勤、毕马威）先后把国外已有初步应用的“财务机器人”概念引入中国，试图制造一个“<strong>软件机器人</strong>”，或者叫“<strong>数字化劳动力</strong>”，自动完成这些计算机上的机械重复工作。</p>
+<p>后来，大家逐渐发现：其实“软件机器人”在财务之外的领域也大有可为，物流、销售、人力资源等很多工作领域中都大量存在简单重复的体力劳动，而偷懒是人类共同的天性，于是，这些软件机器人很快在国外和国内的诸多领域都得到了大量应用，而且有愈演愈烈之势。当然，此时已不局限于财务领域了，“财务机器人”的说法显得有些不合时宜。于是，从美国开始，大家普遍把制造各种“软件机器人”当成了一个新的行业，称之为Robotic Process Automation，中文翻译为机器人流程自动化，简称<strong>RPA</strong>。</p>
+<p>实际上，软件的流程自动化并不是一个新概念，比如微软的Office办公软件中，早在二十多年前就自带了“宏”（Macro）的功能，可以自动化操作Office来工作。</p>
+<figure>
+<img alt="Office的“宏”功能" src="../../doc/guide/d1/media/file0.png" style="width:80.0%"><figcaption>Office的“宏”功能</figcaption>
+</figure>
+<p>但是，RPA和早期的软件流程自动化有所不同，RPA强调对已有系统的“无侵入”，这是什么意思呢？就是说，如果一个软件本身不支持自动化的功能，那么RPA就可以大显身手了。RPA不需要对这个软件进行任何修改，而是通过模拟人的阅读和操作软件的方式，让这个软件实现自动化。不仅如此，如果有两个、三个甚至更多的软件需要一起工作，如果采用传统的Office“宏”的方式，那就必须让这些软件都进行修改，实现一套统一的接口才行。有一个不改，流程就不能自动化，这显然有点儿强人所难，毕竟这些软件很可能不是同一个厂商开发的！但是，如果采用RPA，这些软件 <strong>全部</strong> 都不需要经过任何修改，RPA会制造一个“软件机器人”，模拟人的阅读和操作，让“软件机器人”自动完成这个流程，这种“无侵入”的特点是RPA的核心魅力之一。</p>
+<p>RPA即将成为一个新的行业，这个说法一点儿也不夸张。在国外，RPA领域已经出现了市值数百亿美金的上市企业，专门为其它行业提供RPA的产品和服务。国外的产品做得很不错，能够较好的满足RPA的需求，但是到了中国，或多或少还是有些“水土不服”，比如对中文的支持，对国内银行网银等软件的支持，都差强人意；并且这些公司还缺乏本土化的技术服务，出了问题不能及时得到响应。在这种情况下，选择<strong>北京来也网络科技有限公司</strong>出品的UiBot来做RPA，就是您最明智的选择了。</p>
+</section>
+<section class="level2" id="rpa平台介绍">
+<h2><span class="header-section-number">1.2</span> RPA平台介绍</h2>
+<p>UiBot是一种RPA平台，那么什么是RPA平台呢？且听我慢慢解释：</p>
+<p>为了实现RPA，即机器人操作的流程自动化，打造一个前面所说的“软件机器人”，通常需要如下几个步骤：</p>
+<ol type="1">
+<li>梳理和分析现有的工作流程，看看什么地方可以用“软件机器人”来改造，实现自动化；</li>
+<li>从技术上实现“软件机器人”，让它能够阅读和操作流程中所涉及到的所有软件；</li>
+<li>把“软件机器人”部署到实际工作环境中，启动机器人开始工作，监控机器人的运行状况，如果出现问题还要及时处理。</li>
+</ol>
+<p>第一步通常由业务专家来做，比如在财务领域，就需要财务专家来进行财务工作流程的梳理和分析；第二步通常由IT专家来做，对于这些编程高手来说，用类似Python这样强大的编程语言来实现一个模拟人类工作的机器人，并非难事；第三步通常由普通工作人员来做，只要按一个按钮，启动机器人，就可以在旁边喝茶刷手机了，一切都很美好，对不对？</p>
+<p>可是事实并非如此。第一步，业务专家梳理和分析流程，没问题。第二步，问题来了，术业有专攻，IT专家常常沉浸在数字化的世界里，对业务一窍不通，根本不理解业务专家梳理的流程是怎么回事儿，无从下手！第三步，问题更大了，普通工作人员又不懂IT，让他们去启动机器人还行，出现问题怎么解决？只能呼叫IT专家紧急支援，如果支援不及时，可能就耽误了工作。</p>
+<p>比如，笔者自己是IT技术出身，见了财务领域的“台账”、“交易性金融资产”这样的名词就头大；反之，笔者耳熟能详的“句柄”、“线程”等概念，对于大多数财务专家来说，恐怕也是一头雾水，更别提普通工作人员了。</p>
+<p>怎么办呢？RPA的理念是：</p>
+<ul>
+<li>打造RPA平台，把一些常见的RPA功能做成半成品，就像方便面等方便食品一样；</li>
+<li>让业务专家站在RPA平台这个巨人的肩膀上，自己就能做出机器人，难度就像泡一碗方便面一样；</li>
+<li>让普通工作人员也能看懂机器人的大致原理，必要的时候还可以修改，难度就像给方便面加一点点调料一样，根本不需要求助IT专家；</li>
+<li>从此，“软件机器人”的生产过程不再需要IT专家参与，世界重归美好！</li>
+</ul>
+<p>为了实现上述理念，一般的RPA平台至少会包含以下三个组成部分：</p>
+<ul>
+<li>开发工具：主要用来制作“软件机器人”，当然也可以运行和调试这些机器人；</li>
+<li>运行工具：当开发完成后，普通用户使用RPA平台，来运行搭建好的机器人，也可以查阅运行结果；</li>
+<li>控制中心：当需要在多台电脑上运行”软件机器人“的时候，可以对这些”软件机器人“进行集中控制，比如统一分发，统一设定启动条件等。</li>
+</ul>
+<p>啰嗦了这么多，终于带出 <strong>“RPA平台”</strong> 的概念了。所谓RPA平台，就是把“软件机器人”分解成很多零件，让不懂IT的业务专家能以搭积木的方式，把这些零件在自己的工作台上搭起来，而不需要IT人员的参与，让普通工作人员能看到机器人的基本原理和执行的情况，还能进行简单的维护。</p>
+<p>所以，RPA平台的关键指标是：</p>
+<ul>
+<li>要足够<strong>强大</strong>，零件数量要多，复杂的场景也能应对；</li>
+<li>要足够<strong>简单</strong>，不需要IT专家的参与，普通人就可以轻松掌握；</li>
+<li>要足够<strong>快捷</strong>，普通人稍微熟练一些以后，可以用最便捷的方式，快速实现自己的机器人。</li>
+</ul>
+<p>为了实现这些指标，各种RPA平台作出了很多努力，但效果仍然差强人意。主要是因为这些指标往往是相互矛盾的，按下葫芦浮起瓢，想要强大就很难简单，想要简单又很难快捷。比如有的RPA平台直接让大家用Python编程语言来实现RPA，因为Python本身就足够强大，可是术业有专攻，业务专家和普通用户要精通Python，恐怕不那么容易。所以，这样“剑走偏锋”的RPA平台输掉了简单和快捷这两项指标，结果自然是“走火入魔”。</p>
+<p>UiBot也是一种RPA平台，为了在RPA平台的这三个关键指标上取得平衡，UiBot作出了大量的努力。有些努力您能够从软件界面中看到，有些努力您可能看不到，比如针对一些关键的设计理念，UiBot的设计人员曾花费半年的时间深入调研和反复讨论，几易其稿，才终于拿出一个相对完善的方案。所以，我们很自信地说UiBot在国内的RPA平台中处于遥遥领先的地位，是因为产品经过精心打磨，三个关键指标都达到了比较满意的程度。</p>
+<p>当然，仅凭努力还不够。实际上，UiBot的核心团队从2001年开始，就在做流程自动化方面的事情了，到今天为止已经过去了二十余年，所以才能积累丰富的经验，在一些关键点的设计和研发上把握得游刃有余。这也是UiBot在产品设计和技术实现上足够领先的资本。</p>
+</section>
+<section class="level2" id="uibot发展历程">
+<h2><span class="header-section-number">1.3</span> UiBot发展历程</h2>
+<p>前面提到，在财务、物流、销售、人力资源等很多领域，都存在大量简单重复的软件操作，甚至到了摧残人性的地步。但实际上，早在上个世纪末，这种摧残人性的软件已经在游戏领域大量出现了。游戏其实也是一个需要人来完成的流程，但是，很多游戏开发者的设计水平不够，又希望玩家能在游戏中停留尽可能多的时间，所以故意把简单的流程重复无数遍，玩家苦不堪言。</p>
+<p>于是，针对游戏领域的“软件机器人”应运而生，其中最著名的是2001年问世的“按键精灵”。按键精灵最早在Windows电脑上运行，针对Windows客户端游戏进行自动化操作；从2009年起，出现了“网页版按键精灵”，针对网页游戏进行自动化操作；从2013年起，又出现了“手机版按键精灵”，针对Android手机上的游戏进行自动化操作。这样一套产品体系，把主流游戏一网打尽，其技术积累之深厚可见一斑。</p>
+<p>但按键精灵的成功决不在于技术上的优势，而是其“简单易用”的设计理念。按键精灵本身不是一个软件机器人，而是软件机器人的制造工具，这套工具要足够容易上手，让不是IT专家的游戏玩家也能轻松掌握，才算是达到“及格线”。在这一点上，按键精灵做得很成功，目前已经有几万名游戏玩家能够熟练的用按键精灵制造自己的“软件机器人”，并分享给更多的人使用，而这些玩家大多数并不精通IT技术，甚至没有接受过高等教育。</p>
+<p>从某种意义上讲，2001年出品的“按键精灵”完全可以看作是国内RPA的先驱。实际上，当2017年RPA的概念在国内开始生根发芽的时候，国内有很多介绍RPA的文章，都会用按键精灵来举例子。虽然按键精灵本身是针对游戏设计的，和财务等领域的“软件机器人”有所不同，但因为名气大，容易理解，用来阐述RPA的概念再合适不过了。</p>
+<p>那么，按键精灵的制作团队现在在做什么呢？他们在RPA方面有无斩获呢？当然有，他们认真分析了RPA的具体需求，对按键精灵进行了一次几乎推倒重来的大革新，既保留了团队十几年以来的积累，又积极满足RPA的需求，打造出一款强大、易用、快捷的RPA平台。没错，这就是UiBot！</p>
+<p>现在，您终于明白为什么UiBot有资格傲视群雄了吧？</p>
+<p>由于面向的领域不同，按键精灵和UiBot从基本理念上有很多不同点，技术上的差异更是天翻地覆：</p>
+<ul>
+<li>按键精灵针对个人用户的需求做了很多优化，能制作用户界面，能设定热键，甚至能支持手机App的自动化操作，这些功能在UiBot中都被删掉了；</li>
+<li>UiBot针对企业用户做了很多优化，支持SAP自动化操作，能以流程图的方式展现自动化流程，支持分布式的控制中心，这些都是按键精灵不具备的；</li>
+<li>按键精灵的主要指标是运行速度快，因为游戏画面瞬息万变，慢了会跟不上游戏的节奏；软件体积小，因为个人用户的下载带宽有限，这些指标在UiBot中并不重要；</li>
+<li>UiBot的主要指标是运行稳定性好，容错性强，遇到特殊状况宁可停下来，也不盲目操作，另外每次运行都有迹可循，这些指标都远远超过了按键精灵。</li>
+</ul>
+<p>所以，到底用按键精灵还是UiBot，要看您的具体需求：如果是游戏领域，推荐您仍然使用按键精灵；如果是RPA，果断选择UiBot。</p>
+</section>
+<section class="level2" id="rpa和ai">
+<h2><span class="header-section-number">1.4</span> RPA和AI</h2>
+<p>RPA可以帮我们做很多事情，凡是在计算机上进行的简单、重复的操作，都可以考虑使用RPA来代替。但是，有一些重复而不那么简单的操作，是RPA无能为力的，仍然不得不由人工来完成。比如，我们可以依靠RPA，自动收邮件、回邮件，但它只能回复固定内容的邮件。如果要判断对方的意图，根据意图回复不同的邮件，RPA就做不到了。</p>
+<p>人工智能（AI）在近年来得到了飞速的发展。比如市面上很多手机App都支持依靠人脸识别来进行身份认证，或者以对话的方式向手机发号施令，等等。这些都是人工智能的经典使用场景。那么，我们能不能把AI和RPA相结合，让AI来识别邮件内容的大致意图，然后告诉RPA，再让RPA去根据不同的意图，回复不同内容的邮件呢？</p>
+<p>答案是肯定的！<a href="../../sample/20211110-185549.mp4">这个视频</a>就生动地向我们演示了这一场景。它甚至更进一步，除了收邮件和回邮件之外，还让RPA和AI一起做更多、更有趣的事情。</p>
+<p>随着RPA的发展，大家越来越深入地认识到：RPA本身也能做很多工作，但它是“无脑”的，如果和AI配合起来，RPA模拟人的双手，让AI模拟人的大脑。两者合力形成的“软件机器人”，就像下图所展示的一样，有脑有手，应用场景自然更加广阔。</p>
+<figure>
+<img alt="软件机器人的双手和大脑" src="../../doc/guide/d1/media/file1.png"><figcaption>软件机器人的双手和大脑</figcaption>
+</figure>
+<p>和按键精灵相比，UiBot也加入了大量AI的功能，从识别发票、身份证，到文本信息分类，文本内容抽取等，都是UiBot的拿手好戏。在后续章节中，我们会逐一教大家怎么用这些AI功能。是不是想想还有些小激动呢！</p>
+</section>
+<section class="level2" id="后续内容">
+<h2><span class="header-section-number">1.5</span> 后续内容</h2>
+<p>前面提到，一般的RPA平台至少会包含三个组成部分：开发工具、运行工具和控制中心。</p>
+<p>UiBot也不例外，在UiBot中，这三个组成部分分别被命名为UiBot Creator、UiBot Worker和UiBot Commander。</p>
+<p>和一般的RPA平台相比，UiBot中还提供了专门为RPA设计的AI能力，这些AI能力也构成了UiBot的第四个组成部分，称之为UiBot Mage。</p>
+<p>UiBot的四个组成部分及其关系如图所示：</p>
+<figure>
+<img alt="UiBot的四个组成部分" src="../../doc/guide/d1/media/file2.png" style="width:80.0%"><figcaption>UiBot的四个组成部分</figcaption>
+</figure>
+<p>如果只需要少量的电脑运行流程，可以由UiBot Creator制作出流程后，直接打包分发给UiBot Worker使用，UiBot Commander不需要参与；如果需要大量的电脑运行流程，比较合适的方式是UiBot Creator把流程先上传到UiBot Commander，再由UiBot Commander统一下发给各个UiBot Worker，并统一指挥它们运行流程。</p>
+<p>当然，本文是UiBot的开发者指南，所以，本文的主要内容是介绍如何使用UiBot Creator去创建流程，以及如何使用UiBot Mage提供的AI能力，完成更多更有趣的任务。另外，也会用一章的篇幅介绍如何使用UiBot Worker及UiBot Commander去管理和运行流程。</p>
+<p>在阅读本文的同时，建议您到北京来也网络科技有限公司的官方网站 <a class="uri" href="http://www.laiye.com">http://www.laiye.com</a> 或 UiBot的官方网站 <a class="uri" href="http://www.uibot.com.cn">http://www.uibot.com.cn</a> 下载并安装一份UiBot的社区版，社区版是永久免费的，并且包含了UiBot的四个组成部分，只需要您在线登录一下，即可无限制地使用。</p>
+<p>本文以2021年末发布的UiBot 6.0社区版为蓝本进行讲述。如果您还在使用老版本，可能会有很多界面选项和操作都和本文所述的有所不同，建议下载<a href="../../tutorials/dev-tutorials-20200908.zip">老版本的开发者指南</a>。</p>
+<p>如果您之前有一点点的编程经验，无论什么编程语言，只要知道什么是变量，什么是条件判断，那么阅读本文都会更加顺畅。如果没有，也没关系，我们在本教程最后一章 <a href="ch010-2.html#附录编程基础知识">附录：编程基础知识</a> 中，对UiBot涉及到的编程基础概念进行了简单的介绍，通俗易懂，请您在阅读后续内容之前，提前学习一下。</p>
+<p>准备好了吗？下面将开始我们的UiBot之旅，Let’s Go!</p>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

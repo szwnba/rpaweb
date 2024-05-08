@@ -1,0 +1,239 @@
+html, body {
+    overflow-y: hidden;
+    ext-align: justify;
+    font-size: medium;
+    font-family: 'Microsoft Yahei';
+}
+
+.bg-primary {
+    background-color: #5177c7 !important;
+}
+
+.pd0 {
+    padding: 0;
+}
+
+.title0 {
+    text-align: center;
+    margin-top: 60px;
+    padding-bottom: 30px;
+}
+
+img.logo {
+    height: 24px;
+}
+
+.bd-sidebar {
+    padding: 0;
+    font-size: 14px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    background: #ececec;
+}
+
+.bd-links {
+    margin: 0;
+    padding: 1rem;
+}
+
+.toc {
+
+    padding: 1rem 0;
+}
+
+.toc .toc {
+    height: auto;
+}
+
+.bd-links ol.toc {
+    margin: 0;
+    padding: 0;
+    padding-left: 0.5rem;
+    list-style: none;
+}
+
+.bd-links > ol > li {
+    margin-bottom: 0.5rem;
+    font-size: 16px;
+}
+
+.bd-links > ol > li > ol > li {
+    font-size: 14px;
+}
+
+.bd-links > ol > li > ol > li > a {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.toc > ol > li > ol {
+    margin-bottom: 0.2rem;
+}
+
+.toc ol li {
+    display: block;
+    padding: 3px 0;
+}
+
+.toc a {
+    color: #5177c7;
+    text-decoration: none;
+}
+
+.toc a:hover {
+    color: #ff6600;
+}
+
+.toc a:active {
+    color: #cc3333;
+}
+
+.toc a.active {
+    font-weight: 600;
+    color: #333333;
+}
+
+.toc li .section-header-number {
+    color: #777;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-right: 0.5em;
+}
+
+.bd-content {
+    height: calc(100vh - 56px);
+    overflow-y: scroll;
+    line-height: 1.8;
+    padding: 1rem 2rem;
+}
+
+.bd-content table {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid #ececec;
+    border-left: 1px solid #ececec;
+    margin-bottom: 1em;
+}
+
+.bd-content table td, th {
+    border-right: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+    padding: 3px 8px;
+    line-height: 1.8;
+}
+
+.bd-content p {
+    text-indent: 2em;
+    margn-bottom: 1.2em;
+}
+
+code {
+    font-family: monospace, 'Microsoft Yahei';
+}
+
+pre > code,
+pre.sourceCode {
+    display: block;
+    border: 1px solid #ccc;
+    padding: 18px;
+    background: #f5f5f5;
+    font-size: 14px;
+}
+
+pre.sourceCode > code {
+    border: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: left;
+}
+
+.header-section-number {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.header-section-number::after {
+    content: ' -'
+}
+
+h2 {
+    text-align: left;
+}
+
+h3 {
+    text-align: left;
+}
+
+h4 {
+    text-align: left;
+}
+
+h5 {
+    text-align: left;
+}
+
+h6 {
+    text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: 0.5rem;
+    padding-top: 0.8rem;
+
+}
+
+p {
+    text-indent: 2em;
+    line-height: 2;
+}
+
+p > img {
+    max-width: 95%;
+}
+
+a {
+    color: #5177c7;
+}
+
+figure {
+    display: block;
+    text-align: center;
+}
+
+figure img {
+    box-shadow: 0 0 3px 3px #ccc;
+    margin-bottom: 10px;
+    max-width: 90%;
+    width: auto !important;
+}
+
+figure figcaption {
+    color: #777;
+}
+
+h1.title {
+}
+
+h2.author {
+}
+
+h3.date {
+}
+
+section ul li {
+    line-height: 1.8em;
+}
+
+em, em em em, em em em em em {
+    font-style: italic;
+}
+
+em em, em em em em {
+    font-style: normal;
+}

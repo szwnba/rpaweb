@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>逻辑控制_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a><ol class="toc"><li id="toc-li-43"><a href="ch007-1.html?version=0.6422463797095322#条件分支"><span class="section-header-number">6.1</span> 条件分支</a></li><li id="toc-li-44"><a href="ch007-1.html?version=0.6422463797095322#循环结构"><span class="section-header-number">6.2</span> 循环结构</a><ol class="toc"><li id="toc-li-45"><a href="ch007-1.html?version=0.6422463797095322#计次循环"><span class="section-header-number">6.2.1</span> 计次循环</a></li><li id="toc-li-46"><a href="ch007-1.html?version=0.6422463797095322#条件循环"><span class="section-header-number">6.2.2</span> 条件循环</a></li></ol></li><li id="toc-li-47"><a href="ch007-1.html?version=0.6422463797095322#循环的跳出"><span class="section-header-number">6.3</span> 循环的跳出</a></li></ol></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="逻辑控制">
+<h1><span class="header-section-number">6</span> 逻辑控制</h1>
+<p><a href="ch003-2.html#基本概念">前文</a>中我们讲过，一个流程块通常包含多条命令，在前面的例子中，流程块中的多条命令都是一条一条按顺序来执行的，比如一个流程块完成Excel数据写入的功能，依次执行了“打开Excel”、“读取单元格”、“保存Excel”、“关闭Excel”四条命令。通常，我们把这种顺序执行的流程结构叫做顺序结构。但是实际的RPA场景远比这种情况要复杂，本章介绍稍微复杂一点的流程结构，以及在UiBot中如何使用逻辑控制来实现这些复杂一点的流程结构。</p>
+<section class="level2" id="条件分支">
+<h2><span class="header-section-number">6.1</span> 条件分支</h2>
+<p>首先介绍的这种流程结构叫做条件分支，什么叫做条件分支呢，顾名思义，指的是流程结构运行到某一步骤时，按照一定的条件进行分支：当条件满足时，按照其中一条分支走下去；当条件不满足时，按照另一条分支走下去。</p>
+<p>我们来看具体的命令用法。在UiBot Creator的命令列表中，选中“基本命令”并展开，再选中“语法词法”并打开，找到“条件分支”，用这条命令就可以建立一个条件分支。</p>
+<figure>
+<img alt="条件分支命令" src="../../doc/guide/d1/media/file98.png" style="width:50.0%"><figcaption>条件分支命令</figcaption>
+</figure>
+<p>在UiBot的命令组装区，可以清晰地看到“条件分支”的详细用法。 条件满足时的分支处写着：<code>如果“条件成立”，则</code> ，下方用虚框写着提示语<code>此处可插入执行命令</code>，我们在此处插入一条“输出调试信息”命令，这条命令输出内容<code>"条件成立时，输出这条消息"</code>；条件不满足的分支处写着：<code>否则</code> ，下方用虚框写着提示语<code>此处可插入执行命令</code>，我们在此处插入一条“输出调试信息”命令，这条命令输出内容<code>"条件不成立时，输出这条消息"</code>。这个时候命令组装区变成这个样子：</p>
+<figure>
+<img alt="条件分支命令 — 添加输出调试信息" src="../../doc/guide/d1/media/file99.png" style="width:50.0%"><figcaption>条件分支命令 — 添加输出调试信息</figcaption>
+</figure>
+<p>我们试着运行一下，果然出错了：</p>
+<figure>
+<img alt="条件分支命令 — 运行结果" src="../../doc/guide/d1/media/file100.png" style="width:50.0%"><figcaption>条件分支命令 — 运行结果</figcaption>
+</figure>
+<p>为什么出错？因为这个时候，“条件分支”命令最重要的属性“判断表达式”，我们还根本没有填写，好吗！打开“条件分支”命令的属性区，“判断表达式”属性处，UiBot帮我们默认填了一个文字版的<code>条件成立</code>，但这仅仅是个提示罢了，我们要把<code>条件成立</code>这句话替换成真正的条件表达式。</p>
+<figure>
+<img alt="条件分支命令 — 条件表达式" src="../../doc/guide/d1/media/file101.png" style="width:50.0%"><figcaption>条件分支命令 — 条件表达式</figcaption>
+</figure>
+<p>在这里，“判断表达式”属性是一个布尔类型的属性，其值只能是“真（True）”或者“假（False）”，这个值可以通过常量、变量或者表达式得到，这些概念我们暂时还没讲到，没关系，后面会详细讲解，现在我们只需要记住这里可以填写布尔类型的常量、变量或者表达式即可。出于演示的考虑，这里我们填写True。</p>
+<figure>
+<img alt="条件分支命令 — 条件表达式为真" src="../../doc/guide/d1/media/file102.png" style="width:50.0%"><figcaption>条件分支命令 — 条件表达式为真</figcaption>
+</figure>
+<p>这个时候，我们发现命令组装区，条件满足时的分支处写着：<code>如果 真，则</code>，表明“判断表达式”属性已经生效。运行这条命令，得到正确结果，输出调试信息：<code>"条件成立时，输出这条消息"</code>。</p>
+<p>需要说明的是，“条件分支”命令的两条分支，是两个命令块。在命令块中，根据需要，可以放置一条命令，也可以顺序放置多条命令，当然也可以一条命令都不放，空着。使用“条件分支”命令时，“条件不成立”这条分支不填写内容，也是一种常见的用法。</p>
+</section>
+<section class="level2" id="循环结构">
+<h2><span class="header-section-number">6.2</span> 循环结构</h2>
+<p>我们再来介绍另一种重要的流程结构，叫做循环结构，什么叫做循环结构呢，顾名思义，指的是流程按照一定的规则循环执行。按照循环规则的不同，又可以分为计次循环、条件循环两种，遍历数组和遍历字典其实也是两种特殊的计次循环，但是由于现在我们还没讲到数组和字典，因此遍历数组和遍历字典也放到后面再讲。</p>
+<section class="level3" id="计次循环">
+<h3><span class="header-section-number">6.2.1</span> 计次循环</h3>
+<p>先来看看计次循环。在UiBot Creator的命令列表中，选中“基本命令”并展开，再选中“语法词法”并打开，找到“计次循环”，用这条命令就可以建立一个计次循环。将“计次循环”命令添加到命令组装区后，我们再在循环体内添加一条“输出调试信息”命令，这条命令会把“索引名称”i依次作为调试信息输出。</p>
+<figure>
+<img alt="计次循环" src="../../doc/guide/d1/media/file103.png" style="width:50.0%"><figcaption>计次循环</figcaption>
+</figure>
+<p>这里引出了“索引名称”的概念。我们打开“计次循环”命令的属性列表框可以看到，“计次循环”命令有四个属性：“索引名称”是用来计次的数值，这里用变量 <code>i</code> 表示，<code>i</code>在循环体中也可以使用（上面的例子中我们就将<code>i</code>依次显示出来）；“初始值”和“结束值”标定了循环的范围，“步进”默认值为1，也可以修改为其它值。这三个值合起来的含义是：<code>i</code>从“初始值”开始，每循环一次自动增加“步进”的值，直到大于“结束值”，循环才会结束。我们运行这条命令，可以看到，打印出0到10，循环一共执行了11次。</p>
+<figure>
+<img alt="计次循环的属性" src="../../doc/guide/d1/media/file104.png" style="width:35.0%"><figcaption>计次循环的属性</figcaption>
+</figure>
+</section>
+<section class="level3" id="条件循环">
+<h3><span class="header-section-number">6.2.2</span> 条件循环</h3>
+<p>再来看看条件循环。在UiBot Creator的命令列表中，选中“基本命令”并展开，再选中“语法词法”并打开，找到“条件循环”，用这条命令就可以建立一个条件循环。将“条件循环”命令添加到命令组装区后，我们再在循环体内添加一条“输出调试信息”命令，这条命令输出内容<code>"条件为真，继续循环"</code>。</p>
+<figure>
+<img alt="条件循环" src="../../doc/guide/d1/media/file105.png" style="width:50.0%"><figcaption>条件循环</figcaption>
+</figure>
+<p>“条件循环”命令的属性区与“条件分支”一样，有且只有一个属性：“判断表达式”。“判断表达式”为真，循环才会执行，为了让循环执行起来，我们在“判断表达式”处填入True。</p>
+<figure>
+<img alt="条件循环的属性" src="../../doc/guide/d1/media/file106.png" style="width:35.0%"><figcaption>条件循环的属性</figcaption>
+</figure>
+<p>执行“条件循环”命令，我们发现，会一直不停的输出字符串<code>"条件为真，继续循环"</code>，而不会自动停止。需要我们点击UiBot Creator工具栏的“停止”按钮，才能强行停止流程的执行。回到“条件循环”命令的定义，所谓“条件循环”，指的是：满足一定条件时，将会循环执行某一语句块。相应的，如果条件不满足，将不会执行那个语句块。在刚才的示例中，我们为了让循环执行起来，我们在“判断表达式”属性处填写了一个固定的布尔值True，而这个值不会随着循环变化，因此“判断表达式”一直为真，循环也无休无止地运行下去。</p>
+<p>那怎么来解决这个问题呢？第一种方法，UiBot提供了多种跳出循环的命令，包括“继续循环”、“跳出循环”、“跳出返回”和“退出流程”等。这个我们接下来马上就会讲到；第二种方法，也是更加通用的做法，在“判断表达式”中填入一个表达式，最开始这个表达式的值为真，随着循环的进行，表达式的值不断发生变化，当循环达到某种状态时，表达式不再为真，这个时候循环就结束了。</p>
+<p>我们来举个例子：首先定义一个变量a，并给这个变量赋初值为1；然后在“判断表达式”中填入a&lt;5，一开始这个表达式是成立的（因为这个时候a等于1），循环开始执行；接着在循环中给a的值加上1；就这样，经过几次循环后，a的值不再小于5，循环随之退出。</p>
+<p>同样需要说明的是，不管是“计次循环”还是“条件循环”，其循环体都是命令块。命令块中可以放置一条命令，也可以顺序放置多条命令，命令块中的命令也可以是“条件分支”命令或者“计次循环”、“条件循环”本身，即逻辑控制命令是可以嵌套的，这是一个非常重要的概念。</p>
+</section>
+</section>
+<section class="level2" id="循环的跳出">
+<h2><span class="header-section-number">6.3</span> 循环的跳出</h2>
+<p>我们在上一节说过，UiBot提供了多种跳出循环的命令，包括“继续循环”、“跳出循环”、“跳出返回”和“退出流程”等命令。其中有些命令不仅可以用以循环的跳出，甚至可以用于流程块和流程的退出。下面我们就分别来讲解一下。</p>
+<p>首先是“继续循环”命令，所谓“继续循环”，指的是在执行循环体的过程中，不再执行<strong>本次</strong>循环，而是在终止本次循环后，跳回到循环体开始处，继续执行下一次循环。</p>
+<figure>
+<img alt="继续循环" src="../../doc/guide/d1/media/file107.png" style="width:50.0%"><figcaption>继续循环</figcaption>
+</figure>
+<p>其次是“跳出循环”命令，所谓“跳出循环”，指的是在执行循环体的过程中，不再执行循环命令，而是直接跳出循环体，继续执行循环语句后面的命令。</p>
+<figure>
+<img alt="跳出循环" src="../../doc/guide/d1/media/file108.png" style="width:50.0%"><figcaption>跳出循环</figcaption>
+</figure>
+<p>再次是“跳出返回”命令，所谓“跳出返回”，指的是在执行循环体的过程中，不再执行循环命令，而是直接跳出所在的流程块，并返回<code>retValue</code>这个值。</p>
+<figure>
+<img alt="跳出返回" src="../../doc/guide/d1/media/file109.png" style="width:50.0%"><figcaption>跳出返回</figcaption>
+</figure>
+<p>最后是“退出流程”命令，所谓“退出流程”，指的是在执行循环体的过程中，不再执行循环命令，而是直接退出流程，中止流程的执行。</p>
+<figure>
+<img alt="退出流程" src="../../doc/guide/d1/media/file110.png" style="width:50.0%"><figcaption>退出流程</figcaption>
+</figure>
+<p>需要注意的是：“跳出返回”命令和“退出流程”命令不仅可以用于循环体当中，也可以用于条件分支和顺序结构中，也就是说流程块的任何位置，只要有需要，都可以随时通过“跳出返回”命令和“退出流程”命令达到跳出本流程块和退出流程的目的。</p>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

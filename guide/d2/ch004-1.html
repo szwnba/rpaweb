@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>网络和系统操作_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min-1.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.8831020878128951#预备知识"><span class="section-header-number">1</span> 预备知识</a></li><li id="toc-li-5"><a href="ch003-1.html?version=0.8831020878128951#数据获取和处理"><span class="section-header-number">2</span> 数据获取和处理</a></li><li id="toc-li-20"><a href="ch004-1.html?version=0.8831020878128951#网络和系统操作"><span class="section-header-number">3</span> 网络和系统操作</a><ol class="toc"><li id="toc-li-21"><a href="ch004-1.html?version=0.8831020878128951#网络操作"><span class="section-header-number">3.1</span> 网络操作</a><ol class="toc"><li id="toc-li-22"><a href="ch004-1.html?version=0.8831020878128951#http操作"><span class="section-header-number">3.1.1</span> HTTP操作</a></li><li id="toc-li-23"><a href="ch004-1.html?version=0.8831020878128951#电子邮件协议"><span class="section-header-number">3.1.2</span> 电子邮件协议</a></li></ol></li><li id="toc-li-24"><a href="ch004-1.html?version=0.8831020878128951#系统操作"><span class="section-header-number">3.2</span> 系统操作</a><ol class="toc"><li id="toc-li-25"><a href="ch004-1.html?version=0.8831020878128951#系统命令"><span class="section-header-number">3.2.1</span> 系统命令</a></li><li id="toc-li-26"><a href="ch004-1.html?version=0.8831020878128951#应用命令"><span class="section-header-number">3.2.2</span> 应用命令</a></li><li id="toc-li-27"><a href="ch004-1.html?version=0.8831020878128951#对话框"><span class="section-header-number">3.2.3</span> 对话框</a></li><li id="toc-li-28"><a href="ch004-1.html?version=0.8831020878128951#剪贴板"><span class="section-header-number">3.2.4</span> 剪贴板</a></li><li id="toc-li-29"><a href="ch004-1.html?version=0.8831020878128951#文字写屏"><span class="section-header-number">3.2.5</span> 文字写屏</a></li></ol></li><li id="toc-li-30"><a href="ch004-1.html?version=0.8831020878128951#锁屏与解锁"><span class="section-header-number">3.3</span> 锁屏与解锁</a></li></ol></li><li id="toc-li-31"><a href="ch005-1.html?version=0.8831020878128951#多流程协作"><span class="section-header-number">4</span> 多流程协作</a></li><li id="toc-li-37"><a href="ch006-1.html?version=0.8831020878128951#人工智能功能"><span class="section-header-number">5</span> 人工智能功能</a></li><li id="toc-li-43"><a href="ch007-1.html?version=0.8831020878128951#ub语言参考"><span class="section-header-number">6</span> UB语言参考</a></li><li id="toc-li-62"><a href="ch008-1.html?version=0.8831020878128951#高级开发功能"><span class="section-header-number">7</span> 高级开发功能</a></li><li id="toc-li-73"><a href="ch009-1.html?version=0.8831020878128951#扩展uibot命令"><span class="section-header-number">8</span> 扩展UiBot命令</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="网络和系统操作">
+<h1><span class="header-section-number">3</span> 网络和系统操作</h1>
+<p>至此为止，已经讲述了UiBot中大部分常用的命令。实际上，UiBot中的“网络”和“系统操作”这两类命令虽然使用频率稍微低一些，但应用得当，也能发挥很大作用。我们在本章内容中介绍这两类命令。</p>
+<section class="level2" id="网络操作">
+<h2><span class="header-section-number">3.1</span> 网络操作</h2>
+<section class="level3" id="http操作">
+<h3><span class="header-section-number">3.1.1</span> HTTP操作</h3>
+<p>在网络时代，我们经常会听到 <code>HTTP</code> 这个词，因为几乎所有网址都需要加一个前缀 <code>http://</code> 或者 <code>https://</code> 。其实，<code>HTTP</code> 是 Hyper Text Transfer Protocol（超文本传输协议）的缩写，指的是本地浏览器与网络服务器进行超文本传输和通信协议。也就是说，我们使用浏览器访问网站时，本质上就是通过HTTP协议与远程的网络服务器打交道。</p>
+<p>其实不止是浏览器，只要遵循HTTP协议的标准，其它应用程序同样也可以与网络服务器进行通信。这就厉害了！这说明，前面章节中介绍的某些网页自动化操作，其实可以不通过浏览器，而是直接通过HTTP协议进行操作。这就为网络操作自动化，开辟了一条新的思路。</p>
+<p>应用得比较多的HTTP请求，主要有两大类：<strong>HTTP GET</strong>和<strong>HTTP POST</strong>。我们来看看如何在UiBot中实现这两类请求，首先是HTTP GET请求。在命令中心“网络”的“HTTP”目录下，选择并插入一条“Get获取数据”命令，该命令将创建一个指向特定网址的HTTP GET请求。该命令有四个属性，如下图所示。</p>
+<figure>
+<img alt="Get获取数据" src="../../doc/guide/d2/media/file29.png" style="width:35.0%"><figcaption>Get获取数据</figcaption>
+</figure>
+<p>“链接地址”属性表示此次HTTP请求的网址；“表单数据”属性是一个JSON格式的字符串，表示此次HTTP请求需要发送的数据，这里一共有两组键值对，分别为“user”和“username”、“password”和“12345678”，如下所示。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">"user"</span><span class="fu">:</span> <span class="st">"username"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">"password"</span><span class="fu">:</span> <span class="st">"12345678"</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<p>“超时时间”属性指定了此次HTTP请求的超时时间，如果超过这个时间仍没有数据返回，则认为此次HTTP请求失败。“输出到”属性填写一个变量名，这个变量将会以字符串的形式，保存此次HTTP请求返回的结果。不同的网址，返回的结果格式也会有很大不同。一般来说，如果是可以被人浏览的网址（例如 <code>https://www.laiye.com</code>），那么返回的往往是一个HTML格式的字符串；如果是一个在线服务，那么返回的经常是一个XML或者JSON格式的字符串。在本例中，我们测试的网址 <code>http://httpbin.org/get</code> 是一个在线服务，它的返回结果也是一个JSON格式的字符串，如下所示。如果需要对这个返回结果进行进一步的处理，那么可以根据我们<a href="JSON">前文所学的内容</a>，解析这个JSON字符串。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="dt">"args"</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="dt">"password"</span><span class="fu">:</span> <span class="st">"12345678"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">        <span class="dt">"user"</span><span class="fu">:</span> <span class="st">"username"</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">"headers"</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">        <span class="dt">"Accept"</span><span class="fu">:</span> <span class="st">"*/*"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">        <span class="dt">"Accept-Encoding"</span><span class="fu">:</span> <span class="st">"gzip, deflate"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-9" title="9">        <span class="dt">"Host"</span><span class="fu">:</span> <span class="st">"httpbin.org"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="dt">"User-Agent"</span><span class="fu">:</span> <span class="st">"python-requests/2.21.0"</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="dt">"origin"</span><span class="fu">:</span> <span class="st">"49.94.16.174, 49.94.16.174"</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="dt">"url"</span><span class="fu">:</span> <span class="st">"https://httpbin.org/get?user=username&amp;password=12345678"</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>HTTP GET请求除了能够执行普通的GET请求之外，还能够下载文件，这个功能通过“Get下载文件”命令实现。这个命令有五个属性，其中“链接地址”、“表单数据”、“超时时间”、“输出到”四个属性的含义，与上一条“Get获取数据”命令的四个属性一致，另外一个“文件路径”属性填写下载文件的保存路径。</p>
+<figure>
+<img alt="Get下载文件" src="../../doc/guide/d2/media/file30.png" style="width:35.0%"><figcaption>Get下载文件</figcaption>
+</figure>
+<p>我们再来看看如何在UiBot中实现HTTP POST请求。在命令中心“网络”的“HTTP”目录下，选择并插入一条“Post提交表单”命令，该命令将创建一个指向特定网址的HTTP POST请求。该命令有四个属性，如下图所示。</p>
+<figure>
+<img alt="Post提交表单" src="../../doc/guide/d2/media/file31.png" style="width:35.0%"><figcaption>Post提交表单</figcaption>
+</figure>
+<p>“链接地址”、“表单数据”、“超时时间”、“输出到”属性的含义与“Get获取数据”命令的属性含义相同。需要注意的是：HTTP POST请求发送的“表单数据”与请求的网址相关，需要跟相关的业务人员仔细核对，“表单数据”的键值对仔细填写正确。同样的，HTTP POST请求返回的结果也是一个字符串，但具体的格式会随着不同的网址而不同。可能是JSON字符串，也可能是HTML字符串，或者其他字符串。</p>
+</section>
+<section class="level3" id="电子邮件协议">
+<h3><span class="header-section-number">3.1.2</span> 电子邮件协议</h3>
+<p>在企业业务流程自动化中，电子邮件的自动化收发是非常重要的一环，而且非常基础和高频。除了自动化操作邮件客户端或者通过浏览器自动登录邮箱，UiBot还提供基于电子邮件协议直接收发邮件的命令。常用的电子邮件协议有SMTP、POP3、IMAP等，它们都隶属于TCP/IP协议簇，默认状态下，分别通过TCP端口25、110和143建立连接。在使用命令(SMTP、POP、IMAP)之前，通常需要登录邮箱做一些设置，下面以QQ邮箱为例进行说明。</p>
+<p>打开浏览器，登录QQ邮箱，点击“设置”按钮，再点击“账户”标签页，找到“POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务”，开启“POP3/SMTP服务”和”IMAP/SMTP服务“（服务默认是关闭的），这个时候QQ邮箱系统会生成一串授权码，将这串授权码保存好（只会显示1次），后续的邮件收取和邮件发送操作都使用这串授权码，而不是使用您邮箱的原始密码。</p>
+<figure>
+<img alt="QQ邮箱开启POP和SMTP" src="../../doc/guide/d2/media/file32.png"><figcaption>QQ邮箱开启POP和SMTP</figcaption>
+</figure>
+<p>然后点击“如何使用 Foxmail 等软件收发邮件？”，这篇帮助文档中有QQ邮箱的关键设置信息，如下图所示：POP服务器地址为pop.qq.com，端口号为995，SSL为“是”；SMTP服务器地址为smtp.qq.com，端口号为465，SSL为“是”。这些信息在后续的UiBot邮件命令中都会用到。</p>
+<figure>
+<img alt="QQ邮箱设置信息" src="../../doc/guide/d2/media/file33.png" style="width:60.0%"><figcaption>QQ邮箱设置信息</figcaption>
+</figure>
+<p>接着点击“什么是IMAP，它又是如何设置？”，这篇帮助文档中同样有QQ邮箱的关键设置信息，如下图所示：接收邮件服务器：imap.qq.com，使用SSL，端口号993。同样这些信息在后续的UiBot邮件命令中也会用到。</p>
+<figure>
+<img alt="QQ邮箱IMAP设置" src="../../doc/guide/d2/media/file34.png"><figcaption>QQ邮箱IMAP设置</figcaption>
+</figure>
+<section class="level4" id="smtp">
+<h4><span class="header-section-number">3.1.2.1</span> SMTP</h4>
+<p>SMTP的全称是“Simple Mail Transfer Protocol”，即简单邮件传输协议。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中转方式。在命令区域“网络”的“SMTP/POP”分类下，选择并插入一条“发送邮件”命令，该命令将使用SMTP协议给指定邮箱发送一封邮件。</p>
+<figure>
+<img alt="发送邮件属性区域" src="../../doc/guide/d2/media/file35.png" style="width:60.0%"><figcaption>发送邮件属性区域</figcaption>
+</figure>
+<p>该命令有几个属性：“SMTP服务器”属性填写邮箱的SMTP服务器地址，“服务器端口”属性填写SMTP协议端口号，“SSL加密”属性选择“是”，这三个信息在上一步QQ邮箱的设置中已经得到，其中服务器地址为smtp.qq.com，端口号为465；“邮箱帐号”属性填写需要登录的邮箱帐号（邮箱账户与发送邮箱信息一致）；“登录密码”属性填写生成的授权码（在QQ邮箱的设置中生成授权码，不同的邮箱可能设置也会不同）；“收信邮箱”属性填写对方的邮箱帐号；“邮件标题”属性填写待发送邮件的标题；“邮件正文”属性填写待发送邮件的正文（仅文本格式）；“邮件附件”属性填写待发送邮件的附件文件地址；最后，“输出到”一栏会把此次邮件发送操作是否成功置入指定的变量中，成功则置入True，失败则置入False。如下图即为已发送成功的邮件：</p>
+<figure>
+<img alt="收到使用SMTP发送的邮件" src="../../doc/guide/d2/media/file36.png" style="width:50.0%"><figcaption>收到使用SMTP发送的邮件</figcaption>
+</figure>
+<p>SMTP协议的使用比较简单，一条命令就够了，但它只能发邮件。如果要收邮件，需要用到POP协议。</p>
+</section>
+<section class="level4" id="pop">
+<h4><span class="header-section-number">3.1.2.2</span> POP</h4>
+<p>POP的含义是邮局协议，它负责从邮件服务器中检索电子邮件，POP3(Post Office Protocol 3)即邮局协议的第3个版本，是因特网电子邮件的第一个离线协议标准。POP协议在今天的互联网上早已广泛使用。</p>
+<p>用POP协议可以收邮件，但会稍微复杂一点儿。一条命令是不够的，需要多条命令配合才行。</p>
+<p>在命令区域“网络”的“SMTP/POP”分类下，选择并插入一条“连接邮箱”命令，该命令将使用POP协议连接上指定邮箱，并支持后续收取邮件的操作。</p>
+<figure>
+<img alt="POP连接邮箱" src="../../doc/guide/d2/media/file37.png" style="width:60.0%"><figcaption>POP连接邮箱</figcaption>
+</figure>
+<p>该命令有如下几个属性：“服务器地址”属性填写邮箱的POP服务器地址，“服务器端口”属性填写POP协议端口号，“SSL加密”属性选择“是”，这三个信息在上一步QQ邮箱的设置中已经得到，其中服务器地址为pop.qq.com，端口号为995；“邮箱帐号”属性填写需要收取邮件的邮箱帐号；“登录密码”属性填写邮箱的授权码（和SMTP一致）；“使用协议”属性默认填写“POP3”；“输出到”属性填写变量名objMail，这个变量会保存连接邮箱后得到的邮箱对象，后续获取邮件列表、删除邮件、下载附件等命令，都要使用这个邮箱对象。</p>
+<p>成功连接邮箱后，接下来可以收取邮件了。</p>
+<p>在命令区域“网络”的“SMTP/POP”分类下，选择并插入一条“获取邮件列表”命令，该命令将输出指定数量的邮件信息清单（结果是一个字典类型的变量，可以获取长度、遍历其中内容等。另外，邮箱服务器一般限制了只收取最近30天的邮件，可自行更改此限制）。该命令有几个属性：“操作对象”属性填写刚刚在“连接邮箱”命令中得到的邮箱对象objMail；“邮件数量”填写我们需要收取多少封邮件，这里填写的是<code>10</code>，表示收取10封邮件。如果不希望限定数量，可以填写<code>0</code>；“输出到”属性填写一个变量名，这个变量会保存“获取邮件列表”命令的执行结果：10封邮件信息。</p>
+<figure>
+<img alt="POP获取邮件列表" src="../../doc/guide/d2/media/file38.png" style="width:35.0%"><figcaption>POP获取邮件列表</figcaption>
+</figure>
+<p>有两个命令——“下载附件”、“删除邮件”，不仅需要结合“连接邮箱”命令返回的邮箱对象，而且还要结合”获取邮件列表“的返回结果（即从邮件列表中获取一个元素，称为邮件对象，邮件对象实际上是一个字典，包含一封邮件的标题、正文、附件、发送人、日期、大小等字段信息），才可以使用。</p>
+<figure>
+<img alt="POP下载附件" src="../../doc/guide/d2/media/file39.png" style="width:35.0%"><figcaption>POP下载附件</figcaption>
+</figure>
+<p>另外指定邮件对象删除对应邮件，在使用该命令删除邮件后，必须调用”断开邮箱连接“命令，才能真正删除成功。如果邮件服务器设置了“禁止收信软件删除邮件”，则依然无法删除。</p>
+<figure>
+<img alt="POP删除邮件" src="../../doc/guide/d2/media/file40.png" style="width:35.0%"><figcaption>POP删除邮件</figcaption>
+</figure>
+</section>
+<section class="level4" id="imap">
+<h4><span class="header-section-number">3.1.2.3</span> IMAP</h4>
+<p>互联网信息访问协议（IMAP）是一种优于POP的新协议。和POP一样，IMAP也能下载邮件、从服务器中删除邮件或询问是否有新邮件，但IMAP克服了POP的一些缺点。例如，它可以决定客户机请求邮件服务器提交所收到邮件的方式，请求邮件服务器只下载所选中的邮件而不是全部邮件。客户机可先阅读邮件信息的标题和发送者的名字再决定是否下载这个邮件。通过用户的客户机电子邮件程序，IMAP可让用户在服务器上创建并管理邮件文件夹或邮箱、删除邮件、查询某封信的一部分或全部内容，完成所有这些工作时都不需要把邮件从服务器下载到用户的个人计算机上。</p>
+<p>在命令区域“网络”的“IMAP”目录下，选择并插入一条“连接邮箱”命令，该命令将使用IMAP协议连接上指定邮箱，并支持后续收取邮件的操作。</p>
+<figure>
+<img alt="IMAP连接邮箱" src="../../doc/guide/d2/media/file41.png" style="width:60.0%"><figcaption>IMAP连接邮箱</figcaption>
+</figure>
+<p>该命令有如下几个属性：“服务器地址”属性填写邮箱的IMAP服务器地址，“服务器端口”属性填写IMAP协议端口号，“SSL加密”属性选择“是”，这三个信息在上一步QQ邮箱的设置中已经得到，其中服务器地址为imap.qq.com，端口号为993；“邮箱帐号”属性填写需要收取邮件的邮箱登录帐号；“登录密码”属性填写邮箱授权码；“邮箱地址”属性默认填写需要收取邮件的邮箱地址；“输出到”属性填写变量名objIMAP，这个变量会保存连接邮箱后得到的邮箱对象，后续获取邮件列表、删除邮件、移动邮件、查找邮件、下载附件等命令，都要使用这个邮箱对象。</p>
+<p>另外，需要注意“登录账号”、“邮箱地址”这两个属性。对于普通的QQ邮箱，这两个的值是一样的，而VIP的QQ邮箱，这两个值分别是“登录账号”对应QQ号，“邮箱地址”对应VIP邮箱地址，如下图所示：</p>
+<figure>
+<img alt="IMAP连接QQVip邮箱" src="../../doc/guide/d2/media/file42.png" style="width:60.0%"><figcaption>IMAP连接QQVip邮箱</figcaption>
+</figure>
+<p>“登录账户”、“邮箱地址”是2个属性，这一点要非常注意，在很多域计算机环境下，“登录账户”对应的可能是域用户。</p>
+<p>对邮件进行获取、删除、移动、查找操作时，有一个属性“邮箱文件夹”必须是知晓的，怎么知晓呢？有人说，直接登录邮箱进去看一眼就知道了，如下图以QQ邮箱举例所示：</p>
+<figure>
+<img alt="QQ邮箱文件夹列表" src="../../doc/guide/d2/media/file43.png" style="width:40.0%"><figcaption>QQ邮箱文件夹列表</figcaption>
+</figure>
+<p>如上图所展示的“收件箱”、“草稿箱”、“已发送”、“已删除”、“垃圾箱”、“我的文件夹”、“test”等，是不是就是我们要填写的“邮箱文件夹”属性呢？让我们先来使用一个命令——获取邮箱文件夹列表(主要是辅助作用，为其他命令的邮箱文件夹属性提供可用值)，看看输出结果是什么？</p>
+<figure>
+<img alt="IMAP获取QQ邮箱文件夹列表" src="../../doc/guide/d2/media/file44.png" style="width:40.0%"><figcaption>IMAP获取QQ邮箱文件夹列表</figcaption>
+</figure>
+<p>看起来似乎不对，“我的文件夹”好像没有了。实际上，“我的文件夹”在这里对应的是“其他文件夹”，“收件箱”实际对应“INBOX”，“已发送”实际对应“Sent Messages”。基于电子邮件协议，拿到的报文信息与实际在界面上显示看到的会有所不同(Web、邮件客户端在显示时会做优化处理)，若调试“获取邮件列表”命令，在“邮箱文件夹”属性处输入“我的文件夹”，会看到报错信息“Folder not exist” ，若改成输入“其他文件夹”，就不会报错了。这里只是以QQ邮箱举例，其实不同的邮箱服务器会有各自的访问要求和报文返回格式，很难统一。因此，请多使用“获取邮箱文件夹列表”命令，获得具体的邮箱文件夹列表信息，并以此为准。属性“原始报文”若选择为“是”,则输出的是原始报文信息，选择为“否”，则输出的是基于一定的提取规则进行提取后的文件夹列表信息(有的邮箱不支持此提取规则)。如下图，获取QQ邮箱文件夹列表的原始报文信息：</p>
+<figure>
+<img alt="QQ邮箱文件夹列表原始报文" src="../../doc/guide/d2/media/file45.png" style="width:50.0%"><figcaption>QQ邮箱文件夹列表原始报文</figcaption>
+</figure>
+<p>已经能够知晓到邮箱文件夹信息，再来重点讲解“获取邮件列表”、“查找邮件”、“移动邮件”这3条命令的用法，也是与POP协议的关键区别：</p>
+<figure>
+<img alt="IMAP获取邮件列表" src="../../doc/guide/d2/media/file46.png" style="width:60.0%"><figcaption>IMAP获取邮件列表</figcaption>
+</figure>
+<p>如上图为“获取邮件列表”命令的属性区域，支持“仅限未读消息”、“标记为已读”设置，比POP协议更加灵活，输出的数组中元素的字段结构与POP也有稍微区别，即POP的邮件对象与IMAP的邮件对象存在区别。</p>
+<figure>
+<img alt="IMAP查找邮件" src="../../doc/guide/d2/media/file47.png" style="width:35.0%"><figcaption>IMAP查找邮件</figcaption>
+</figure>
+<p>如上图为“查找邮件”命令的属性区域，可以指定邮箱文件夹和查找关键字（检索邮件头信息：主题、发件人、收件人、抄送人）进行邮件查找，返回的结果为数组，若没有检索到邮件则返回空数组，检索到1封邮件，则数组里只有1个元素，若多封邮件则多个元素。“字符集”属性默认为“gb2312”,遇到邮箱服务器的编码不一致才需要调整。</p>
+<figure>
+<img alt="IMAP移动邮件" src="../../doc/guide/d2/media/file48.png" style="width:35.0%"><figcaption>IMAP移动邮件</figcaption>
+</figure>
+<p>如上图“移动邮件”命令的属性区域，依赖“邮箱对象”和“邮件对象”(与“下载附件”命令相同)，指定目标邮箱文件夹后，就可把指定的邮件移动到指定的邮箱文件夹下，而POP协议是缺失此功能的。</p>
+</section>
+</section>
+</section>
+<section class="level2" id="系统操作">
+<h2><span class="header-section-number">3.2</span> 系统操作</h2>
+<section class="level3" id="系统命令">
+<h3><span class="header-section-number">3.2.1</span> 系统命令</h3>
+<p>UiBot提供了一些实用的命令，来调用操作系统的相关功能，例如播放声音、读取和设置环境变量、执行命令行和PowerShell、获取系统和用户的文件夹路径等。这些操作系统相关的命令（简称“系统命令”）与其它命令搭配使用，能够让您的自动化流程如虎添翼。</p>
+<p>我们先尝试找到并插入一条“播放声音”命令，该命令可以播放指定文件路径的声音文件。该命令的属性只有一个：“文件路径”属性，这个属性填写待播放声音的完整文件路径。目前，UiBot暂时只支持wav格式的声音播放。</p>
+<figure>
+<img alt="播放声音" src="../../doc/guide/d2/media/file49.png" style="width:35.0%"><figcaption>播放声音</figcaption>
+</figure>
+<p>在命令中心“系统操作”的“系统”目录下，选择并插入一条“读取环境变量”命令，该命令可以读取Windows操作系统的环境变量。该命令的属性有两个：“环境变量”属性，填写环境变量的名称；“输出到”属性填写一个变量名，这个变量将会保存读取出来环境变量的值。需要注意的是：“读取环境变量”命令一次只能读取一个变量，如果需要读取多个环境变量的值，可以多次调用该命令。另外，读取出来的环境变量的文本格式与操作系统中环境变量的文本格式完全一致，如果需要进一步解析环境变量文本，可采用<a href="ch003-2.html#数据处理方法">上一章</a>学习的数据处理的相关命令。“设置环境变量”命令的用法与“读取环境变量”命令类似，这里也不再展开讲解。</p>
+<figure>
+<img alt="读取环境变量" src="../../doc/guide/d2/media/file50.png" style="width:35.0%"><figcaption>读取环境变量</figcaption>
+</figure>
+<p>在命令中心“系统操作”的“系统”目录下，选择并插入一条“执行命令行”命令，该命令可以执行Windows脚本，该命令的属性有两个：“命令行”属性，填写待执行的Windows脚本；“输出到”属性，填写一个变量，这个变量保存脚本的执行结果。Windows脚本的写法，请查阅相关文档。</p>
+<figure>
+<img alt="执行命令行" src="../../doc/guide/d2/media/file51.png" style="width:35.0%"><figcaption>执行命令行</figcaption>
+</figure>
+<p>在命令中心“系统操作”的“系统”目录下，选择并插入一条“获取系统文件夹路径”命令，该命令可以获取各个系统文件夹的路径，该命令的属性有两个：“获取目录”属性，目前UiBot支持如下路径的获取：系统目录、Windows目录、桌面目录、软件安装目录、开始菜单目录，用户可以根据需要自行选择；“输出到”属性，填写一个变量，这个变量保存“获取系统文件夹路径”命令的执行结果，即最后获取到的路径。</p>
+<figure>
+<img alt="获取系统文件夹路径" src="../../doc/guide/d2/media/file52.png" style="width:35.0%"><figcaption>获取系统文件夹路径</figcaption>
+</figure>
+<p>“获取临时文件夹路径”、“获取用户文件夹路径”与“获取系统文件夹路径”命令用法类似，不再赘述。</p>
+</section>
+<section class="level3" id="应用命令">
+<h3><span class="header-section-number">3.2.2</span> 应用命令</h3>
+<p>在企业业务流程中，可能会需要启动、关闭应用程序。我们固然可以通过界面模拟，来实现这些功能。但实际上，UiBot提供了更简单易用的“应用命令”，可以直接管理应用程序的生命周期，包括启动应用、关闭应用、获取应用程序的状态等。先插入一条“启动应用程序”命令，该命令的属性如下：“文件路径”属性，填写待的启动应用程序的文件路径；“等待方式”属性指的是系统与该应用程序的等待关系，UiBot提供三种等待方式：“不等待”、“等待应用程序准备好”、“等待应用程序执行到退出”，“不等待”指的是目标程序立即启动，命令即完成；“等待应用程序准备好”指的是只有应用程序准备好了，命令才算完成，否则会一直等待；“等待应用程序执行到退出”指的是启动应用程序后，UiBot会一直等待，直到应用程序退出，该命令才算执行完成。“显示样式”属性指的是当应用程序启动时，以何种方式显示，UiBot支持的显示样式有：“默认”、“最大化”、“最小化”、“隐藏”。“默认”的指的是应用程序以默认显示方式启动，“最大化”指的是启动时应用程序窗口最大化，“最小化”指的是启动时应用程序窗口最小化，“隐藏”指的是启动时不显示应用程序窗口。最后，还有“输出到”属性，填写一个变量，这个变量保存启动后应用程序的PID（即进程ID），这个PID在后续的命令中还会用到。</p>
+<figure>
+<img alt="启动应用程序" src="../../doc/guide/d2/media/file53.png" style="width:35.0%"><figcaption>启动应用程序</figcaption>
+</figure>
+<p>“启动应用程序”命令打开的是一个应用程序，但是有些场景不仅仅需要打开应用程序，还需要应用程序打开一个文件或网址，这个时候可以用到“打开文件或网址”命令。该命令的几个属性与“启动应用程序”命令大致相同，唯一不同的是“文件路径”属性，这里填写需要打开的文件或网址。</p>
+<figure>
+<img alt="打开文件或网址" src="../../doc/guide/d2/media/file54.png" style="width:35.0%"><figcaption>打开文件或网址</figcaption>
+</figure>
+<p>通过“启动应用程序”命令或“打开文件或网址”命令启动应用程序后，在流程运行的过程中，我们可以随时查看某个特定应用是否仍在运行。插入一条“获取应用运行状态”命令，该命令可以根据进程名或PID判断一个进程是否存活。该命令的属性有两个：“进程名或PID”属性，填写应用的进程名或PID，如果填写PID，即是上一条“启动应用程序”命令“输出到”属性得到的值，如果填写进程名，则填写应用程序的完整文件名，例如上一条“启动应用程序”命令的进程名为“notepad.exe”；“输出到”属性保存命令的执行结果，True表示进程仍然存活，False表示进程已经关闭。</p>
+<figure>
+<img alt="获取应用运行状态" src="../../doc/guide/d2/media/file55.png" style="width:35.0%"><figcaption>获取应用运行状态</figcaption>
+</figure>
+<p>最后，别忘了关闭应用程序。选择并插入一条“关闭应用”命令，该命令可以根据进程名或PID关闭一个进程。该命令的属性只有一个：“进程名或PID”属性，填写待关闭应用的进程名或PID，含义与“获取应用运行状态”命令的同名属性是一样的。</p>
+<figure>
+<img alt="关闭应用程序" src="../../doc/guide/d2/media/file56.png" style="width:35.0%"><figcaption>关闭应用程序</figcaption>
+</figure>
+</section>
+<section class="level3" id="对话框">
+<h3><span class="header-section-number">3.2.3</span> 对话框</h3>
+<p>RPA流程运行的过程中，一般来说不需要人工干预。但是某些场景下，流程需要与人进行双向的信息沟通，一方面将流程的关键信息通知给人，另一方面获取人的控制和决策信息。为此，UiBot提供了对话框机制，它既可以将流程关键信息在一个对话框里显示出来，也可以弹出对话框，让用户进行选择和输入，从而实现了流程与人的双向信息沟通。</p>
+<p>在命令中心“系统操作”的“对话框”目录下，选择并插入一条“消息框”命令，该命令将在流程运行的过程中在屏幕的中间弹出一个消息框。</p>
+<figure>
+<img alt="消息框" src="../../doc/guide/d2/media/file57.png" style="width:65.0%"><figcaption>消息框</figcaption>
+</figure>
+<p>该条命令有如下属性：“消息内容”属性填写消息内容主体；“对话框标题”属性指的是弹出对话框的标题栏；“按钮样式”属性指的是这个对话框中显示哪几个按钮，“按钮样式”属性选项有：“只显示确定”、“显示是和否按钮”、“显示放弃、重试和跳过按钮”、“显示是、否和取消按钮”、“显示重试和取消按钮”、“显示确认和取消按钮”，大家可以根据业务场景的需求，合理地选择“按钮样式”属性；</p>
+<figure>
+<img alt="消息框设置" src="../../doc/guide/d2/media/file58.png" style="width:65.0%"><figcaption>消息框设置</figcaption>
+</figure>
+<p>“图标样式”属性指定了对话框显示什么图标，选项有：“不显示图标”、“显示消息图标”、“显示询问图标”、“显示警告图标”、“显示出错图标”，大家也可以根据业务场景合理选择图标；“超时时间”属性指的是多少毫秒以后，该对话框强制关闭，例如填写5000，表示5000毫秒后，即使用户未点击对话框的任何按钮，该对话框也会强制关闭。如果“超时时间”属性填0，UiBot就不考虑超时时间了，即用户必须点击对话框，对话框才会消失；“输出到”属性填写了一个变量，该变量在用户点击了对话框按钮后，会记录用户点击了哪个按钮。接下来的流程运行逻辑，可以根据用户点击了哪个按钮，选择不同的流程走向。各按钮的值如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>按钮的值</th>
+<th>按钮的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>确定</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>取消</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>放弃</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>重试</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>跳过</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>是</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>“消息框”命令是一条非常强大的命令，用户可以根据实际需要填写消息框的内容、标题、按钮样式、图标样式等。但是有时候不需要这么复杂的对话框，也不需要用户来确认，只要弹出一条简单的消息通知即可，这时可以用“消息通知”命令。“消息通知”命令将会以气泡的方式弹出一条通知消息，即使用户不进行任何操作，也会在几秒钟后自动消失。</p>
+<p>“消息通知”命令有几个属性：“消息内容”、“对话框标题”、“对话框图标”的含义与“消息框”命令相同。需要注意的是：“消息框”命令一般会停留几秒才消失，但是如果流程结束运行的话，流程中弹出的消息框也会随之消失，可以在“消息框”命令后面接一个“延时”命令，延时几秒钟时间，这样可以让用户查看消息框的时间更加充裕一些。</p>
+<figure>
+<img alt="消息通知设置" src="../../doc/guide/d2/media/file59.png" style="width:35.0%"><figcaption>消息通知设置</figcaption>
+</figure>
+<p>“消息框”命令和“消息通知”命令实现流程向用户传递消息，“消息框”命令虽然能够得到“用户点击哪个按钮”，完成用户向流程传递消息的部分功能，但是非常有限，如果用户要向流程传递更多的信息，该怎么办呢？UiBot提供了“输入对话框”命令，这条命令可以弹出一个对话框，用户可以在对话框中输入需要传递的信息，这个信息将会被传递到流程中。</p>
+<p>我们来看看“输入对话框”命令的具体用法。“消息内容”属性和“对话框标题”属性的含义与“消息框”命令相同；“默认内容”属性是给用户的提示信息，如果用户不修改，那么“默认内容”属性中的内容将会传递给流程；“仅支持数字”属性是布尔值，“是”表示用户只能输入数字，“否”表示用户输入不受限制，可以输入任意字符；“输出到”属性填写一个变量，当执行完命令后，用户的输入信息将会保存到这个变量中，后续流程可以使用这个变量，这样就打通了用户输入到流程的通道。</p>
+<figure>
+<img alt="输入对话框" src="../../doc/guide/d2/media/file60.png" style="width:35.0%"><figcaption>输入对话框</figcaption>
+</figure>
+<p>除了支持用户输入文字外，UiBot还支持用户输入文件。插入一条“打开文件对话框”命令，这个命令可以在流程运行的过程中，弹出一个“打开文件对话框”，用户选择文件，并将文件路径传递给流程。该命令有几个属性：“初始目录”属性指的是弹出对话框时，默认打开哪个目录，我们可以点击“初始目录”属性右边的文件夹按钮选择初始目录，如果没有选择初始目录（即该属性默认值为"“）或者选择的初始目录不存在，UiBot会打开一个默认目录作为初始目录。“文件类型过滤”属性是一个字符串，指明了该对话框可以打开哪些类型的文件，具体的写法请参阅相关文档；“对话框标题”属性含义与其它对话框命令相同。“输出到”属性填写一个变量，当执行完命令后，用户选择文件的完整路径将会保存到这个变量中，也就是说，这个“打开文件对话框”并<strong>“不会真正”</strong>打开文件，而是得到文件路径，后续流程可以使用这个变量，这样就打通了用户输入到流程的通道。</p>
+<figure>
+<img alt="打开文件对话框" src="../../doc/guide/d2/media/file61.png" style="width:35.0%"><figcaption>打开文件对话框</figcaption>
+</figure>
+<p>“打开文件对话框[多选]”、“保存文件对话框”与“打开文件对话框”命令用法类似，“打开文件对话框[多选]”命令可以选择多个文件，这条命令返回的是一个文件路径数组，用户可以遍历数组依次处理每个文件，这里不再展开讲解。</p>
+</section>
+<section class="level3" id="剪贴板">
+<h3><span class="header-section-number">3.2.4</span> 剪贴板</h3>
+<p>剪贴板的操作是我们在日常工作中非常常用的，它可以把文字或图像从一个应用程序迁移到另一个应用程序。我们固然可以通过界面模拟剪贴板的复制、粘贴等操作，更便捷的是，UiBot还可以直接读取或设置剪贴板中的文本或图像，让剪贴板真正成为业务流程的一部分。我们尝试插入一条“设置剪贴板文本”命令，该命令将一段文字置入剪贴板中。该命令只有一个“剪贴板内容”属性，显然，表示的是将要设置到剪贴板中的文字内容。</p>
+<figure>
+<img alt="设置剪贴板文本" src="../../doc/guide/d2/media/file62.png" style="width:35.0%"><figcaption>设置剪贴板文本</figcaption>
+</figure>
+<p>我们可以接着插入一条“读取剪贴板文本”命令，查看上一条“设置剪贴板文本”命令是否成功。“读取剪贴板文本”命令同样只有一个属性——“输出到”属性，运行该命令后，属性中填写的变量sRet将会保存剪贴板中的文本。添加一条“输出调试信息”命令，将sRet输出，即可查看设置和读取剪贴板文本是否执行成功。</p>
+<p>除了通过剪贴板传输文字，剪贴板同样也可以传输图像。在命令中心“系统操作”的“剪贴板”目录下，选择并插入一条“图片设置到剪贴板”命令，该命令将一个图像文件设置到剪贴板中。该命令只有一个“文件路径”属性，这个属性填写将要设置到剪贴板的图像文件的路径。</p>
+<figure>
+<img alt="图片设置到剪贴板" src="../../doc/guide/d2/media/file63.png" style="width:35.0%"><figcaption>图片设置到剪贴板</figcaption>
+</figure>
+<p>我们可以插入一条“保存剪贴板图像”命令，查看上一条“图片设置到剪贴板”命令是否成功。“保存剪贴板图像”命令只有一个“保存路径”属性，这个属性填写剪贴板中图像文件的保存路径。</p>
+<figure>
+<img alt="保存剪贴板图像" src="../../doc/guide/d2/media/file64.png" style="width:35.0%"><figcaption>保存剪贴板图像</figcaption>
+</figure>
+</section>
+<section class="level3" id="文字写屏">
+<h3><span class="header-section-number">3.2.5</span> 文字写屏</h3>
+<p>文字写屏是一个非常有趣的功能。它可以在流程运行的过程中，把一段文字输出到屏幕上，不管屏幕正在显示什么内容，都会覆盖到显示内容之上。同时，文字的空隙区域又是透明的，仍然能通过这些空隙区域看到屏幕原有的内容。通过文字写屏，可以用非常醒目的方式，让用户看到必要的提示信息，而对流程的运行几乎没有影响。下图是UiBot的测试工程师在运行自测的实景图，UiBot的每个版本在发布前都会经过复杂的自测，通过这些写屏的红色文字，让测试工程师一眼就能看到自测仍然在进行中。</p>
+<figure>
+<img alt="“文字写屏”的实景图" src="../../doc/guide/d2/media/file65.jpg" style="width:85.0%"><figcaption>“文字写屏”的实景图</figcaption>
+</figure>
+<p>如此炫酷的效果，实现起来需要不止一条命令，但其实仍然很简单。在命令中心“系统操作”的“文字写屏”分类下，选择并插入一条“创建写屏对象”命令，后续的写屏操作都针对这个对象来进行。</p>
+<figure>
+<img alt="创建写屏对象" src="../../doc/guide/d2/media/file66.png" style="width:35.0%"><figcaption>创建写屏对象</figcaption>
+</figure>
+<p>该条命令有三个属性：“写屏区域”是一个字典类型的值，表示文字写在屏幕的哪块区域。您暂时看不懂也没关系，点击写屏区域右边的范围选择按钮，此时界面蒙上了一层幕布，按住鼠标左键开始勾选，当觉得选择好以后，松开鼠标左键，UiBot会自动选择好写屏区域，例如刚才我们选择的区域，基于1920×1080分辨率，起始点坐标（左上角）为(312,174)，写屏区域的高度为346，宽度为598，单位都是像素。“自适应”属性是一个布尔值，表明写屏区域是否随着分辨率的变化而自动适应，True表示“写屏区域”属性会随着分辨率的变化而自动适应，False表示严格按照“写屏区域”属性的值进行写屏；输出到”属性填写写屏对象objWindow，后续操作将会用到这个写屏对象。</p>
+<figure>
+<img alt="设置写屏区域" src="../../doc/guide/d2/media/file67.png" style="width:50.0%"><figcaption>设置写屏区域</figcaption>
+</figure>
+<p>创建写屏对象后，就可以利用这个写屏对象绘制文字了，选择并插入一条“绘制文字”命令，该命令将往屏幕上写一段文字。这条命令有四个属性：“写屏窗口对象”属性填写写屏对象objWindow；“显示内容”属性填写所要显示的文字内容；“文字大小”填写文字的字号；“文字颜色”一栏中，用[255,0,0]代表红色，[0,0,255]代表蓝色，[255,255,0]代表黄色等，关于RGB颜色的相关知识，请参见相关教程。</p>
+<figure>
+<img alt="绘制文字" src="../../doc/guide/d2/media/file68.png" style="width:35.0%"><figcaption>绘制文字</figcaption>
+</figure>
+<p>有时候我们需要多次写屏，写屏对象objWindow可以反复使用。在上一条“绘制文字”命令后面，再加入一条“绘制文字”命令，两条“绘制文字”命令只有“显示内容”属性不同。运行后发现上一条“绘制文字”命令显示的文本并没有消失。原来，UiBot并不会默认擦除上一条“绘制文字”命令的写屏内容，如果要擦除写屏文字，需要用到“清除文字”命令。“清除文字”命令只有一个“写屏窗口对象”属性，这个属性与“绘制文字”命令的“写屏窗口对象”属性含义相同，填入objWindow即可。</p>
+<p>再次运行流程，这次上一条文字的内容倒是擦除了，不过文字显示的时间太短了。原来UiBot的命令都是实时执行的，如果需要文字在屏幕中停留一段时间，在“绘制文字”命令和“清除文字”命令中间插入一条“延时”命令即可。</p>
+<p>最后切记，在所有的写屏操作完成后，一定要添加一条“关闭窗口”命令，这条命令和“创建写屏对象”命令一一对应，将“创建写屏对象”命令创建的objWindow对象释放。</p>
+</section>
+</section>
+<section class="level2" id="锁屏与解锁">
+<h2><span class="header-section-number">3.3</span> 锁屏与解锁</h2>
+<p>当我们使用UiBot，在普通的桌面计算机上运行流程（在有的资料中，把这种场合也称为“桌面自动化”或者“有人值守自动化”） 的过程中，经常遇到这样的场合：临时有事需要暂时离开办公桌，又不想让别人乱动这台计算机，破坏流程的执行，或者不想让别人看见当前的流程。我们希望能够锁住屏幕，比如在Windows系统中按“Win+L”键。但是采用这种锁屏方法后，UiBot的流程还能正常运行吗？下面用一个具体的例子来实验一下，这个例子只有一个流程块，执行一条“屏幕OCR”命令，获得桌面上“回收站”图标的文字并显示出来，为了预留按“Win+L”键的时间，我们再加入一条“延时”命令，延时5秒钟。</p>
+<figure>
+<img alt="一个具体流程：识别桌面上的回收站图标" src="../../doc/guide/d2/media/file69.png" style="width:65.0%"><figcaption>一个具体流程：识别桌面上的回收站图标</figcaption>
+</figure>
+<p>先正常执行流程，能够正确识别出文字“回收站”：</p>
+<figure>
+<img alt="正常执行后，正确识别出文字" src="../../doc/guide/d2/media/file70.png" style="width:40.0%"><figcaption>正常执行后，正确识别出文字</figcaption>
+</figure>
+<p>再次运行流程，马上按“Win+L”键锁住屏幕，然后等待流程执行完成，输入解锁密码，此时UiBot并未识别出文字“回收站”：</p>
+<figure>
+<img alt="锁屏执行后，无法正确识别出文字" src="../../doc/guide/d2/media/file71.png" style="width:40.0%"><figcaption>锁屏执行后，无法正确识别出文字</figcaption>
+</figure>
+<p>这是因为“回收站”的图标和文字实际上都是Windows“画”在桌面上的，UiBot的OCR命令需要获得Windows“画”的那些内容，才能识别。但Windows也会“偷懒”，当屏幕锁定的时候，它就不会再“画”这些内容了。所以UiBot的OCR命令自然也不会获得预想的效果。</p>
+<p>那有没有别的办法呢？UiBot从5.0版本开始，提供了一种名叫“屏幕锁屏”的命令，可以锁住屏幕，却不影响流程的正常运行，我们来看具体的用法：</p>
+<p>在UiBot的命令列表中，找到“系统操作”的“锁屏解锁”分类，选择并插入一条“屏幕锁屏”命令，该命令会将屏幕锁住，但又不影响后续流程的执行。这条命令有三个属性：“输出到”属性返回锁屏命令是否执行成功，这个属性暂时用不到；“用户或账户”属性填写Windows系统的用户名；“密码”属性填写该用户名的密码，如果不想让别人看见输入框和源代码中的密码原文，可以点击密码输入框右边的“切换使用密文或明文”按钮，再次输入时即为密文。</p>
+<figure>
+<img alt="锁屏命令的属性" src="../../doc/guide/d2/media/file72.png" style="width:35.0%"><figcaption>锁屏命令的属性</figcaption>
+</figure>
+<p>类似的，插入一条“屏幕解锁”命令，即可将屏幕解锁。该命令的三个属性含义同“屏幕锁屏”命令。在“屏幕锁屏”和“屏幕解锁”命令之间，填入原来的命令（OCR识别屏幕命令、输出调试信息命令等）。运行流程，此时屏幕会被自动锁住，且流程仍然在正常执行，执行完成后，屏幕自动解锁，并正确识别出文字“回收站”。</p>
+<p>是不是很神奇？通过锁屏和解锁命令，既可以将屏幕锁住，又可以正确运行流程，一举两得，完美！别着急，为了支持这些命令，Windows系统需要预先进行一些设置：</p>
+<p>第一、Windows系统需要支持远程桌面连接，这个是先决条件，因为这两条命令实际上是使用了Windows的远程桌面协议（Remote Desktop Protocol，简称RDP）。一般来说，家庭版或者教育版的Windows系统不支持RDP，而企业版、旗舰版等都支持RDP。</p>
+<p>第二、Windows系统需要启用远程桌面连接。启用方法参考如下：</p>
+<p>1、右键“此电脑”或“我的电脑”，点击“属性”，在“高级系统设置”里，点击“远程桌面”或者“远程”选项卡。</p>
+<p>2、在“远程桌面”或者“远程”选项卡下，选择“允许远程连接到此计算机”。</p>
+</section>
+</section>
+
+        </div>
+    </div>
+    <script src="../../tutorials/js/jquery.slim.min-1.js"></script>
+    <script src="../../tutorials/js/popper.min-1.js"></script>
+    <script src="../../tutorials/js/bootstrap.min-1.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

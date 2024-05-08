@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>多流程协作_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min-1.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.8831020878128951#预备知识"><span class="section-header-number">1</span> 预备知识</a></li><li id="toc-li-5"><a href="ch003-1.html?version=0.8831020878128951#数据获取和处理"><span class="section-header-number">2</span> 数据获取和处理</a></li><li id="toc-li-20"><a href="ch004-1.html?version=0.8831020878128951#网络和系统操作"><span class="section-header-number">3</span> 网络和系统操作</a></li><li id="toc-li-31"><a href="ch005-1.html?version=0.8831020878128951#多流程协作"><span class="section-header-number">4</span> 多流程协作</a><ol class="toc"><li id="toc-li-32"><a href="ch005-1.html?version=0.8831020878128951#辅助流程"><span class="section-header-number">4.1</span> 辅助流程</a></li><li id="toc-li-33"><a href="ch005-1.html?version=0.8831020878128951#子流程"><span class="section-header-number">4.2</span> 子流程</a><ol class="toc"><li id="toc-li-34"><a href="ch005-1.html?version=0.8831020878128951#子流程的概念"><span class="section-header-number">4.2.1</span> 子流程的概念</a></li><li id="toc-li-35"><a href="ch005-1.html?version=0.8831020878128951#创建子流程"><span class="section-header-number">4.2.2</span> 创建子流程</a></li><li id="toc-li-36"><a href="ch005-1.html?version=0.8831020878128951#子流程的输入和输出"><span class="section-header-number">4.2.3</span> 子流程的输入和输出</a></li></ol></li></ol></li><li id="toc-li-37"><a href="ch006-1.html?version=0.8831020878128951#人工智能功能"><span class="section-header-number">5</span> 人工智能功能</a></li><li id="toc-li-43"><a href="ch007-1.html?version=0.8831020878128951#ub语言参考"><span class="section-header-number">6</span> UB语言参考</a></li><li id="toc-li-62"><a href="ch008-1.html?version=0.8831020878128951#高级开发功能"><span class="section-header-number">7</span> 高级开发功能</a></li><li id="toc-li-73"><a href="ch009-1.html?version=0.8831020878128951#扩展uibot命令"><span class="section-header-number">8</span> 扩展UiBot命令</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="多流程协作">
+<h1><span class="header-section-number">4</span> 多流程协作</h1>
+<p>在前面的学习中，我们编写的流程可能包含了若干个流程块，复杂一些的流程可能还包含了多个条件判断，但它们仍然只是一个流程，因为它们只有一个“开始”块。在本章的内容中，我们会学习到如何针对一个任务，编写多个流程（每个流程都有自己的“开始”块），通过多个流程之间的协作来完成这个任务。</p>
+<p>在UiBot中，既支持多个流程之间并行地运行（多个流程同时运行），也支持多个流程之间串行地运行（先运行一个，再运行另一个）。前者称之为“<strong>辅助流程</strong>”，后者称之为“<strong>子流程</strong>”，两者各有不同的用途。下文将会逐一讲解。</p>
+<section class="level2" id="辅助流程">
+<h2><span class="header-section-number">4.1</span> 辅助流程</h2>
+<p>如果您使用的是UiBot Creator 5.1.0或更新的版本，您可能会注意到：流程图上有且仅有一个称为“主流程开始”的组件，这是流程的起点，可以把多个流程块用箭头连接到“主流程开始”的后面，让这些流程块依次运行，这就构成了一个流程。如下图所示：</p>
+<figure>
+<img alt="主流程示意" src="../../doc/guide/d2/media/file73.png"><figcaption>主流程示意</figcaption>
+</figure>
+<p>顾名思义，既然有“主流程”，自然就会有“副流程”。在UiBot中，我们将其命名为“辅助流程”，而不是“副流程”。之所以这样命名，是因为它的用途通常是帮助主流程完成一些额外的任务，起到“辅助”的作用。具体的用法，后文会举例说明。我们先来看如何创建一个辅助流程。</p>
+<p>在流程图左侧的组件面板中，可以看到有一种名为“辅助流程开始”的组件，可以拖动到流程图中来。这个组件的形状很像“主流程开始”，但除了文字上有差异之外，还多了一圈虚线，如下图中红框所示：</p>
+<figure>
+<img alt="辅助流程开始" src="../../doc/guide/d2/media/file74.png" style="width:15.0%"><figcaption>辅助流程开始</figcaption>
+</figure>
+<p>在一个流程图中，可以没有，也可以有一个或多个“辅助流程开始”的组件。我们在流程图中创建了多少个“辅助流程开始”组件，在运行的时候就产生多少个辅助流程。当然，只创建“辅助流程开始”还不够，还需要创建若干个流程块，并且用箭头将其依次连接到“辅助流程开始”的后面，就像创建主流程一样。如下图所示，我们创建了一个主流程和一个辅助流程，它们各自又连接了三个流程块。</p>
+<figure>
+<img alt="一个主流程和一个辅助流程" src="../../doc/guide/d2/media/file75.png"><figcaption>一个主流程和一个辅助流程</figcaption>
+</figure>
+<p>值得注意的是：在流程图中可能有多个流程块，每个流程块要么隶属于主流程，要么隶属于某个辅助流程，而不能同时隶属于主流程和辅助流程，也不能同时隶属于多个辅助流程。因此，在UiBot Creator的流程图界面中，一个流程块一旦被连接到了“主流程”后面，您就无法再将其连接到“辅助流程”后面了。</p>
+<p>辅助流程是如何工作的呢？当流程开始运行的时候，主流程和所有的辅助流程都会同时开始，同时从“主流程开始”和每个“辅助流程开始”的组件处，根据箭头指向，依次运行每个流程块中的内容。您可以把这样的运行过程想象成为田径运动中的接力赛跑。发令枪响起之后，会有多组运动员在多个赛道上同时起跑，遇到了赛道中的队友，就会把接力棒交给队友，由队友接着往下跑。</p>
+<figure>
+<img alt="接力赛跑" src="../../doc/guide/d2/media/file76.jpg"><figcaption>接力赛跑</figcaption>
+</figure>
+<p>正如同图中赛跑的多组运动员都在各自的跑道上，而不会互相冲突一样。主流程和辅助流程所使用的变量也都是各自私有的，不会产生冲突。比如在主流程中有一个命名为<code>a</code>的变量，它的值为<code>1</code>，那么在辅助流程中完全有可能有一个同名的变量，它的值为<code>2</code>。</p>
+<p>当主流程中的某个流程块运行完毕后，它的后面没有连接其他流程块，或者连接了“结束”组件，主流程就会结束。辅助流程也是类似的，如果没有后续的流程块或者遇到“结束”组件就会结束。两者的差异在于：如果主流程结束了，会自动通知每个辅助流程，要求它们也结束。而辅助流程结束后，则不会影响到主流程或者其他辅助流程。</p>
+<p>有的读者可能会质疑：既然辅助流程和主流程是同时运行的，且辅助流程没有数量限制。那么，如果创建很多个辅助流程，每个辅助流程都去做一个独立的任务，岂不是相当于同时运行了很多个软件机器人，可以让它们在固定的时间内做更多的事情？实际上并非如此，UiBot的辅助流程是采用操作系统的多线程机制实现的，每个辅助流程都是一个独立的线程，如果读者熟悉计算机系统原理，就会知道线程的数量增加并不一定会带来工作效率的提升，甚至线程数量过多，反而会带来效率的下降。如果读者不熟悉线程的基本原理也没关系，只要记住辅助流程的数量不宜过多即可。</p>
+<p>实际上，UiBot设计辅助流程机制的初衷，并不是让我们同时运行多个软件机器人，去做不同的任务。因为UiBot经常需要模拟界面操作，如果多个流程都在同一套界面上进行操作，实际上很难协调，让它们能够有条不紊的做不同的操作，就像两个人各拿一个鼠标，去操作同一台计算机一样，稍有不慎就会产生冲突。比如一个人正在文本框里输入，另一个人却点击了某个按钮，导致输入焦点丢失，等等。辅助流程顾名思义，只是主流程的“助手”，帮助主流程做一些杂事儿。</p>
+<p>下面的例子可以说明辅助流程的一般用法：</p>
+<p>在某个电信运营商的业务系统中，需要不停地处理客户发来的业务请求（如修改手机话费套餐等）。处理每个请求都需要在业务系统中进行一系列复杂的操作，虽然复杂，但由于有特定的规则，所以特别适合用UiBot来自动化操作，只要把操作分为多个步骤，每个步骤都按规则点击特定的界面元素即可。但是，在这个业务系统中，可能会反复弹出“通知”对话框，“通知”对话框是异步产生的，也就是说，在进行任何操作的时候，随时都可能弹出，没有规律可循。而一旦弹出了这个对话框，就不得不点击对话框中的“确认”按钮，把这个对话框关掉，才能继续操作。</p>
+<p>如下图所示，当我们正在填写业务系统中的某个表单的时候，系统却弹出了一个无关紧要的对话框。如果是人在操作，很简单，关掉这个对话框就可以继续了。但如果是软件机器人操作，就会变得非常麻烦。因为我们在设计流程的时候，无法预测这个对话框什么时候会弹出，所以不得不在操作表单中的每个界面元素之前，都先检测一下对话框是否弹出。否则，万一哪个步骤中没有检测，而对话框又偏偏弹出来了，就会造成流程运行的错误。</p>
+<figure>
+<img alt="弹出对话框示例" src="../../doc/guide/d2/media/file77.png" style="width:60.0%"><figcaption>弹出对话框示例</figcaption>
+</figure>
+<p>如果采用UiBot的辅助流程，这个问题就很好解决了。我们只需要在主流程中照常处理表单，而不必考虑对话框是否弹出。另外再创建一个辅助流程，其作用是随时检测对话框是否弹出，一旦弹出，立即将其关闭，以免影响到主流程。这个辅助流程只有一个流程块，其内容大致如下图所示：</p>
+<figure>
+<img alt="检测并关闭对话框的辅助流程" src="../../doc/guide/d2/media/file78.png" style="width:60.0%"><figcaption>检测并关闭对话框的辅助流程</figcaption>
+</figure>
+<p>这样一来，主流程和辅助流程各司其职，职责更加明确，流程编写更加简单。辅助流程就像是给主流程“保驾护航”一样，当主流程结束后，辅助流程也会自动结束。</p>
+</section>
+<section class="level2" id="子流程">
+<h2><span class="header-section-number">4.2</span> 子流程</h2>
+<p>当我们在开发一个稍微复杂一些的流程时，为了能够提高效率，确保流程尽快完成，常见的方法是把流程划分为多个步骤，由不同的人去编写不同的步骤，最后再把这些步骤组装在一起。</p>
+<p>用UiBot如何做到这一点呢？如果读者有实践经验，可能会把每个步骤用一个流程块来实现。然后再使用UiBot的“导入”功能，把这些流程块逐一导入到同一张流程图中。</p>
+<p>这种方式并非不可以，但存在以下的问题：</p>
+<ul>
+<li>如果流程块的内容有更新，需要每次都在流程图中，把旧的流程块删掉，在重新导入新的流程块，非常麻烦；</li>
+<li>如果一个步骤比较复杂，用一个流程块描述起来不太方便，必须要用多个流程块才更清晰，这种方式就不支持了；</li>
+<li>我们在流程图中定义了一个变量，在每个流程块中都可以使用这个变量。但如果两个人之间缺乏协调，互相不知道彼此是如何使用这个变量的，会造成数据的相互覆盖等冲突（比如我们定义了一个流程图变量<code>a</code>，一个流程块将其值设为<code>1</code>，另一个流程块将其值设为<code>2</code>，如果两个流程块不是同一个人编写的，第一个流程块的编写者并不知道这个值已经被修改了，仍然按照<code>1</code>去处理，就会出现问题）。</li>
+</ul>
+<p>从UiBot Creator 5.2版本开始，支持一种新的机制：子流程。正确地使用子流程，能够避免前面的问题，更有助于多人协作。下面详细介绍这种机制。</p>
+<section class="level3" id="子流程的概念">
+<h3><span class="header-section-number">4.2.1</span> 子流程的概念</h3>
+<p>举例来说，假设我们有一个流程，其中包含一个前置步骤、两个业务步骤、一个后置步骤。我们希望把这两个业务步骤交给其他人来编写，其中每个业务步骤都是一个“子流程”，每个子流程里面又可以包含多个流程块，以及条件判断等。从我们的视角来看，这个流程图大致是如下的状态（不妨把这个顶级的流程称之为“总流程”，下文将延续这种称呼）：</p>
+<figure>
+<img alt="总流程示意" src="../../doc/guide/d2/media/file79.png" style="width:90.0%"><figcaption>总流程示意</figcaption>
+</figure>
+<p>其中，“前置步骤”和“后置步骤”这两个流程块由我们来编写，“子流程1”和“子流程2”这两个步骤由其他同事来编写。细心的读者可能注意到了，“子流程1”和“子流程2”这两个步骤并不是普通的流程块，因为图标两侧各有一条竖线，和流程块的图标不一样。实际上，“子流程1”和“子流程2”分别都是一张完整的流程图，里面还可以包含其他流程块。但在我们的视角中，只是把这两位同事编写的“子流程1”和“子流程2”当作两个单独的组件，并不关心其中的细节。</p>
+<p>例如，对于“子流程1”来说，其中可能包含了两个流程块，如下图：</p>
+<figure>
+<img alt="子流程1示意" src="../../doc/guide/d2/media/file80.png" style="width:90.0%"><figcaption>子流程1示意</figcaption>
+</figure>
+<p>而对于“子流程2”来说，其中可能包含了一个流程块和一个条件判断，如下图：</p>
+<figure>
+<img alt="子流程2示意" src="../../doc/guide/d2/media/file81.png" style="width:70.0%"><figcaption>子流程2示意</figcaption>
+</figure>
+<p>我们作为“总包方”，并不关心子流程1和子流程2的这些细节，只要写好前置步骤和后置步骤，再等两位同事分别完成子流程1和子流程2，即可运行这个流程。当我们点击了“运行”按钮之后，会先运行前置步骤，然后运行子流程1里面包含的流程块，当遇到子流程1中的“结束”块时，并不会结束整个流程，只是跳出子流程1，然后马上运行接下来的子流程2。类似地，当遇到子流程2中的“结束”块时，也不会结束，而是跳回到我们的流程图中，接着运行后续的“后置步骤”。直到在我们的流程图中遇到了“结束”块，才会真正结束。</p>
+<p>也就是说，实际运行的路径是：</p>
+<p>开始 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 前置步骤 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 子流程1-步骤1 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 子流程1-步骤2 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 子流程2-步骤 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 是否完成（在子流程2中，假设这里的判断条件为“是”）<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 后置步骤 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math> 结束</p>
+<p>值得注意的是，对于总流程、子流程1、子流程2，它们的变量都是彼此隔离的。也就是说，如果在总流程和子流程里面都定义一个变量<code>a</code>，无论<code>a</code>是流程图变量，还是流程块变量，它们在总流程或者子流程里面各有各的取值，不会互相影响。这样的话，我们在编写流程或子流程的时候，即使是由不同的人完成，也不用担心大家凑巧给变量起了相同的名字而导致冲突。</p>
+<p>创建这样一个包含子流程的流程其实非常容易，下面介绍其操作方法。</p>
+</section>
+<section class="level3" id="创建子流程">
+<h3><span class="header-section-number">4.2.2</span> 创建子流程</h3>
+<p>使用UiBot，您可以先创建子流程（包含其中的流程块），然后再在总流程中去引用子流程。也可以在总流程编写的过程中，创建一个子流程并引用它。而且，子流程中还可以再创建其他子流程。创建顺序没有限定。如下图中，总流程包含了3个子流程，其中有的子流程又包含了其他子流程（不妨称之为“孙流程”）。那么可以先逐一创建孙流程，再创建子流程，最后创建总流程；也可以先创建总流程，再逐一创建子流程，再在每个子流程中逐一创建孙流程。</p>
+<figure>
+<img alt="多级子流程示意" src="../../doc/guide/d2/media/file82.png" style="width:50.0%"><figcaption>多级子流程示意</figcaption>
+</figure>
+<p>我们先考虑最简单的情况：在一个总流程里引用一个子流程。掌握了这种操作以后，再考虑多级子流程，也就可以举一反三了。</p>
+<p>假设我们当前正在编写总流程，并且需要引用一个子流程。在左边的组件面板中，可以看到一个如图所示的图标，其下方的文字表明，用这个组件可以引入“子流程”。如下图：</p>
+<figure>
+<img alt="“子流程”组件图标" src="../../doc/guide/d2/media/file83.png" style="width:15.0%"><figcaption>“子流程”组件图标</figcaption>
+</figure>
+<p>把这个组件拖入流程图，UiBot Creator会立即弹出一个对话框，询问我们是希望引用已有的子流程，还是创建一个子流程并引用它，如下图。如果之前已经建好了子流程，显然这里应该选择“打开”，来选择已有的子流程；否则，可以选择“空白创建<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math>流程”或者“从模板创建<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⇒</mo><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math>企业级流程模板”来创建一个子流程。</p>
+<figure>
+<img alt="创建或打开子流程" src="../../doc/guide/d2/media/file84.png" style="width:60.0%"><figcaption>创建或打开子流程</figcaption>
+</figure>
+<p>值得注意的是：在UiBot Creator中，会使用一个Windows文件夹来放置一个流程，这个流程包含的所有文件都在这个文件夹下面。所以，如果是选择已有的子流程，UiBot Creator会立即弹出一个“选择文件夹”的对话框，其含义是确定被引入的子流程在哪个文件夹下面。如果是新建子流程，同样是在“位置”一栏指定流程所在路径，并点击“创建”即可。无论是选择已有的子流程还是创建子流程，完成操作后， 流程图中就多了一个“子流程”的图标。在流程沿着箭头运行的过程中，每当遇到这个图标，即开始运行这个子流程，直到子流程运行完毕，再回到这一张流程图。</p>
+<p>在流程图中加入一个子流程之后，UiBot并没有把子流程中的所有内容都复制到我们的流程图中，而是采取了“引用”的方式，只记录子流程的路径信息。也就是说，创建子流程之后，如果子流程又发生了修改，我们不需要做任何额外动作，再次运行的时候，子流程已经是修改之后的内容。</p>
+<p>您可能会注意到，在流程图中加入一个子流程之后，在表示子流程的方块上，也会有一个显示为纸和笔的按钮（如下图中红圈中所示）。点击这个按钮后，UiBot Creator会自动打开子流程的流程图，让我们有机会对子流程进行修改。</p>
+<figure>
+<img alt="修改子流程的按钮" src="../../doc/guide/d2/media/file85.png" style="width:80.0%"><figcaption>修改子流程的按钮</figcaption>
+</figure>
+<p>有的读者可能会担心：子流程里面又有孙流程，如果嵌套层数太多，“子子孙孙无穷匮也”，会不会忘记了子流程的层级结构。不必担心，UiBot Creator都帮您记得清清楚楚。无论是在编辑流程图还是流程块的时候，左侧都有一个名为“流程”的选项卡（可以通过拖动，放置到其他位置，但默认位置在左侧）。切换到这个选项卡，里面显示了一个树形结构，从总流程到子流程，再到每个子流程里面的流程块，都清清楚楚。这个选项卡有两个主要作用：</p>
+<ol type="1">
+<li><p>显示整个流程的结构，并且以加粗的字体来表示当前正在编辑的流程图或流程块在整个流程里面的位置；</p></li>
+<li><p>双击其中的任何一个流程图或者流程块，可以马上开始编辑。方便您在不同的子流程之间快速跳转。</p></li>
+</ol>
+<figure>
+<img alt="“流程”选项卡的作用" src="../../doc/guide/d2/media/file86.png"><figcaption>“流程”选项卡的作用</figcaption>
+</figure>
+<p>由于总流程和子流程各自使用了不同的Windows文件夹来保存，我们可以把流程运行过程中需要的文件（例如“查找图像”命令中用到的图像文件）放在各自的文件夹中，彼此之间不会干扰。按照我们之前学习的内容，在总流程的任意一个流程块中使用<code>@res""</code>，得到的是总流程所在文件夹下的<code>res</code>文件夹。而在子流程中，则会得到子流程所在文件夹下的<code>res</code>文件夹。</p>
+<p>当我们在UiBot Creator中编写好了总流程和子流程，并希望在UiBot Worker中使用时，需要使用UiBot Creator的企业版，并将流程打包成一个独立的、扩展名为<code>.bot</code>的文件。在打包的时候，虽然总流程和子流程放置在不同的文件夹下，UiBot Creator会自动遍历所需的子流程，以及子流程中的子流程（即“孙流程”）所在的文件夹，把它们的内容全部都打包到同一个<code>.bot</code>文件里。也就是说，您在打包的时候并不需要关心总流程和子流程各自放置在哪里，也不用担心他们在运行中用到的文件会有冲突，一切都是自动处理的。</p>
+</section>
+<section class="level3" id="子流程的输入和输出">
+<h3><span class="header-section-number">4.2.3</span> 子流程的输入和输出</h3>
+<p>当我们在总流程中引入了一个子流程的时候，根据前文所述，它们的变量是相互隔离的。即使定义了相同命名的变量，也各有各的取值，不会冲突。这样虽然避免了冲突的问题，但是，如果总流程和子流程需要协作，不可避免的还是要把数据在总流程和子流程之间进行传递。比如，子流程是某个同事负责编写的，其作用是根据我的手机号码，查询手机号码的归属地。那么，在和这位同事协作的过程中，至少有三个需求要满足：</p>
+<ul>
+<li>负责编写子流程的同事，能够很容易地使用自己的手机号码，对子流程的有效性进行测试；</li>
+<li>在我们使用子流程的时候，能够很容易地把要查询的手机号码发给子流程；</li>
+<li>子流程查到手机号码归属地之后，能够很容易地把结果发回给我们。</li>
+</ul>
+<p>从UiBot Creator 5.2版本开始，对“流程图变量”的概念进行了扩充，以支持以上的需求。</p>
+<p>在UiBot Creator中，打开任何一个流程图，在右侧会有一个选项卡，名为“变量”。点击这个选项卡，可以看到，在弹出的面板里面有三类变量。第一类叫“流程图”，也就是说，这里定义的是“流程图变量”；第二类叫“流程输入”，说明这里定义的是“流程输入变量”，UiBot Creator通常会自动新建一个名为<code>g_input</code>的流程输入变量；第三类叫“流程输出”，说明这里定义的是“流程输出变量”，类似地，UiBot Creator会自动新建一个名为<code>g_output</code>的流程输出变量。</p>
+<p>我们在前文中已经学过，在这里定义的“流程图变量”，在流程图里的各个流程块中都可以共享使用。实际上，“流程输入变量”和“流程输出变量”也都是特殊的流程图变量，也可以在各个流程块中共享使用。当然，他们还有更进一步的用途。</p>
+<ul>
+<li>对于“流程输入变量”，当这个流程图作为子流程的时候，这个变量可以接收上一级流程（简称“父流程”）传来的值；</li>
+<li>对于“流程输出变量”，当这个流程图作为子流程的时候，这个变量可以把值传给父流程；</li>
+<li>对于“流程图变量”，只能在流程图及其流程块中使用，对父流程不可见；</li>
+<li>对于总流程，其“流程输入变量”和“流程输出变量”还可以在使用UiBot Commander创建任务的时候，作为任务的输入和输出。除此之外，和“流程图变量”并无其他区别。</li>
+</ul>
+<figure>
+<img alt="定义流程图变量" src="../../doc/guide/d2/media/file87.png" style="width:50.0%"><figcaption>定义流程图变量</figcaption>
+</figure>
+<p>除了自动定义好的“流程输入变量”<code>g_input</code>和“流程输出变量”<code>g_output</code>之外，您可以通过点击下面的“加号”图标去增加，或者点击右边的“垃圾桶”图标去删除这些变量。</p>
+<p>细心的读者可能还会发现：对于“流程图变量”和“流程输出变量”来说，在定义的时候都没有“类型”这一栏，而“流程输入变量”则有这一栏。其实，UiBot中的变量是动态类型的，也就是说，一个变量可能先是字符串，后面又变成了数组、数值等类型，所以“流程图变量”和“流程输出变量”中到底存放了什么类型的数据，在流程运行的时候才知道，无法事先预估。而对于“流程输入变量”来说，其实UiBot也并未<strong>强制</strong>限定其数据类型，这一栏中填写的“类型”只是告知其父流程或者UiBot Commander，当需要输入的时候，<strong>建议</strong>输入什么类型的值。</p>
+<p>对于上文所述的查询手机号码归属地的例子来说，显然，我们需要在子流程中定义两个变量（如图）：</p>
+<ul>
+<li>一个是“流程输入变量”，作用是从父流程中获得要查询的手机号码。由于UiBot可以用中文命名变量名，不妨将其命名为 <code>手机号</code>。设定其类型为字符串，还可以为其设一个初始值，比如<code>"13074835678"</code>；</li>
+<li>另一个是“流程输出变量”，作用是向父流程传递查到的手机号码归属地。不妨将其命名为 <code>归属地</code>。</li>
+</ul>
+<figure>
+<img alt="子流程中的变量" src="../../doc/guide/d2/media/file88.png" style="width:50.0%"><figcaption>子流程中的变量</figcaption>
+</figure>
+<p>这样一来，对于编写这个子流程的同事来说，只需要读取 <code>手机号</code> 这个变量的值，即可得到要查询的手机号码。并且，在流程编写和单元测试阶段，还没有作为子流程接入的时候，这个变量的值就是我们设置的初始值，以便调试。当查到归属地信息之后，只需要将其置入 <code>归属地</code> 变量，等待被父流程使用即可。</p>
+<p>在我们编写总流程（同时也是上文中子流程的父流程）的时候，类似的，只需要定义一个“流程图变量”，用于接收子流程传回的归属地信息，变量名不妨定位为 <code>归属地结果</code>。我们还可以为其设置一个初始值，比如<code>"北京市"</code>。这样的话，在子流程还没有接入之前，也可以先用这个初始值进行后续步骤的测试和调试。如下图。</p>
+<figure>
+<img alt="总流程（父流程）中的变量" src="../../doc/guide/d2/media/file89.png" style="width:50.0%"><figcaption>总流程（父流程）中的变量</figcaption>
+</figure>
+<p>最后，假设子流程和总流程都已经编写完毕，开始集成测试了。只需要按<a href="ch005-2.html#创建子流程">前文</a>所述的步骤，把子流程引入到总流程中来，并且，在流程图中选中代表子流程的方块，注意，右侧有一个名为“属性”的标签页，打开这个标签页，在面板里面，除了显示子流程的名称等信息之外，还会显示子流程中定义的所有“流程输入变量”和“流程输出变量”。</p>
+<figure>
+<img alt="子流程的“基本信息”面板及其设置方法" src="../../doc/guide/d2/media/file90.png" style="width:50.0%"><figcaption>子流程的“基本信息”面板及其设置方法</figcaption>
+</figure>
+<p>如上所示的设置，其含义是：在子流程运行之前，把字符串<code>"13912341234"</code>（注意：上图中是采用普通模式输入，所以不需要输入代表字符串的双引号。如果是专业模式，就需要引号了）作为要查询的手机号，传入到子流程的 <code>手机号</code> 这个“流程输入变量”中；在子流程运行之后，把子流程的 <code>归属地</code> 这个“流程输出变量”的值置入总流程的 <code>归属地结果</code> 变量中。UiBot Creator中采用了标有左右方向的箭头表示数据的传递方向，留意此箭头及其方向，将有助于您理解数据是如何在总流程和子流程之间传递的。</p>
+</section>
+</section>
+</section>
+
+        </div>
+    </div>
+    <script src="../../tutorials/js/jquery.slim.min-1.js"></script>
+    <script src="../../tutorials/js/popper.min-1.js"></script>
+    <script src="../../tutorials/js/bootstrap.min-1.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

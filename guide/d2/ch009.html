@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>扩展UiBot命令_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min-1.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.8831020878128951#预备知识"><span class="section-header-number">1</span> 预备知识</a></li><li id="toc-li-5"><a href="ch003-1.html?version=0.8831020878128951#数据获取和处理"><span class="section-header-number">2</span> 数据获取和处理</a></li><li id="toc-li-20"><a href="ch004-1.html?version=0.8831020878128951#网络和系统操作"><span class="section-header-number">3</span> 网络和系统操作</a></li><li id="toc-li-31"><a href="ch005-1.html?version=0.8831020878128951#多流程协作"><span class="section-header-number">4</span> 多流程协作</a></li><li id="toc-li-37"><a href="ch006-1.html?version=0.8831020878128951#人工智能功能"><span class="section-header-number">5</span> 人工智能功能</a></li><li id="toc-li-43"><a href="ch007-1.html?version=0.8831020878128951#ub语言参考"><span class="section-header-number">6</span> UB语言参考</a></li><li id="toc-li-62"><a href="ch008-1.html?version=0.8831020878128951#高级开发功能"><span class="section-header-number">7</span> 高级开发功能</a></li><li id="toc-li-73"><a href="ch009-1.html?version=0.8831020878128951#扩展uibot命令"><span class="section-header-number">8</span> 扩展UiBot命令</a><ol class="toc"><li id="toc-li-74"><a href="ch009-1.html?version=0.8831020878128951#用python编写插件"><span class="section-header-number">8.1</span> 用Python编写插件</a><ol class="toc"><li id="toc-li-75"><a href="ch009-1.html?version=0.8831020878128951#编写方式"><span class="section-header-number">8.1.1</span> 编写方式</a></li><li id="toc-li-76"><a href="ch009-1.html?version=0.8831020878128951#插件api"><span class="section-header-number">8.1.2</span> 插件API</a></li><li id="toc-li-77"><a href="ch009-1.html?version=0.8831020878128951#插件的导入模块"><span class="section-header-number">8.1.3</span> 插件的导入模块</a></li><li id="toc-li-78"><a href="ch009-1.html?version=0.8831020878128951#隐藏源代码"><span class="section-header-number">8.1.4</span> 隐藏源代码</a></li><li id="toc-li-79"><a href="ch009-1.html?version=0.8831020878128951#其他注意事项"><span class="section-header-number">8.1.5</span> 其他注意事项</a></li></ol></li><li id="toc-li-80"><a href="ch009-1.html?version=0.8831020878128951#用java编写插件"><span class="section-header-number">8.2</span> 用Java编写插件</a><ol class="toc"><li id="toc-li-81"><a href="ch009-1.html?version=0.8831020878128951#编写方式-1"><span class="section-header-number">8.2.1</span> 编写方式</a></li><li id="toc-li-82"><a href="ch009-1.html?version=0.8831020878128951#插件api-1"><span class="section-header-number">8.2.2</span> 插件API</a></li><li id="toc-li-83"><a href="ch009-1.html?version=0.8831020878128951#变量的传递"><span class="section-header-number">8.2.3</span> 变量的传递</a></li><li id="toc-li-84"><a href="ch009-1.html?version=0.8831020878128951#插件的引用模块"><span class="section-header-number">8.2.4</span> 插件的引用模块</a></li><li id="toc-li-85"><a href="ch009-1.html?version=0.8831020878128951#其他注意事项-1"><span class="section-header-number">8.2.5</span> 其他注意事项</a></li></ol></li><li id="toc-li-86"><a href="ch009-1.html?version=0.8831020878128951#用c.net编写插件"><span class="section-header-number">8.3</span> 用C#.Net编写插件</a><ol class="toc"><li id="toc-li-87"><a href="ch009-1.html?version=0.8831020878128951#编写方式-2"><span class="section-header-number">8.3.1</span> 编写方式</a></li><li id="toc-li-88"><a href="ch009-1.html?version=0.8831020878128951#插件api-2"><span class="section-header-number">8.3.2</span> 插件API</a></li><li id="toc-li-89"><a href="ch009-1.html?version=0.8831020878128951#变量的传递-1"><span class="section-header-number">8.3.3</span> 变量的传递</a></li><li id="toc-li-90"><a href="ch009-1.html?version=0.8831020878128951#插件的引用模块-1"><span class="section-header-number">8.3.4</span> 插件的引用模块</a></li><li id="toc-li-91"><a href="ch009-1.html?version=0.8831020878128951#其他注意事项-2"><span class="section-header-number">8.3.5</span> 其他注意事项</a></li></ol></li><li id="toc-li-92"><a href="ch009-1.html?version=0.8831020878128951#插件的分享"><span class="section-header-number">8.4</span> 插件的分享</a></li></ol></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="扩展uibot命令">
+<h1><span class="header-section-number">8</span> 扩展UiBot命令</h1>
+<p>说起 <strong>“插件”</strong> ，很多人脑海中都会浮现出IE/Chrome/Firefox浏览器插件、Eclipse、Visual Studio、Sublime Text等各种编程工具的插件，这些应用工具层面上的插件，依托于原平台运行，但又扩展了原平台的功能，极大丰富了原有工具和平台。基于插件，用户甚至可以定制化地打造个性化的浏览器和编程工具。</p>
+<p>其实，绝大部分编程语言也提供这样一种插件机制，我们一般称之为 <strong>“类库”</strong>。比如Java语言，除了提供最基本的语言特性之外，还额外提供了内容极为丰富的核心库，涵盖了网络通信、文件处理、加解密、序列化、日志等方方面面，几乎无所不包。但是，即便是如此完善、如此强大的Java官方核心库，仍有很多用户还是觉得不够用，或者说在自己特定的应用场景中不好用。因此，一部分具备编程能力的用户，根据自己的应用需求和场景特点，将某一部分的功能打造得非常强大，弥补或者超越了官方核心库。这些用户将这部分功能抽取和贡献出来，这就形成了公认的第三方类库，这些第三方类库和官方核心库一起，共同构成了繁荣的Java生态圈。JavaScript和Python语言同样也是如此。</p>
+<p>我们再回到UiBot上来。前文提到过，UiBot本质上是一个平台工具，这个平台有几个特点，第一个特点就是 <strong>“强大”</strong> ，UiBot提供用以搭建RPA流程的零部件数量非常丰富，大大小小一整套的功能模块，从基础的键盘鼠标操作、各种界面元素操作，到常见办公软件、浏览器的自动化操作，从各种各样的数据处理，到文件处理、网络和系统操作等，一应俱全。但是这个平台还有第二个特点，那就是 <strong>“简单”</strong>，UiBot将最通用、最常用、最基本、最核心的功能抽取出来，集成到平台中，形成一套简明、精干的核心库。如果一味地堆砌功能，将大大小小的所有功能一股脑地集成到UiBot的框架中，那UiBot的框架就会变得非常的臃肿，学习难度也会大幅上升。</p>
+<p>那么，如果用户遇到了一个UiBot框架不能直接解决的问题，那么应该怎么办呢？类似于Java或JavaScript，UiBot也提供了<strong>插件</strong>机制，如果您擅长市面上的通用编程语言，那么您可以利用这些编程语言实现特定的功能，然后在UiBot中使用这个功能。</p>
+<p>更有意思的是，UiBot还支持用多种不同的编程语言来编写插件。包括Python语言、Java语言、C#语言和C/C++语言。您可以在此范围内任意选择喜欢的语言，无论哪种语言编写的插件，在UiBot里面使用起来几乎没有差异。</p>
+<p>当然，由于不同的编程语言之间有比较大的差异，使用不同的编程语言为UiBot编写插件的方法也是不一样的。本文分别介绍使用Python语言、Java语言、C#语言为UiBot编写插件的方法。考虑到C/C++语言比较难学，鉴于篇幅，本文就不对这两种语言的插件机制进行介绍了。</p>
+<p>在以下描述中，经常会涉及到文件目录，如无特殊说明，均指相对于UiBot Creator/Worker安装目录的相对路径。为了便于书写，我们采用<code>/</code>符号来作为路径的分隔符，而不是Windows习惯的<code>\</code>符号。</p>
+<section class="level2" id="用python编写插件">
+<h2><span class="header-section-number">8.1</span> 用Python编写插件</h2>
+<section class="level3" id="编写方式">
+<h3><span class="header-section-number">8.1.1</span> 编写方式</h3>
+<p>用Python编写UiBot插件是最简单的，只需要用任意文本编辑器书写扩展名为.py的文件（下文简称py文件），并且保存为UTF-8格式，放置在extend/python目录下，即可直接以<code>插件名.函数名</code>的形式，调用这个py文件里面定义的函数。</p>
+<p>注意，这里的<strong>插件名</strong>是指文件名去掉扩展名.py以后的部分，例如文件名为test.py，则插件名为test。</p>
+<p>我们来看一个完整的例子：</p>
+<ol type="1">
+<li><strong>编写插件源代码</strong>。打开extend/python目录，在这个目录下创建test.py文件，使用记事本打开test.py文件，写入如下内容：</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">def</span> Add(n1, n2):</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="cf">return</span> n1 <span class="op">+</span> n2</a></code></pre></div>
+<ol start="2" type="1">
+<li>将test.py文件另存为UTF-8编码格式，如下图：</li>
+</ol>
+<figure>
+<img alt="Python插件编写" src="../../doc/guide/d2/media/file136.png"><figcaption>Python插件编写</figcaption>
+</figure>
+<ol start="3" type="1">
+<li><strong>调用插件功能</strong>。打开UiBot，新建一个流程，在源代码视图写入代码：</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1">Traceprint test.add(<span class="dv">1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<ol start="4" type="1">
+<li><strong>验证插件功能是否正确</strong>。运行此流程，结果如下所示，代表插件调用正常。</li>
+</ol>
+<figure>
+<img alt="Python插件运行结果" src="../../doc/guide/d2/media/file137.png"><figcaption>Python插件运行结果</figcaption>
+</figure>
+</section>
+<section class="level3" id="插件api">
+<h3><span class="header-section-number">8.1.2</span> 插件API</h3>
+<p>在用Python编写插件的时候，除了可以调用Python本身的功能之外，插件还可以反过来调用UiBot的一部分功能。我们称之这些被调用的功能为插件API。</p>
+<p>插件API的调用方法如下：</p>
+<ol type="1">
+<li>在Python插件中写入如下代码：</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> UiBot</a></code></pre></div>
+<ol start="2" type="1">
+<li>直接调用插件API，例如：</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> CommanderInfo():</a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="cf">return</span> UiBot.GetCommanderInfo()</a></code></pre></div>
+<p>目前Python插件中能使用的插件API包括：</p>
+<ul>
+<li>UiBot.IsStop()</li>
+</ul>
+<p>这个函数用于检测当前流程是否需要马上停下来（比如用户按下了“停止”按钮）。当需要停下来时，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>当某个插件函数需要执行比较长时间的时候，在执行过程中，如果用户决定停止流程，但插件函数还没有执行完成，流程将无法立即停下来。 因此，建议在编写插件时，考虑到插件函数执行时间比较长的情况，并且在函数执行过程中定期的调用这个插件API，来确定流程是否要停下来。如果要停，应该立即退出插件函数。</p>
+<ul>
+<li>UiBot.GetString(string_path)</li>
+</ul>
+<p>这个函数用于获得当前语言版本的某个字符串，参数是一个字符串路径（下面解释），返回值是获得的字符串。</p>
+<p>我们在插件中可能会用到字符串，有的字符串内容是需要区分语言版本的。比如我们在插件中提示一个报错信息，这个报错信息应该包含中文版、英文版或其他语言版本。如果用户使用的是中文版的UiBot，那么就报中文的错误；如果用户使用的是英文版的UiBot，就报英文的错误。</p>
+<p>如何做到这一点呢？我们可以在UiBot的安装目录下看到<code>lang/en-us/extend.json</code>和<code>lang/zh-cn/extend.json</code>这两个文件（其他语言版本也有类似的路径，不再赘述），分别表示插件中要用到的英文版和中文版的字符串。可以把我们要用的字符串的不同语言版本分别写到这些文件中去，然后在插件中用<code>UiBot.GetString()</code>来获得需要的字符串即可。</p>
+<p>当然，UiBot的插件有很多，每个插件中也有很多字符串，这么多字符串都放在一个文件中，如何保证不冲突呢？很容易看到，这个文件是<a href="http://json.org">JSON格式</a>的，其中用多个嵌套的JSON Object来区分不同的字符串。当我们需要使用一个字符串的时候，只需要在<code>UiBot.GetString()</code>的参数中填入<strong>字符串路径</strong>即可。所谓<strong>字符串路径</strong>，是指这个字符串所在的Object及其往上各级Object的Key的组合，其中用<code>/</code>分隔。比如<code>UiBot.GetString('App/Prefix')</code>获得的就是这个文件中，Key为’App’的JSON Objet中的Key为’Prefix’的字符串。</p>
+<ul>
+<li>UiBot.GetCommanderInfo()</li>
+</ul>
+<p>当UiBot Worker在运行流程时，和UiBot Commander建立了连接，则可以通过这个API获得Commander的一些信息，如URL等。除了UiBot官方之外，一般用户的插件不会用到UiBot Commander，所以并不需要使用这个API。</p>
+</section>
+<section class="level3" id="插件的导入模块">
+<h3><span class="header-section-number">8.1.3</span> 插件的导入模块</h3>
+<p>单纯的一个py文件，功能往往比较有限。只有在py文件中通过import语句，导入其他的一些Python模块，其功能才更加丰富。</p>
+<p>实际上，在UiBot安装目录的<code>lib/site-packages</code>路径下，已经预置了很多的Python模块（或者Python包。Python包和模块的定义和差异请查阅相关说明，本文不作解释）。这些模块都是在Python插件中可以直接使用的。 如果我们在插件中还需要导入其他的模块，一种方式是将其放置在<code>lib/site-packages</code>路径下，还有一种方式是将其放置在<code>extend/python/&lt;插件名&gt;.lib</code>路径下。注意这里的<code>&lt;插件名&gt;.lib</code>也是一个目录，如果我们有个Python插件，文件名是test.py，则这个目录就是<code>test.lib</code>。</p>
+<p>在编写插件时，我们更推荐把插件中导入的模块（假设这些模块是UiBot本身没有预置的）放在<code>extend/python/&lt;插件名&gt;.lib</code>路径下，而不是<code>lib/site-packages</code>路径下。因为<code>lib/site-packages</code>是一个公用目录，当我们删除掉一个插件的时候，很难从中分辨出到底哪个模块是被这个插件所使用的，而现在已经不再需要了。但如果把这些模块放在<code>extend/python/&lt;插件名&gt;.lib</code>路径下，就很清晰了，因为在删除插件时，只需要把和插件同名，且扩展名为<code>.lib</code>的目录一并删掉，就可保证不错不漏。</p>
+<p>另外，值得注意的是：有的py文件会导入一些扩展名为pyd的模块，这些模块实际上是二进制格式的动态链接库。请注意动态链接库区分32位版本和64位版本，如果您使用的UiBot是32位版本，那么这些pyd模块也应该是32位版本的；否则，pyd模块就应该是64位版本的。</p>
+</section>
+<section class="level3" id="隐藏源代码">
+<h3><span class="header-section-number">8.1.4</span> 隐藏源代码</h3>
+<p>对于py文件来说，其源代码是完全公开的。如果我们既要让其他人使用我们编写的Python插件，又不希望被其他人看到插件的源代码，该怎么办呢？</p>
+<p>我们只需要在UiBot Creator中至少调用一次这个插件，就会看到有一个<code>extend/python/__pycache__</code>目录被创建出来了。到这个目录里面去看一看，里面有一些以插件名开头，中间是诸如<code>.cpython-37</code>这样的内容，以扩展名<code>.pyc</code>结束的文件。例如，我们的py文件为test.py，那么会自动创建这样的一个文件：<code>extend/python/__pycache/test.cpython-37.pyc</code>。</p>
+<p>把这个文件改名为<code>test.pyc</code>，并且放在<code>extend/python</code>目录下，同时删除掉原来的<code>test.py</code>（删除前请自行备份），我们仍然可以在UiBot中使用test这个插件，且用法不变。因为它的代码已经以二进制的格式保存在<code>test.pyc</code>中了。我们只需要把这个文件发送给其他人去使用，就可以避免被人直接读到源代码。</p>
+<p>当然，<code>test.pyc</code>实际上并不是加密的，仍然有可能被人反编译，得到一部分源代码。如果要做比较彻底的加密，还需要配合其他手段，本文不再赘述。</p>
+</section>
+<section class="level3" id="其他注意事项">
+<h3><span class="header-section-number">8.1.5</span> 其他注意事项</h3>
+<ol type="1">
+<li><p>如果Python插件的函数中定义了N个参数，那么在UiBot中调用的时候，可以传入少于N个参数，多余的参数会自动补为None。但不可以传入多于N个参数。</p></li>
+<li><p>可以把UiBot中的数组或者字典类型作为参数，传入Python插件中，对应为Python中的list或dict类型。也可以把Python中的list, tuple或dict类型作为返回值，传回到UiBot，前两者都被转换为数组类型，后者被转换为字典类型。 无论传入参数，还是返回值，这些复合类型在Python插件和UiBot之间都采用值传递的方式，而不是引用传递的方式。</p></li>
+<li><p>可以在Python插件的函数中抛出异常，异常可以由Python插件自行捕获，也可以不捕获。如果Python插件不捕获，那么异常会自动被传到UiBot中，UiBot可以捕获。 如果UiBot也不捕获，那么流程的运行会出错退出，并且会在出错信息中说明是由于Python插件中的异常导致的，以便排查问题。</p></li>
+<li><p>UiBot中已经内置了Python的运行环境，无需额外安装Python。即使安装了，UiBot也不会使用您安装的Python。目前UiBot内置的Python是3.7.1版本。</p></li>
+<li><p>Python中的变量、函数都是区分大小写的，但在UiBot中使用Python插件时，仍然可以不区分大小写的调用其中的函数。比如，在前面的例子中，可以在UiBot中写<code>test.add(1,1)</code>，也可以写<code>Test.ADD(1,1)</code>，其效果完全一样。</p></li>
+<li><p>可以在Python中使用全局变量，比如可以把变量写到函数之外。全局变量的值被Python插件中的所有函数所共享，但不同的插件不共享全局变量。</p></li>
+<li><p>使用Python编写UiBot插件很容易，但Python本身是一门独立的编程语言，使用文本编辑器开发和调试都很不方便，因此建议使用集成开发环境，例如Visual Studio Code进行Python插件开发。</p></li>
+</ol>
+</section>
+</section>
+<section class="level2" id="用java编写插件">
+<h2><span class="header-section-number">8.2</span> 用Java编写插件</h2>
+<section class="level3" id="编写方式-1">
+<h3><span class="header-section-number">8.2.1</span> 编写方式</h3>
+<p>从UiBot Creator 5.0版开始，支持用Java语言写UiBot的插件。用过Java的读者都知道，Java的源代码文件一般以<code>.java</code>扩展名结尾，需要先用<strong>JDK</strong>（Java Development Kit）编译成扩展名为<code>.class</code>的字节码（Byte Code）文件，然后才能运行。运行的时候不一定要安装JDK，也可以只安装<strong>JRE</strong>（Java Runtime Environment）。</p>
+<p>由于版权的限制，UiBot中没有内置JDK，但内置了由Oracle公司发布的JRE 1.7版本。所以，为了用Java编写插件，需要您自行下载和安装Oracle JDK 1.7版本。下载和安装的方法在互联网上有大量资料讲述，本文不再重复。</p>
+<p>为了方便您用Java语言写UiBot的插件，我们设计了一个插件的例子并将其源码放在GitHub上，点击<a href="https://github.com/Laiye-UiBot/extend-example/tree/master/java">这里</a>即可获取。如果您习惯使用git，也可以从这个URL拉取：<a class="uri" href="https://github.com/Laiye-UiBot/extend-example">https://github.com/Laiye-UiBot/extend-example</a>。后续内容将围绕这个例子展开。</p>
+<p>按照Java语言的规范，首先我们需要设计一个插件名，然后将源代码文件命名为<code>&lt;插件名&gt;.java</code>，并在文件中写一个Java类，这个类的名字也必须是插件名。在例子中，我们可以看到插件名为JavaPlugin，所以源代码文件名必须是JavaPlugin.java，而在这个文件中会定义一个名为JavaPlugin的类：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">public</span> <span class="kw">class</span> JavaPlugin</a>
+<a class="sourceLine" id="cb5-2" title="2">{</a>
+<a class="sourceLine" id="cb5-3" title="3">}</a></code></pre></div>
+<p>为了让UiBot能够正常使用这个类，这个类必须是public的，也不能包含在任何包里。类里面可以定义public、private或protected的函数，但只有public函数是UiBot可以直接调用的。 比如，我们在例子中定义了一个叫Add的函数，这个函数是public的，所以，可以在UiBot中调用它。</p>
+<p>怎么调用呢？需要先用JDK中的javac程序，编译这个源码文件，在命令行输入：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" title="1">javac -encoding utf8 JavaPlugin.<span class="fu">java</span></a></code></pre></div>
+<p>当然，这里需要javac程序在当前的搜索路径下。另外，例子中的JavaPlugin.java是UTF-8编码的，且里面有中文字符，所以需要加上<code>-encoding utf8</code>的选项。如果没有中文字符，则此选项可以省略。</p>
+<p>如果编译成功，会自动生成名为JavaPlugin.class的文件，把这个文件放到<code>extend/java</code>目录下，然后就可以像使用Python插件一样的使用它。例如，我们可以打开UiBot，新建一个流程，在源代码视图写入代码：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb7-1" title="1">Traceprint javaPlugin.add(<span class="dv">1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<p>运行此流程，结果如下所示，代表插件调用正常。</p>
+<figure>
+<img alt="Java插件运行结果" src="../../doc/guide/d2/media/file137.png"><figcaption>Java插件运行结果</figcaption>
+</figure>
+</section>
+<section class="level3" id="插件api-1">
+<h3><span class="header-section-number">8.2.2</span> 插件API</h3>
+<p>和Python插件类似，在Java插件中，也可以使用插件API，反过来调用UiBot的一部分功能。如果要调用插件API，无需import任何包，只需要在编译Java插件的时候，把插件例子中的UiBot目录复制到Java插件源代码所在目录下即可。</p>
+<p>目前Java插件中能使用的插件API包括：</p>
+<ul>
+<li>UiBot.API.IsStop()</li>
+</ul>
+<p>用于检测当前流程是否需要马上停下来（比如用户按下了“停止”按钮）。当需要停下来时，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>其具体作用请参考Python插件中使用的UiBot.IsStop()函数。</p>
+<ul>
+<li>UiBot.API.GetString(string_path)</li>
+</ul>
+<p>用于获得当前语言版本的某个字符串，参数是一个字符串路径（下面解释），返回值是获得的字符串。</p>
+<p>其具体作用请参考Python插件中使用的UiBot.GetString()函数。 另外，在插件例子中，我们也使用到了这个API，来获得字符串路径为’Excel/SaveBook’的字符串，即extend.json文件中，名为’Excel’的JSON Object中的名为’SaveBook’的字符串。</p>
+<p>下面这段UiBot源代码会先调用Java插件中的GetString()函数，再反过来调用UiBot中的UiBot.API.GetString()。您可以在UiBot中输入这段代码，运行试试，看能得到什么结果。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" title="1">Traceprint JavaPlugin.getString()</a></code></pre></div>
+<ul>
+<li>UiBot.API.GetCommanderInfo()</li>
+</ul>
+<p>当UiBot Worker在运行流程时，和UiBot Commander建立了连接，则可以通过这个API获得Commander的一些信息。除UiBot官方之外，一般用户的插件不会用到UiBot Commander，所以并不需要使用这个API。</p>
+</section>
+<section class="level3" id="变量的传递">
+<h3><span class="header-section-number">8.2.3</span> 变量的传递</h3>
+<p>Java是静态类型的编程语言，也就是说，变量在使用之前需要先定义，且定义时必须指定变量的类型（整数、浮点数、字符串等），在运行的时候，变量也只能是指定的这种类型。而且，数组中通常只能包含同一种类型的数据。</p>
+<p>但这与UiBot有很大的不同，UiBot的变量是动态类型的，可以不指定类型，运行的时候还可以随意更换类型，数组中也可以包含各种不同类型的数据。</p>
+<p>所以，为了在UiBot中顺利使用Java插件，需要符合以下规定：</p>
+<ul>
+<li>如果Java插件的参数是整数、浮点数、字符串、布尔类型，UiBot传入的参数也必须是同样的类型（除了下面几条所述的例外情况），否则会出错</li>
+<li>如果Java插件的参数是浮点数，可以传入整数，不会出错。但反之不成立，也就是说，如果Java插件的参数是整数，不能传入浮点数</li>
+<li>如果Java插件的参数是长整数型（long），可以传入小于 2^31 的整数，不会出错。但反之不成立，也就是说，如果Java插件的参数是整数型（int），不能传入大于等于 2^31 的整数</li>
+<li>如果需要把字典或数组类型从UiBot中传到Java插件中，Java插件中的参数类型只能使用org.json.JSONArray（对应数组）或者org.json.JSONObject（对应字典）</li>
+<li>如果需要把字典或数组类型从Java插件中传到UiBot中，Java插件中的返回值类型只能使用org.json.JSONArray或者org.json.JSONObject。UiBot会自动把org.json.JSONArray类型的返回值转换成UiBot中的数组，而把org.json.JSONObject类型的返回值转换成UiBot中的字典</li>
+<li>无论传入参数，还是返回值，这些复合类型在Java插件和UiBot之间都采用值传递的方式，而不是引用传递的方式</li>
+<li>可以在Java源代码中写<code>import org.json.*;</code>，这样就可以直接使用JSONArray或者JSONObject类型，避免<code>org.json</code>的前缀。在插件例子中就是这样写的。另外，org.json这个包已经被UiBot包含在运行环境中了，无需额外下载和安装。</li>
+</ul>
+<p>在插件例子中，有一个Concat函数，用于演示如何把两个数组从UiBot传到Java插件中，又如何把两个数组连接后的结果返回到UiBot中。建议读者仔细阅读。</p>
+</section>
+<section class="level3" id="插件的引用模块">
+<h3><span class="header-section-number">8.2.4</span> 插件的引用模块</h3>
+<p>和Python类似，单纯的一个Java文件，功能往往比较有限。只有在源代码中通过import语句，导入其他的一些Java包，其功能才更加丰富。</p>
+<p>我们在UiBot中已经内置了Oracle JRE 1.7，当然也包含了JRE中自带的包，比如<code>com.sun.javafx</code>等。此外，我们还在UiBot中内置了要用到的org.json包。除了上述内容以外，其他第三方的Java包可以以<code>.class</code>格式的文件存在，也可以以<code>.jar</code>格式的文件存在。熟悉Java语言的读者，对以上两种文件应该有足够的了解，前者是Java代码的Byte Code，后者是多个Byte Code打包而成的压缩文件。</p>
+<p>在启动UiBot的时候，会自动把<code>extend/java</code>目录加入到Java的classpath中。此外，当加载一个Java插件的时候，还会把<code>extend/java/&lt;插件名&gt;.lib</code>这个目录，以及这个目录下<strong>所有</strong>扩展名为<code>.jar</code>的文件，都自动加入到Java的classpath中。比如，我们有个Java插件，名为<code>A.class</code>，且放置在<code>extend/java</code>目录下。那么，<code>extend/java</code>目录、<code>extend/java/A.lib</code>目录、以及<code>extend/java/A.lib/*.jar</code>，都会加入classpath中。我们的插件中如果需要引用任何第三方的Java包，只要把包放置在这些路径下，并且符合Java的<a href="https://docs.oracle.com/javase/7/docs/technotes/tools/windows/classpath.html">classpath规范</a>，即可使用。</p>
+</section>
+<section class="level3" id="其他注意事项-1">
+<h3><span class="header-section-number">8.2.5</span> 其他注意事项</h3>
+<ol type="1">
+<li><p>Java插件中的函数不支持可变参数或默认参数，在调用时必须传入指定数量、指定类型的参数。</p></li>
+<li><p>可以在Java插件的函数中抛出异常，异常可以由Java插件自行捕获，也可以不捕获。如果Java插件不捕获，那么异常会自动被传到UiBot中，UiBot可以捕获。 如果UiBot也不捕获，那么流程的运行会出错退出，并且会在出错信息中说明是由于Java插件中的异常导致的，以便排查问题。</p></li>
+<li><p>Java中的变量、函数都是区分大小写的，但在UiBot中使用Java插件时，仍然可以不区分大小写的调用其中的函数。比如，在前面的例子中，可以在UiBot中写<code>javaPlugin.add(1,1)</code>，也可以写<code>JavaPlugin.ADD(1,1)</code>，其效果完全一样。</p></li>
+<li><p>在写Java插件的时候，实际上是定义了一个Java类，并且把类里面的public函数给UiBot去调用。这个类可以有构造函数，也可以有成员变量，它们的初始化都会在流程刚刚开始运行的时候自动完成。</p></li>
+<li><p>UiBot中内置了Oracle JRE 1.7版本，您需要自行下载Oracle JDK 1.7版本去编译Java插件。虽然有时JDK和JRE的版本不一致也可以工作，但为了减少麻烦，还是推荐用同一版本。另外，也推荐使用集成开发环境，来进行Java插件的开发，例如Eclipse或IntelliJ IDEA。</p></li>
+</ol>
+</section>
+</section>
+<section class="level2" id="用c.net编写插件">
+<h2><span class="header-section-number">8.3</span> 用C#.Net编写插件</h2>
+<section class="level3" id="编写方式-2">
+<h3><span class="header-section-number">8.3.1</span> 编写方式</h3>
+<p>UiBot本身的部分代码就是基于微软的.Net框架，用C#语言编写的。所以，也可以用C#语言编写UiBot的插件（以下简称为.Net插件）。实际上，微软的.Net框架支持多种编程语言，包括VB.Net、C++/CLI等等，这些编程语言都遵循.Net框架的规范，它们都可以用来编写.Net插件，但因为C#是微软主推的编程语言，所以本文用C#举例，有经验的读者亦可将其移植到.Net框架上的其他语言。另外，UiBot对.Net插件的支持也是在不断升级的，本文以UiBot Creator 5.1版为例，如果在老版本的UiBot上，一些例子可能无法正常运行，请及时升级。</p>
+<p>为了方便您用C#语言写.Net插件，我们设计了一个插件的模板，并将其源码放在GitHub上，点击<a href="https://github.com/Laiye-UiBot/extend-example/tree/master/DotNet">这里</a>即可获取。如果您习惯使用git，也可以从这个URL拉取：<a class="uri" href="https://github.com/Laiye-UiBot/extend-example">https://github.com/Laiye-UiBot/extend-example</a>。建议您在写.Net插件的时候，直接在这个模板的基础上写，而无需从头开始。后续讲述的内容，也将围绕这个模板中的例子展开。</p>
+<p>和Java插件类似，.Net插件也需要编译成扩展名为<code>.dll</code>的文件，才能被UiBot使用。微软的集成开发环境Visual Studio兼具编写和编译的功能，并且也提供了免费的社区版，推荐下载使用。我们提供的模板是基于Visual Studio 2015版本的，您可以选择这个版本，也可以选更高版本的Visual Studio，但不建议使用低于2015版本的Visual Studio。</p>
+<p>安装了Visual Studio，并下载了我们的.Net插件模板后，可以双击<code>UiBotPlugin.sln</code>文件，这是一个“解决方案”，名字起得很唬人，实际上就是多个相关联的文件的集合。用Visual Studio打开这个解决方案后。可以看到，里面包含了很多内容，其中唯一需要我们动手修改的是UiBotPlugin.cs文件，其他的文件、引用、Properties等都可以不去动。如下图：</p>
+<figure>
+<img alt=".Net插件的模板" src="../../doc/guide/d2/media/file138.png"><figcaption>.Net插件的模板</figcaption>
+</figure>
+<p>在<code>UiBotPlugin.cs</code>文件里，有一个叫<code>UiBotPlugin</code>的命名空间，其中包含了一个接口（interface）和一个类（class）。为了避免混淆，我们推荐把这个命名空间的名字改为您的插件名。比如最终的插件文件是<code>DotNetPlugin.dll</code>，那么插件名就是<code>DotNetPlugin</code>，这个命名空间的名字也改为<code>DotNetPlugin</code>为宜。</p>
+<p>从模板中可以看出：在接口里面声明了三个函数，在类里面写了这三个函数的实现。这三个函数都是例子，您随时可以把它们的声明和实现都删掉，加入您自己的插件函数。但请特别注意：在加入函数的时候，也要保持类似的写法，需要在接口中声明，在类中实现，否则，UiBot不能正常识别这个插件函数。</p>
+<p>我们用例子中的Add函数为例，尝试编译插件，并在UiBot中调用这个函数：</p>
+<ol type="1">
+<li>选择Visual Studio的“生成”（Build）菜单项，编译这个解决方案之后，会看到在插件的目录下有个叫Release的目录，里面产生了一个叫UiBotPlugin.dll的文件。</li>
+<li>把这个文件手动改名为您的插件名，并保留<code>.dll</code>的扩展名。如改名为<code>DotNetPlugin.dll</code>。</li>
+<li>把这个文件放到UiBot的<code>extend/DotNet</code>目录下。</li>
+<li>打开UiBot，新建一个流程，在源代码视图写入代码：</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" title="1">Traceprint DotNetPlugin.add(<span class="dv">1</span>, <span class="dv">1</span>)</a></code></pre></div>
+<p>运行此流程，结果如下所示，代表插件调用正常。</p>
+<figure>
+<img alt=".Net插件运行结果" src="../../doc/guide/d2/media/file137.png"><figcaption>.Net插件运行结果</figcaption>
+</figure>
+<p>您可能注意到了，在前面的Python插件、Java插件的例子中，都有Add这个例子函数，而除了插件名之外，UiBot调用它们的方式和运行结果都没有区别。实际上，不同的插件内部实现是有很大差异的，比如在Python语言里，默认用UTF-8编码来保存字符串，而在.Net里默认用UTF-16保存。但UiBot已经帮您抹平了这些差异，让您在使用的过程中不必关心这些细节。</p>
+</section>
+<section class="level3" id="插件api-2">
+<h3><span class="header-section-number">8.3.2</span> 插件API</h3>
+<p>和Python、Java插件类似，在.Net插件中，也可以使用插件API，反过来调用UiBot的一部分功能。如果要调用插件API，只需要基于<a href="https://github.com/Laiye-UiBot/extend-example/tree/master/DotNet">UiBot提供的模板</a>编写插件即可，无需做其他任何设置。</p>
+<p>.Net插件中能使用的插件API的名字、参数和含义都和Java插件完全一致，例如，可以用<code>UiBot.API.IsStop()</code>来检测当前流程是否需要马上停下来，等等。请参考Java插件的中关于插件API的讲解，不再赘述。</p>
+<p>在模板中，您可能会看到一个名叫<code>DotNetAdapter.dll</code>的文件。实际上，这个文件是UiBot每个版本都包含的。从UiBot 5.1版开始，您调用的.Net版的插件API，实际上都在这个文件里面实现。因此，当您的插件发布的时候，并不需要包含这个文件，因为UiBot已经自带了。</p>
+<p>同时，如果您的UiBot更新到了更高的版本，<code>DotNetAdapter.dll</code>中也可能会包含了更多的插件API。您可以自行从UiBot中拿到新版本的<code>DotNetAdapter.dll</code>文件，并放在您编写的插件的源代码所在的目录下，即可使用到新版的插件API。</p>
+</section>
+<section class="level3" id="变量的传递-1">
+<h3><span class="header-section-number">8.3.3</span> 变量的传递</h3>
+<p>和Java类似，C#.Net也是静态类型的编程语言，变量在使用之前需要先定义，且定义时必须指定变量的类型。而且，数组中通常只能包含同一种类型的数据。这与UiBot的动态类型有很大的不同。</p>
+<p>因此，在编写和使用.Net插件的时候，需要符合以下规定：</p>
+<ul>
+<li>对于整数、浮点数、字符串、布尔类型等基本类型的参数，UiBot对.Net插件的类型检查不是很严格，它会尽量进行转换，即使转换不成功，也不会报错。所以，请在使用时特别留意每个参数的类型，避免传入了不正确的值，而没有及时发现。</li>
+<li>如果需要把字典或数组类型从UiBot中传到.Net插件中，.Net插件中的参数类型只能使用Newtonsoft.Json.Linq.JArray（对应数组）或者Newtonsoft.Json.Linq.JObject（对应字典）。在模板中，由于我们已经写了<code>using Newtonsoft.Json.Linq;</code>，所以可以省略前缀，简写为JArray（对应数组）或JObject（对应字典），下文亦使用此简化写法。</li>
+<li>如果需要把字典或数组类型从.Net插件中传到UiBot中，.Net插件中的返回值类型只能使用JArray（对应数组）或JObject（对应数组）。UiBot会自动把JArray类型的返回值转换成UiBot中的数组，而把 JObject类型的返回值转换成UiBot中的字典。</li>
+<li>无论传入参数，还是返回值，这些复合类型在.Net插件和UiBot之间都采用值传递的方式，而不是引用传递的方式。</li>
+</ul>
+<p>在插件模板中，有一个作为例子的Concat函数，用于演示如何把两个数组从UiBot传到.Net插件中，又如何把两个数组连接后的结果返回到UiBot中。建议读者仔细阅读。</p>
+</section>
+<section class="level3" id="插件的引用模块-1">
+<h3><span class="header-section-number">8.3.4</span> 插件的引用模块</h3>
+<p>UiBot本身是依赖于.Net Framework的，并且假设用户已经安装了.Net Framework 4.5.2（含）以上的版本。如果没有安装.Net Framework，或者版本不对，UiBot本身都不能运行，当然就更不能使用您编写的插件了。所以，在编写插件的时候，只要您的插件依赖的也是.Net Framework 4.5.2版本，就不必担心环境不匹配的问题。</p>
+<p>微软已经在.Net Framework里面内置了非常丰富的功能，但难免有的功能仍然没有包含，需要引用第三方的.Net dll文件。</p>
+<p>和Java插件类似，UiBot在加载一个.Net插件的时候，如果这个.Net插件引用了其他第三方的.Net dll文件，UiBot首先会试图到.Net插件所在的目录下去搜索被引用的dll文件。如果没有找到，还会再到<code>&lt;插件名&gt;.lib</code>这个目录下去找一次。比如，我们有个.Net插件，名为<code>A.dll</code>，放置在<code>extend/DotNet</code>目录中，且引用了<code>B.dll</code>。那么UiBot会先尝试找<code>extend/DotNet/B.dll</code>，再尝试找<code>extend/DotNet/A.lib/B.dll</code>。如果这两个目录下都没有找到，会抛出异常。</p>
+</section>
+<section class="level3" id="其他注意事项-2">
+<h3><span class="header-section-number">8.3.5</span> 其他注意事项</h3>
+<ol type="1">
+<li><p>JArray和JObject并不是.Net Framework里面自带的，而是使用了开源的<a href="https://www.newtonsoft.com/json">Json.Net</a>。在编译和运行的时候，都需要依赖一个名为<code>Newtonsoft.Json.dll</code>的文件。 在<a href="https://github.com/Laiye-UiBot/extend-example/tree/master/DotNet">UiBot提供的模板</a>中，已经包含了这个文件。同时，在每个版本的UiBot中，也会自带这个文件。因此，您可以直接使用JArray和JObject，而并不需要把这个文件包含在插件当中。</p></li>
+<li><p>在编译插件的时候，编译器可能会警告“<code>DotNetAdapter</code>的处理器架构不匹配”之类的信息。实际上没有影响，无需理睬这个警告。</p></li>
+<li><p>.Net插件中的函数支持默认参数。在调用时，如果某些参数有默认值，则可以不传值，此参数会自动取默认值。</p></li>
+<li><p>可以在.Net插件的函数中抛出异常，异常可以由.Net插件自行捕获，也可以不捕获。如果.Net插件不捕获，那么异常会自动被传到UiBot中，UiBot可以捕获。 如果UiBot也不捕获，那么流程的运行会出错退出，并且会在出错信息中说明是由于.Net插件中的异常导致的，以便排查问题。</p></li>
+<li><p>.Net中的变量、函数都是区分大小写的，但在UiBot中使用.Net插件时，仍然可以不区分大小写的调用其中的函数。比如，在前面的例子中，可以在UiBot中写<code>DotNet.add(1,1)</code>，也可以写<code>dotnet.ADD(1,1)</code>，其效果完全一样。</p></li>
+</ol>
+</section>
+</section>
+<section class="level2" id="插件的分享">
+<h2><span class="header-section-number">8.4</span> 插件的分享</h2>
+<p>无论是用哪种语言编写插件，都可以放在<code>extend</code>目录的相应路径中，例如Python插件放在<code>extend/python</code>目录中，即可直接使用。</p>
+<p>但这种情况只适合您自己使用，不能分享给其他人。另外，使用了这个插件的流程，如果打包在UiBot Worker上运行的时候，并不会把插件打包进去，而需要单独把插件复制到UiBot Worker的<code>extend</code>目录的相应路径中。</p>
+<p>如果您的插件确实具有分享的意义，我们推荐您把插件分享到UiBot命令中心，供互联网上的其他人学习使用。您也可以在UiBot命令中心找到其他人分享的一些插件。在UiBot Worker上运行的时候，如果用到了这些插件，也不需要把它们复制到UiBot Worker中。</p>
+<p>假设我们用Python语言写了一个“四则运算”的插件，文件名为<code>Arith.py</code>，其内容如下：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode Python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">def</span> Add(a, b):</a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="cf">return</span> a<span class="op">+</span>b</a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="kw">def</span> Sub(a, b):</a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="cf">return</span> a<span class="op">-</span>b</a>
+<a class="sourceLine" id="cb10-6" title="6"></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="kw">def</span> Mul(a, b):</a>
+<a class="sourceLine" id="cb10-8" title="8">    <span class="cf">return</span> a<span class="op">*</span>b</a>
+<a class="sourceLine" id="cb10-9" title="9"></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="kw">def</span> Div(a, b):</a>
+<a class="sourceLine" id="cb10-11" title="11">    <span class="cf">return</span> a<span class="op">/</span>b</a></code></pre></div>
+<p>按照如下的步骤，可以把这个插件分享给其他用户：</p>
+<ol type="1">
+<li><p>用UiBot Creator打开任意一个流程，然后再打开任意一个流程块；</p></li>
+<li><p>在左侧的面板中找到“UiBot命令中心”的按钮，点击此按钮，选择“自定义”下面的“自定义插件”，如下图中红框所示；</p></li>
+<li><p>选择“新增自定义插件”，并在对话框中，参考图示内容进行填写：</p></li>
+</ol>
+<figure>
+<img alt="新增自定义插件" src="../../doc/guide/d2/media/file139.png" style="width:60.0%"><figcaption>新增自定义插件</figcaption>
+</figure>
+<p>由于我们的插件文件名为<code>Arith.py</code>，所以，主文件名就是<code>Arith</code>。可以把<code>Arith.py</code>和它依赖的文件都压缩成一个zip文件（可采用任意第三方压缩工具，或者Windows自带的压缩功能来完成），这个zip文件的命名随意。然后选中这个zip文件，再填好主文件名，最关键的信息就填完了。其他的栏目如“插件名称”、“插件主页”、“插件描述”都是供使用者阅读的，按照您的习惯详略得当的填写即可。</p>
+<ol start="4" type="1">
+<li>保存之后，一个插件就添加完成了，可以在界面上看到这个新增插件的信息。为了让使用者能够更清晰的了解这个插件的具体用法，我们还有必要对插件中的每个函数（在使用者看来，是每个命令）进行相关配置。配置方法如下：</li>
+</ol>
+<ul>
+<li><p>在界面上可以看到，添加完成插件之后，会多出一个“新增命令”的按钮。这个按钮允许我们为插件中的函数（在使用者看来是“命令”）增加一些配置信息，以便使用。</p></li>
+<li><p>点击“新增命令”按钮，进入新增命令页面，左侧是关于命令的说明信息，请根据页面提示和要求填写。其中，可视化翻译中填写的“把 %1% 和 %2% 两个数字相加”，“ %1% ”和“ %2%”分别表示读取第一个和第二个属性。</p></li>
+</ul>
+<figure>
+<img alt="新增命令" src="../../doc/guide/d2/media/file140.png" style="width:60.0%"><figcaption>新增命令</figcaption>
+</figure>
+<ul>
+<li>还可以进一步填写命令的属性信息。找到右侧的“属性编辑”窗口。点击“必选属性”右侧的“添加”按钮，通过“属性编辑”的对话框添加第一个属性“a”及其属性说明，参数类型选“数字”；组件类型选择“输入框”；默认值填写0。同理，添加第二个属性“b”。这两个值分别代表被加数和加数。</li>
+</ul>
+<figure>
+<img alt="新增属性" src="../../doc/guide/d2/media/file141.png" style="width:40.0%"><figcaption>新增属性</figcaption>
+</figure>
+<ul>
+<li>陆续加入其它命令的信息，让使用者在用到您的插件时，能够在可视化视图中清晰的显示出命令的含义，并清晰的说明每项属性的含义，使用起来才足够容易。</li>
+</ul>
+<p>到此为止，我们已经做好了插件发布的一切准备工作，点击对话框右上方的“安装调试”按钮，即可把这个插件安装到当前流程中。回到编写流程的界面中，即可在左侧的命令列表中找到我们添加的“四则运算”，以及里面的四条命令：我的加法、我的减法、我的乘法和我的除法。对于使用者来说，就像使用一般的UiBot预制命令一样，拖动到UiBot的可视化视图中，并配置其属性即可。</p>
+<p>我们来尝试一下，拖入“我的加法”命令，同时在属性栏里面，设置第一个加数为“2”，第二个加数为“3”。如图所示：</p>
+<figure>
+<img alt="“我的加法”命令属性设置" src="../../doc/guide/d2/media/file142.png" style="width:40.0%"><figcaption>“我的加法”命令属性设置</figcaption>
+</figure>
+<p>还可以再拖入一条“向调试窗口输出”命令，把结果输出出来。这样一来，可视化视图的显示效果类似于下图所示。可见我们设置的信息生效了，在使用插件的时候，插件的翻译是易于理解的形式。</p>
+<figure>
+<img alt="在可视化视图中的显示" src="../../doc/guide/d2/media/file143.png" style="width:40.0%"><figcaption>在可视化视图中的显示</figcaption>
+</figure>
+<p>运行这个流程，可以看到输出栏的结果符合预期，说明这个自定义命令达到了要求，可以发布。</p>
+<p>接下来，再次打开“UiBot命令中心”，找出我们刚才添加的插件，并点击“发布”，在“发布命令”页面中填写说明和版本号之后，点击“提交”按钮。之后请等待UiBot官方的审核，如审核通过，就可以在命令中心的“可安装”一栏中找到您发布的插件及其命令了。</p>
+<p>除了您发布的插件之外，还能看到其他用户发布的插件，包含了各种特定的功能。您可以选择喜欢的插件进行安装，并在您的流程中使用。</p>
+<p>值得说明的是，和<a href="ch008-2.html#导入和使用命令库">前文</a>中提到的“命令库”类似:如果我们在编写流程块的时候，使用了一个插件或命令库，这个插件或命令库在当前流程里面的所有流程块中都是可用的。但如果换了另外一个流程，就需要重新安装或者导入了；另外，使用了插件或命令库的流程，在打包给UiBot Worker或者UiBot Store使用的时候，命令库会被自动打包，而不需要我们再做额外的处理。</p>
+</section>
+</section>
+
+        </div>
+    </div>
+    <script src="../../tutorials/js/jquery.slim.min-1.js"></script>
+    <script src="../../tutorials/js/popper.min-1.js"></script>
+    <script src="../../tutorials/js/bootstrap.min-1.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

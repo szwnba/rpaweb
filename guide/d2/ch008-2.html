@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>高级开发功能_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min-1.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+           <li class="nav-item">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.8831020878128951#预备知识"><span class="section-header-number">1</span> 预备知识</a></li><li id="toc-li-5"><a href="ch003-1.html?version=0.8831020878128951#数据获取和处理"><span class="section-header-number">2</span> 数据获取和处理</a></li><li id="toc-li-20"><a href="ch004-1.html?version=0.8831020878128951#网络和系统操作"><span class="section-header-number">3</span> 网络和系统操作</a></li><li id="toc-li-31"><a href="ch005-1.html?version=0.8831020878128951#多流程协作"><span class="section-header-number">4</span> 多流程协作</a></li><li id="toc-li-37"><a href="ch006-1.html?version=0.8831020878128951#人工智能功能"><span class="section-header-number">5</span> 人工智能功能</a></li><li id="toc-li-43"><a href="ch007-1.html?version=0.8831020878128951#ub语言参考"><span class="section-header-number">6</span> UB语言参考</a></li><li id="toc-li-62"><a href="ch008-1.html?version=0.8831020878128951#高级开发功能"><span class="section-header-number">7</span> 高级开发功能</a><ol class="toc"><li id="toc-li-63"><a href="ch008-1.html?version=0.8831020878128951#流程调试"><span class="section-header-number">7.1</span> 流程调试</a><ol class="toc"><li id="toc-li-64"><a href="ch008-1.html?version=0.8831020878128951#调试的原则"><span class="section-header-number">7.1.1</span> 调试的原则</a></li><li id="toc-li-65"><a href="ch008-1.html?version=0.8831020878128951#调试的方法"><span class="section-header-number">7.1.2</span> 调试的方法</a></li><li id="toc-li-66"><a href="ch008-1.html?version=0.8831020878128951#uibot的调试方法"><span class="section-header-number">7.1.3</span> UiBot的调试方法</a></li></ol></li><li id="toc-li-67"><a href="ch008-1.html?version=0.8831020878128951#单元测试块"><span class="section-header-number">7.2</span> 单元测试块</a></li><li id="toc-li-68"><a href="ch008-1.html?version=0.8831020878128951#时间线"><span class="section-header-number">7.3</span> 时间线</a></li><li id="toc-li-69"><a href="ch008-1.html?version=0.8831020878128951#命令库"><span class="section-header-number">7.4</span> 命令库</a><ol class="toc"><li id="toc-li-70"><a href="ch008-1.html?version=0.8831020878128951#模块化思想"><span class="section-header-number">7.4.1</span> 模块化思想</a></li><li id="toc-li-71"><a href="ch008-1.html?version=0.8831020878128951#建立命令库"><span class="section-header-number">7.4.2</span> 建立命令库</a></li><li id="toc-li-72"><a href="ch008-1.html?version=0.8831020878128951#导入和使用命令库"><span class="section-header-number">7.4.3</span> 导入和使用命令库</a></li></ol></li></ol></li><li id="toc-li-73"><a href="ch009-1.html?version=0.8831020878128951#扩展uibot命令"><span class="section-header-number">8</span> 扩展UiBot命令</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="高级开发功能">
+<h1><span class="header-section-number">7</span> 高级开发功能</h1>
+<section class="level2" id="流程调试">
+<h2><span class="header-section-number">7.1</span> 流程调试</h2>
+<p>当我们兴致勃勃地用UiBot写完一个流程并运行后，总是期待得到成功的结果。但是有时候往往达不到预期的效果，尤其是对于新手而言，要么运行的时候UiBot报错，要么UiBot不报错，但是流程运行没有得到预想的结果。这个时候就需要对流程进行调试了。</p>
+<pre><code>所谓调试，是将编制的程序投入实际运行前，用手工或自动等方式进行测试，修正语法错误和逻辑错误的过程，是保证计算机软件程序正确性的必不可少的步骤。</code></pre>
+<p>其实，我们在前面已经大量使用了一种最原始、最朴素、但也是最常用、最实用的一种程序调试方法：“输出调试信息”命令。在关键代码的上一行或下一行添加输出调试信息，查看参数、返回值是否正确。严格意义上来说，这并不能算是一种程序调试的方法，但是确实可以用以测试和排除程序错误，同时也是某些不支持调试的情况下一个重要的补充方法。</p>
+<p>本节将会介绍 <strong>“真正意义上”</strong> 的程序调试方法，可以根据提示的错误信息、监测的运行时变量，准确定位错误原因及错误位置。</p>
+<section class="level3" id="调试的原则">
+<h3><span class="header-section-number">7.1.1</span> 调试的原则</h3>
+<p>首先，我们要清晰地认识到：程序，是人脑中流程落实到编程工具的一种手段；程序调试，本质上是帮助厘清人脑思路的一种方式。因此，在调试的过程中，人脑一定要清晰，这样才能迅速和准确地定位和解决问题。</p>
+<ol type="1">
+<li><p>冷静分析和思考与错误相关的提示信息。</p></li>
+<li><p>思路要开阔，避开钻死胡同。一个问题，如果一种方法已验证行不通，就需要换种尝试思路。</p></li>
+<li><p>避免漫无目的试探，试探也是要有目的性地缩减排查的范围，最终定位出错的地方。</p></li>
+<li><p>调试工具只是定位错误位置、查找错误原因的辅助方法和手段。利用调试工具，可以帮你理清楚程序中数据流转逻辑，可以辅助思考，但不能代替思考，解决实际问题时仍需要根据调试的提示信息，自己思考后做出正确的判断。</p></li>
+<li><p>不要只停留于修正了一个错误，而要思考引起这个错误的本质原因，是粗心写错了名称？还是用错了命令？还是流程设计上就有问题？只有找到了引起错误的本质原因，才能从根本上规避错误，以后不再犯类似错误。</p></li>
+</ol>
+</section>
+<section class="level3" id="调试的方法">
+<h3><span class="header-section-number">7.1.2</span> 调试的方法</h3>
+<p>首先，要对系统的业务流程非常清楚。业务产生数据，数据体现业务，流程的运行逻辑也代表着业务和数据的运转过程。当错误发生时，首先应该想到并且知道这个问题的产生所依赖的业务流程和数据。</p>
+<p>比如：当点击“提交”按钮时，表单提交出现错误。这时应该思考：点击“提交”按钮后，发生了哪些数据流转？再根据错误现象及报错提示信息，推测该错误可能会发生在这个业务数据流转过程中的哪个位置，从而确定我们调试的断点位置。</p>
+</section>
+<section class="level3" id="uibot的调试方法">
+<h3><span class="header-section-number">7.1.3</span> UiBot的调试方法</h3>
+<p><strong>添加和删除断点</strong></p>
+<p>在UiBot中，可以设置断点，在调试的过程中，遇到断点会自动停下来。考虑到UiBot的主要业务逻辑在流程块中，所以只需要在流程块中设置断点，即可满足调试要求。</p>
+<p>我们知道，流程块包含了“可视化”和“源代码”两种视图，无论哪一种，都可以用以下的方式来添加和删除断点：</p>
+<ol type="1">
+<li>点击任意一行命令左边的空白位置，都可以添加断点。再次点击这个位置，可以删除这个断点。</li>
+<li>选中一行命令，在菜单中选择“运行”-&gt;“设置/取消断点”，原先没有断点的，会加上断点；原先有断点的，会删掉这个断点。</li>
+<li>选中一行命令，直接按热键F4，效果同上。</li>
+</ol>
+<p>设置断点后，这一行命令的左边空白处会出现一个红色的圆形，同时这一行命令本身的背景也会变红。如下图：</p>
+<figure>
+<img alt="添加和删除断点" src="../../doc/guide/d2/media/file114.png" style="width:60.0%"><figcaption>添加和删除断点</figcaption>
+</figure>
+<p><strong>调试运行</strong></p>
+<p>在编写流程块的过程中，我们可以发现：在菜单栏的“运行”一栏下面，分别有四个菜单项：运行、运行全流程、调试运行、调试运行全流程。点击工具栏的“运行”图标右边的下拉按钮，也有类似的四个选项。它们的含义分别是：</p>
+<ol type="1">
+<li>运行：只运行当前流程块，并且忽略其中所有的断点。</li>
+<li>运行全流程：运行整个流程图，并且忽略其中所有的断点。</li>
+<li>调试运行：只运行当前流程块，遇到断点会停下来。</li>
+<li>调试运行全流程：运行整个流程图，遇到断点会停下来。</li>
+</ol>
+<figure>
+<img alt="调试运行菜单项" src="../../doc/guide/d2/media/file115.png" style="width:60.0%"><figcaption>调试运行菜单项</figcaption>
+</figure>
+<figure>
+<img alt="调试运行工具栏" src="../../doc/guide/d2/media/file116.png" style="width:60.0%"><figcaption>调试运行工具栏</figcaption>
+</figure>
+<p><strong>单步调试</strong></p>
+<p>当调试运行时，程序运行到断点处，会自动停下来。此时，在调试状态栏列出了常见的四个调试运行动作：继续运行(F6)、步过(F7)、步入(F8)、步出(F9)。“继续运行”指的是继续运行到下一个断点；“步过”指的是继续运行下一条命令；“步入”指的是继续运行下一条命令，如果下一条命令是函数，那么进入函数，在函数内的第一条命令处停下来；“步出”指的是跳出本层函数，并返回到上一层。</p>
+<p>调试状态栏的左下方列出了本流程块变量的值，在程序运行到断点位置暂停时，进行下一步调试，这时需要特别<strong><em>注意观察</em></strong>程序运行的每一步的数据是否为业务流程处理的正确数据，来判断程序是否正确执行。这些数据包括输入数据、返回数据等，如果程序运行起来后，并没有进入我们预先设定的断点处，此时需要根据错误信息和业务处理流程逻辑重新推测错误发生位置，重新设置断点。最终不断将一个大的问题细化拆解，最终精确定位错误点。</p>
+<figure>
+<img alt="单步调试" src="../../doc/guide/d2/media/file117.png" style="width:60.0%"><figcaption>单步调试</figcaption>
+</figure>
+<p>调试状态栏的右下方列出了本流程块的断点列表，大家可以根据需要启用、禁用和删除断点。</p>
+<figure>
+<img alt="断点列表" src="../../doc/guide/d2/media/file118.png" style="width:60.0%"><figcaption>断点列表</figcaption>
+</figure>
+<p><strong>打断点的技巧</strong></p>
+<p>一般打断点的方式及位置是：</p>
+<ul>
+<li><p>在有可能发生错误的方法的第一行逻辑程序打断点。</p></li>
+<li><p>方法中最有可能发生错误的那一行打程序断点。</p></li>
+</ul>
+</section>
+</section>
+<section class="level2" id="单元测试块">
+<h2><span class="header-section-number">7.2</span> 单元测试块</h2>
+<p>一般来说，一个流程图由一个或多个流程块组成，如果该流程比较复杂，那么流程中包含的流程块数量一般比较多，或者单个流程块的命令条数比较多。我们对流程图中靠后执行的流程块进行调试时，如果靠后流程块依赖靠前流程块的数据输入，那么靠后流程块的调试将会非常费时费力。我们举一个具体实例：假设某个流程由两个流程块组成，分别叫做“靠前流程块”和“靠后流程块”，流程中定义了两个全局变量<code>x</code>和<code>y</code>，“靠前流程块”中分别为<code>x</code>和<code>y</code>赋值为<code>4</code>和<code>5</code>，“靠后流程块”分别打印出<code>x</code>、<code>y</code>和<code>x+y</code>的值。</p>
+<figure>
+<img alt="单元测试块的实例" src="../../doc/guide/d2/media/file119.png" style="width:70.0%"><figcaption>单元测试块的实例</figcaption>
+</figure>
+<p>我们在流程图视图下点击运行，可以看到，UiBot可以输出正确的结果：</p>
+<figure>
+<img alt="运行全流程 得到正确结果" src="../../doc/guide/d2/media/file120.png" style="width:50.0%"><figcaption>运行全流程 得到正确结果</figcaption>
+</figure>
+<p>假如我们要单独测试一下“靠后流程块”的功能（其实就是一个加法模块）是否正确，此时“靠后流程块”是无法单独执行的，我们在“靠后流程块”的可视化视图或源代码视图下点击运行，会报错：</p>
+<figure>
+<img alt="运行单个流程块 报错" src="../../doc/guide/d2/media/file121.png" style="width:60.0%"><figcaption>运行单个流程块 报错</figcaption>
+</figure>
+<p>为了测试这个“靠后流程块”，必须要执行“靠前流程块”，因为<code>x</code>和<code>y</code>赋值操作来源于“靠前流程块”。这里“靠前流程块”比较简单，只做了几个赋值操作，如果“靠前流程块”比较复杂，例如<code>x</code>和<code>y</code>的值分别来源于抓取天猫和京东两个网站某类商品后的统计数量。那么测试这个“靠后流程块”的代价将非常大。</p>
+<p>那怎么办呢？强大的UiBot从5.0版本开始，提供了一种单元测试块，可对单个流程块进行测试。回到刚才的例子，我们来看看单元测试块的具体用法。</p>
+<p>打开“靠后流程块”的源代码视图，在命令中心“基本命令”的“基本命令”目录下，插入一条“单元测试块”命令。我们可以看到，在源代码视图下，<code>UnitTest</code>和<code>End UnitTest</code>中间就是单元测试块，我们在中间填入测试命令分别为<code>x</code>和<code>y</code>赋值<code>3</code>和<code>2</code>。</p>
+<figure>
+<img alt="撰写单元测试块" src="../../doc/guide/d2/media/file122.png" style="width:40.0%"><figcaption>撰写单元测试块</figcaption>
+</figure>
+<p>我们在“靠后流程块”的可视化视图或源代码视图下再次点击运行，此时执行正确：</p>
+<figure>
+<img alt="运行单元测试块" src="../../doc/guide/d2/media/file123.png" style="width:50.0%"><figcaption>运行单元测试块</figcaption>
+</figure>
+<p>单元测试块具有如下特性：</p>
+<p>第一、单元测试块不管放置在流程块中的什么位置，都会被优先执行。</p>
+<p>第二、只有在运行单个流程块时，这个流程块中的单元测试块才会被执行；如果运行的是整个流程，流程块中的单元测试块将不会被执行。</p>
+<p>第一条特性保证了调试单个流程块时，单元测试块肯定会被执行到；第二条特性保证了单元测试块的代码不会影响整个流程的运行，不管是运行单个流程块，还是运行整个流程，都可以得到正确的结果。</p>
+</section>
+<section class="level2" id="时间线">
+<h2><span class="header-section-number">7.3</span> 时间线</h2>
+<p>源代码的版本控制是软件开发中一个十分重要的工程手段，它可以保存代码的历史版本，可以回溯到任意时间节点的代码进度。版本控制是保证项目正常进展的必要手段。对初学者学习而言，建议在开始进行实践小项目的阶段即进行源代码版本控制，这在以后的工作中会大有裨益。</p>
+<p>UiBot通过集成著名的代码版本控制软件Git，提供了强大的版本控制手段： <strong>“时间线”</strong>。所谓时间线，指的是不同时间点的代码版本。</p>
+<ol type="1">
+<li>手动保存时间线</li>
+</ol>
+<p>用户鼠标移到工具栏“时间线”按钮上，“时间线”按钮上出现“保存时间线”按钮，点击“保存时间线”，即可保存将该时间点的流程。保存时间线时，需要填写备注信息，用以描述该时间点修改了代码的哪些内容。</p>
+<figure>
+<img alt="保存时间线" src="../../doc/guide/d2/media/file124.png" style="width:40.0%"><figcaption>保存时间线</figcaption>
+</figure>
+<ol start="2" type="1">
+<li>自动保存时间线</li>
+</ol>
+<p>如果用户不记得保存时间线，没关系，UiBot每隔五分钟，会自动保存时间线；如果这段时间内用户未修改流程内容，则不保存时间线。</p>
+<ol start="3" type="1">
+<li>查看时间线</li>
+</ol>
+<p>点击工具栏“时间线”按钮，“时间线”页面按照“今天”、“七天之内”、“更早之前”列出已保存的时间点，单击任意一个时间点，可查看当前文件和选中时间点文件的内容差异，内容差异会用红色背景标识出。</p>
+<p>如果要恢复该时间线的部分代码，可以直接点击代码对比框的蓝色箭头，直接将该段代码恢复到现有代码中。</p>
+<figure>
+<img alt="时间线对比代码" src="../../doc/guide/d2/media/file125.png"><figcaption>时间线对比代码</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>在“时间线”页面，点击任意一个时间点的备注详情，可查看该时间点备注的详细信息，如图：</li>
+</ol>
+<figure>
+<img alt="查看时间线备注" src="../../doc/guide/d2/media/file126.png"><figcaption>查看时间线备注</figcaption>
+</figure>
+<ol start="5" type="1">
+<li>在“时间线”页面，点击任意一个时间点的恢复按钮，可将该时间线的代码内容恢复至现有代码，恢复后的时间点，会在左上角有个绿色的R标记，表示Revert（恢复），鼠标移动到R标记上，会显示从哪个时间点恢复的具体时间点。</li>
+</ol>
+<figure>
+<img alt="恢复时间线" src="../../doc/guide/d2/media/file127.png"><figcaption>恢复时间线</figcaption>
+</figure>
+</section>
+<section class="level2" id="命令库">
+<h2><span class="header-section-number">7.4</span> 命令库</h2>
+<section class="level3" id="模块化思想">
+<h3><span class="header-section-number">7.4.1</span> 模块化思想</h3>
+<p>模块化的思想在许多行业中早已有之，并非计算机科学所独创。</p>
+<p>例如，建筑行业很早就提出了模块化建筑概念，即在工厂里预制各种房屋模块构件，然后运到项目现场组装成各种房屋。模块构件在工厂中预制，便于组织生产、提高效率、节省材料、受环境影响小。模块组装时施工简便快速、灵活多样、清洁环保，盖房子就像儿童搭建积木玩具一样。</p>
+<p>又如，现代电子产品功能越来越复杂、规模越来越大，利用模块化设计的功能分解和组合思想，可以选用模块化元件（如集成电路模块），利用其标准化的接口，搭建具有复杂功能的电子系统。模块化设计不但能加快开发周期，而且经过测试的模块化元件也使得电子系统的可靠性大大提高，标准化、通用化的元件使得系统易构建、易维护。</p>
+<p>总之，模块化的思想就是在对产品进行功能分析的基础上，将产品分解成若干个功能模块，预制好的模块再进行组装，形成最终产品。</p>
+<p>UiBot中的预制件是模块化的一个典型示例，现在UiBot已经提供了四百多个预制件，涵盖了鼠标键盘、各种界面元素的操作、常见软件的自动化操作、数据处理、文件处理、网络和系统操作等方方面面。这些预制件采用模块化，各自相对独立，而又能组合起来完成复杂的功能。</p>
+<p>除了UiBot中的预制件之外，您也可以把用UiBot实现的一部分功能组装成模块，将来如果要再用到类似的功能，就不需要重写了，直接拿这个模块来用即可。比如，在某个项目中，我们使用UiBot做了“银行账户流水下载”的功能，即可将其组装成模块。在今后的项目中，只要导入模块，即可直接使用“银行账户流水下载”的功能，省时省力。</p>
+<p>在UiBot中，这样的模块称之为命令库。一个命令库里面包含了若干条命令，使用起来就像UiBot中的预制件一样，可以在可视化视图中拖拽，也可以用接近自然语言的形式来展示，便于理解。</p>
+</section>
+<section class="level3" id="建立命令库">
+<h3><span class="header-section-number">7.4.2</span> 建立命令库</h3>
+<p>这里用一个实际的例子来说明如何建立命令库：假设我们设计了一个模块，其中包含四个功能：加法、减法、乘法、除法。我们希望把这四个功能作为四条命令包装在一个UiBot的命令库里面，以便今后使用。当然，在实际使用UiBot的过程中，四则运算这样的命令过于简单了，意义不大。但读者通过这个例子掌握了命令库的用法，自然就会实现更实用、更复杂的功能。</p>
+<p>从UiBot Creator 5.1版本开始，当我们点击首页上的“新建”按钮时，会弹出一个对话框，可以选择要新建的是一个流程，还是一个命令库（如下图）。</p>
+<figure>
+<img alt="新建命令库" src="../../doc/guide/d2/media/file128.png"><figcaption>新建命令库</figcaption>
+</figure>
+<p>选择命令库之后，可以看到命令库的编写界面和编写流程块类似。实际上，命令库确实可以视为一个特殊的流程块，但它不会像普通的流程块那样，从第一行开始执行，而是需要设置若干个“<strong>子程序</strong>”。如果您熟悉其他编程语言，“子程序”的称呼实际上就相当于其他语言中的“函数”（function）或者“过程”(procedure)。在UiBot中，之所以称为“子程序”，是为了让IT基础较少，不了解其他编程语言的开发者不至于感到困惑（比如和数学中的“函数”概念产生混淆）。</p>
+<p>命令库中的每个子程序，对于命令库的使用者看来，就是一条“命令”。所以，就像UiBot预制的命令一样，我们可以为其设置一个名称，和一组属性，这些名称和属性也会被使用者看到。</p>
+<p>新建一个命令库之后，作为例子，UiBot Creator已经帮我们生成了一个子程序的框架，在可视化视图和源代码视图下，其内容如下图所示。在源代码视图下，还会生成一段注释，以助理解。</p>
+<figure>
+<img alt="命令库的可视化视图" src="../../doc/guide/d2/media/file129.png" style="width:90.0%"><figcaption>命令库的可视化视图</figcaption>
+</figure>
+<figure>
+<img alt="命令库的源代码视图" src="../../doc/guide/d2/media/file130.png" style="width:80.0%"><figcaption>命令库的源代码视图</figcaption>
+</figure>
+<p>我们已经学习了使用源代码来编写流程内容，直接切换到源代码视图，把下面的源代码粘贴进去。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode vb"><code class="sourceCode monobasic"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">Function </span>加法(被加数, 加数)</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">Return</span> 被加数 + 加数</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">End Function</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">Function </span>减法(被减数, 减数)</a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="kw">Return</span> 被减数 - 减数</a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">End Function</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">Function </span>乘法(被乘数, 乘数)</a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="kw">Return</span> 被乘数 * 乘数</a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="kw">End Function</span></a>
+<a class="sourceLine" id="cb2-12" title="12"></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="kw">Function </span>除法(被除数, 除数)</a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="kw">Return</span> 被除数 / 除数</a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="kw">End Function</span></a></code></pre></div>
+<p>切换到可视化视图，即可看到我们已经完成了一个加减乘除的四则运算命令库，其中包含四条命令。如下图。当然，您也可以直接在可视化视图编写命令库及命令，具体过程比较简单，不再赘述。</p>
+<figure>
+<img alt="四则运算命令库" src="../../doc/guide/d2/media/file131.png" style="width:80.0%"><figcaption>四则运算命令库</figcaption>
+</figure>
+<p>命令库至此已建立完毕，但为了方便他人使用，推荐使用“发布”功能，把这个命令库发布成一个独立的文件，以便发给他人。</p>
+<p>在编写命令库的时候，我们可以看到，工具栏上有一个“发布库”的按钮，如下图所示。</p>
+<figure>
+<img alt="“发布库”的按钮" src="../../doc/guide/d2/media/file132.jpg" style="width:35.0%"><figcaption>“发布库”的按钮</figcaption>
+</figure>
+<p>点击这个按钮，UiBot Creator会校验命令库中是否存在错误，如果没有错误，则会弹出如图所示的对话框。这个对话框中的默认值已经填写好了，可以不填。而且即使不填，也不会对使用命令库有任何影响。但在这个例子中， 我们仍然对红框所在的内容进行了修改，这样修改是为了让用户使用起命令库来更加容易。</p>
+<figure>
+<img alt="发布命令库界面" src="../../doc/guide/d2/media/file133.png" style="width:60.0%"><figcaption>发布命令库界面</figcaption>
+</figure>
+<p>这些修改的意义在于：</p>
+<ul>
+<li>填写“使用说明”一栏，使得其他人在用命令库的时候，鼠标移动到这条命令上面，会有一个浮窗说明命令的具体说法；</li>
+<li>填写“可视化翻译”一栏，使得其他人在用命令库的时候，这条命令在可视化视图中能以更容易理解的形式出现。其中的<code>%1%</code>和<code>%2%</code>，会在可视化视图中，分别用命令的第一个属性和第二个属性替代。例如，第一个属性为<code>1</code>，第二个属性为<code>2</code>，则可视化视图中显示的内容是“<code>将1和2相加</code>”，而不是默认的“<code>四则运算.加法(1,2)</code>”。显然，前者的可读性要好得多；</li>
+<li>在“输出到”一栏打勾并填写一个变量名，如“相加结果”。使得其他人在用命令库的时候，每次插入这条命令，还会把命令的执行结果放置到这个变量里面。</li>
+</ul>
+<p>填写完成后，只要点击“发布”按钮，即可把命令库发布为一个独立的、以<code>.zip</code>为扩展名的文件。把这个文件用各种方式（如邮件、U盘等）发给其他同事，他们只要导入命令库，就可以像使用UiBot Creator中的其他预制件一样，使用其中的命令。</p>
+<p>下面我们来看看如何导入命令库。</p>
+</section>
+<section class="level3" id="导入和使用命令库">
+<h3><span class="header-section-number">7.4.3</span> 导入和使用命令库</h3>
+<p>假如我们的某个同事拿到了我们发布的命令库，具体的使用方法是：</p>
+<ol type="1">
+<li><p>用UiBot Creator打开任意一个流程，然后再打开任意一个流程块；</p></li>
+<li><p>在左侧的面板中找到“UiBot命令中心”的按钮，点击此按钮，选择“自定义命令”下面的“自定义库命令”，如下图中红框所示。</p></li>
+<li><p>找到“导入命令库”按钮，点击后，选择已发布的命令库文件（扩展名为<code>.zip</code>）。导入完成后，在界面上会出现已导入的命令库，如下图中绿框所示。</p></li>
+</ol>
+<figure>
+<img alt="导入命令库" src="../../doc/guide/d2/media/file134.png" style="width:60.0%"><figcaption>导入命令库</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>回到编写流程块的界面中，可以看到左侧的命令列表中，增加了一项“扩展命令”，其中包含了我们导入的“四则运算”，里面又有四条命令，对应着编写命令库时定义的四个“子程序”。</li>
+</ol>
+<figure>
+<img alt="导入命令库之后" src="../../doc/guide/d2/media/file135.png" style="width:35.0%"><figcaption>导入命令库之后</figcaption>
+</figure>
+<p>这些命令的用法和UiBot Creator中的其他预制件一样，具体不再赘述。</p>
+<p>值得注意的是：</p>
+<ul>
+<li><p>如果我们在编写流程块的时候导入一个命令库，这个命令库在当前流程里面的所有流程块中都是可用的。但如果换了另外一个流程，就需要重新导入了；</p></li>
+<li><p>使用了命令库的流程，在打包给UiBot Worker或者UiBot Store使用的时候，命令库会被自动打包，而不需要我们再做额外的处理。</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </div>
+    </div>
+    <script src="../../tutorials/js/jquery.slim.min-1.js"></script>
+    <script src="../../tutorials/js/popper.min-1.js"></script>
+    <script src="../../tutorials/js/bootstrap.min-1.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

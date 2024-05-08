@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>附录：编程基础知识_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a><ol class="toc"><li id="toc-li-56"><a href="ch010-1.html?version=0.6422463797095322#数据"><span class="section-header-number">8.1</span> 数据</a></li><li id="toc-li-57"><a href="ch010-1.html?version=0.6422463797095322#数据类型"><span class="section-header-number">8.2</span> 数据类型</a></li><li id="toc-li-58"><a href="ch010-1.html?version=0.6422463797095322#变量"><span class="section-header-number">8.3</span> 变量</a></li><li id="toc-li-59"><a href="ch010-1.html?version=0.6422463797095322#表达式"><span class="section-header-number">8.4</span> 表达式</a></li><li id="toc-li-60"><a href="ch010-1.html?version=0.6422463797095322#条件判断"><span class="section-header-number">8.5</span> 条件判断</a></li><li id="toc-li-61"><a href="ch010-1.html?version=0.6422463797095322#循环"><span class="section-header-number">8.6</span> 循环</a></li></ol></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1 unnumbered" id="附录编程基础知识">
+<h1>附录：编程基础知识</h1>
+<p>在阅读本文时，我们假设您有任意一门编程语言的最基本的经验，至少了解数据类型、变量、条件判断等基本概念。如果连这些概念都没有，我们将在本章对此进行简单的介绍。UiBot需要的编程基础非常少，也非常容易学，所以，不必担心，耐心读完、理解本章所讲的概念，就已经足够了。</p>
+<p>当然，如果您已有编程基础，那么本章的内容完全可以不用阅读。</p>
+<p>我们首先来看一张Excel表格。这张表格中的内容是完全虚构的，我们只是用它来解释下面的几个重要概念。</p>
+<figure>
+<img alt="虚构的Excel表格" src="../../doc/guide/d1/media/file128.png" style="width:50.0%"><figcaption>虚构的Excel表格</figcaption>
+</figure>
+<section class="level2" id="数据">
+<h2><span class="header-section-number">0.1</span> 数据</h2>
+<p>RPA的主要工作通常就是在处理各种数据，什么是数据呢？我们设想有一张Excel表格，里面的很多格子已经填写了内容，这些内容都是数据。数据是计算机和人类之间交换的信息。</p>
+<p>实际上，数据还可以细分为结构化数据和非结构化数据。像这种整整齐齐的写在一个个格子中的，显然是结构化数据。我们需要接触到的大多数数据也都是结构化数据，所以用这个表格来理解数据的概念就够了。而像图片、声音、视频、网页这些大部分都是非结构化数据，这里就不展开讲了。</p>
+</section>
+<section class="level2" id="数据类型">
+<h2><span class="header-section-number">0.2</span> 数据类型</h2>
+<p>在一般的编程语言中，都会把数据分为若干种不同的类型，UiBot常见的数据类型包含数值型、字符串型、布尔型、空值型、复合型等等。在初级教程中，学习除了复合型之外的几种类型就够了，复合型放在中级教程中学习。</p>
+<p>数值型就是数字，可能是整数，也可能包含小数位（在计算机中一般称为浮点数），比如实例表格中的“订单数量”、“销售额”等等；</p>
+<p>字符串型通常是一串文字，通常会用一对双引号（<strong><code>"</code></strong>）或一对单引号（<strong><code>'</code></strong>）包起来，以示区别；字符串中使用反斜杠来表示一些特殊字符，例如 <strong><code>\t</code></strong> 代表制表符， <strong><code>\n</code></strong> 代表换行， <strong><code>\'</code></strong> 代表单引号， <strong><code>\"</code></strong> 代表双引号， <strong><code>\\</code></strong> 代表反斜杠本身等。字符串中间可以直接换行，换行符也会作为字符串的一部分。也可以用前后各三个单引号（<strong><code>'''</code></strong>）来表示一个字符串，这种字符串被称为长字符串。在长字符串中，可以直接写回车符、单引号和双引号，无需用 <strong><code>\n</code></strong>，<strong><code>\'</code></strong> 或者 <strong><code>\"</code></strong>。</p>
+<p>布尔型只有“真”和“假”两个值，当然也经常被称为“是”和“否”、“True”和“False”等，内涵都是一样的。空值型的值总是 <strong><code>Null</code></strong>，不区分大小写。</p>
+<p>如何区分这几个数据类型呢？一般来说，数值型是可以加减乘除的；字符串通常只会连接，而没有其他运算；布尔型通常只有“与、或、非”等逻辑运算。比如表中“顾客姓名”一列的数据，做加减乘除和逻辑运算都是没有意义的，所以应该是字符串类型，写的时候要加一对双引号，如<code>"李鹏晨"</code>。</p>
+<p>表中“订单号”一列的数据，本质上都是数字，可以加减乘除，但他们的加减乘除并无意义。所以既可以按数值型处理，也可以按字符串型处理，设计者可以根据需要酌情考虑。</p>
+</section>
+<section class="level2" id="变量">
+<h2><span class="header-section-number">0.3</span> 变量</h2>
+<p>在上面的Excel表格中，每个数据都是保存在一个小格子当中的。而且，Excel给每个小格子都设定了一个名字，比如261.54这个数据所占用的格子，就被称为D2。这个格子里面的数据可能会改变，比如销售额可能会发生变化，但是，这个格子的名字，D2，是不变的。我们在Excel中只要取D2这个格子里面的数据，就可以取得其中最新的值。</p>
+<p>“变量”是编程中一个常见的概念，和Excel中的格子一样，变量也相当于是一个格子，里面可以存放数据。变量也有名字，可以通过名字取得变量中保存的数据，也可以通过名字对变量“赋值”，也就是设置变量中保存的数据。</p>
+<p>Excel中的格子命名都是“字母+数字”的形式，而编程语言中的变量命名会灵活很多，可以是一个很长的英文单词，或者用下划线连接起来的好几个单词，除了第一个字符外，后面还可以使用0-9的数字。有的编程语言，包括UiBot所使用的编程语言，还可以用汉字来命名变量。一般推荐把变量的命名设置的略长一些，最好是有意义的单词或词组，而不是像D2这样的“代号”。这主要是为了让我们在阅读的时候看得更清晰，对程序的运行并没有影响。UiBot变量名不区分大小写。</p>
+<p>UiBot中的变量是动态类型的，无需再定义的时候声明变量的类型，即变量的值和类型都可以在运行过程中动态改变。这也符合一般脚本语言如Python、Lua、JavaScript的习惯。</p>
+<p>定义变量名的方式是： <code>Dim 变量名</code> 再定义变量名的同时可以给变量赋值一个初始值： <code>Dim 变量名 = 值</code> 想要定义多个变量的话，可以这样定义： <code>Dim 变量名=值, 变量名1</code> <code>Dim 变量名=值, 变量名=值</code> 同理，想要定义一个常量就可以这样定义： <code>Const 常量名=值, 常量名=值</code></p>
+</section>
+<section class="level2" id="表达式">
+<h2><span class="header-section-number">0.4</span> 表达式</h2>
+<p>变量和变量之间、或者变量和固定的数据之间，都可以进行运算，它们运算的算式被称为“表达式”。由于变量的值可能会发生变化，所以表达式的值也可能会发生变化。在编程语言中写一个表达式以后，只要当运行到了表达式所在的这一行，才会去根据变量里面保存的数据，去计算表达式的值。</p>
+<p>比如，<code>x + 2</code> 就是一个表达式，当我们不能确定<code>x</code>的值的时候，就不能确定这个表达式的值。如果在运行到这一行的时候，发现<code>x</code>的值是3，那么<code>x + 2</code>的值就是5。</p>
+<p>当然，有的运算是没有意义的，比如我们对一个字符串做除法，就是没有意义的。但由于我们在书写表达式的时候，变量的值还没有确定，可能无法马上确定这个表达式有问题。到运行到这一行的时候，计算机才发现表达式有错，无法继续运行下去了，通常会报错并退出。</p>
+</section>
+<section class="level2" id="条件判断">
+<h2><span class="header-section-number">0.5</span> 条件判断</h2>
+<p>在编写一段程序的时候，我们通常会一行一行的去写。在程序运行的时候，通常也会按照从上到下的顺序，一行一行的运行。当然，这种运行方式是不够灵活的，我们常常希望能在运行的时候判断某个条件，然后根据条件，决定是否要执行某一段语句。这就是条件判断语句。</p>
+<p>条件判断语句在不同的编程语言中有不同的写法，但其大致形式通常都是一样的：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1">如果 &lt;表达式&gt; 则</a>
+<a class="sourceLine" id="cb1-2" title="2">    语句<span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    语句<span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-4" title="4">条件判断结束    </a></code></pre></div>
+<p>其含义是，在运行到“如果”那一行的时候，会计算其中的表达式的值。这个表达式的值应该是布尔类型，如果不是，通常会自动转换为布尔类型。计算机会根据这个表达式的值，来决定要不要运行被“如果”和“条件判断结束”所包夹的语句，也就是例子中的语句1和语句2。只有当这个表达式的值为“真”的时候，才会运行它们，否则，会跳过它们。</p>
+<p>我们在程序中会经常遇到条件判断语句，比如如下的程序：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1">发送邮件</a>
+<a class="sourceLine" id="cb2-2" title="2">如果 发邮件没有成功 则</a>
+<a class="sourceLine" id="cb2-3" title="3">    给用户报告没有成功</a>
+<a class="sourceLine" id="cb2-4" title="4">条件判断结束</a></code></pre></div>
+<p>只要正确的填写“如果”这一行中的表达式，使其在“发邮件没有成功”的时候为真，在“发邮件成功”的时候为假，就能达到我们的目的。反之，通常条件判断语句没有写好，其实也都是表达式没有设定好。在这个例子里面，通常“发送邮件”语句会给一个变量赋值，告诉我们是否发送成功，我们只需要把这个变量置入“如果”这一行的表达式中，即可奏效。</p>
+</section>
+<section class="level2" id="循环">
+<h2><span class="header-section-number">0.6</span> 循环</h2>
+<p>循环语句和条件判断语句的形式比较接近，通常是：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" title="1">当 &lt;表达式&gt; 的时候循环</a>
+<a class="sourceLine" id="cb3-2" title="2">    语句<span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    语句<span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-4" title="4">循环结束    </a></code></pre></div>
+<p>和条件判断语句类似，在运行到“当XXX的时候循环”时，也会先计算其中的表达式的值，如果表达式的值为“假”，会跳过这个循环，直接运行“循环结束”后面的语句。但和条件判断语句最大的不同是，如果表达式的值为“真”，会在运行完后面的语句1和语句2以后，再次跳回“当XXX的时候循环”这一行，重新判断表达式的值。</p>
+<p>这样一来，就可以用循环语句，让计算机来做重复性的工作了。比如如下的程序：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1">发送邮件</a>
+<a class="sourceLine" id="cb4-2" title="2">当 邮件没有发送成功 的时候循环</a>
+<a class="sourceLine" id="cb4-3" title="3">    再尝试发送邮件</a>
+<a class="sourceLine" id="cb4-4" title="4">循环结束    </a></code></pre></div>
+<p>当邮件没有发送成功的时候，这个程序会反复尝试，直到邮件发送成功为止。当然，和条件判断语句类似，循环语句里面最关键的还是如何正确的设置这个表达式。如果设置的不好，表达式始终为“假”，则有可能程序在这里一直循环，不会再往下运行，也不能结束，这种情况叫“死循环”。</p>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

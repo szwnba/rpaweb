@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>界面元素自动化_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a><ol class="toc"><li id="toc-li-19"><a href="ch004-1.html?version=0.6422463797095322#界面元素"><span class="section-header-number">3.1</span> 界面元素</a></li><li id="toc-li-20"><a href="ch004-1.html?version=0.6422463797095322#目标选取"><span class="section-header-number">3.2</span> 目标选取</a></li><li id="toc-li-21"><a href="ch004-1.html?version=0.6422463797095322#目标编辑"><span class="section-header-number">3.3</span> 目标编辑</a></li><li id="toc-li-22"><a href="ch004-1.html?version=0.6422463797095322#界面元素操作"><span class="section-header-number">3.4</span> 界面元素操作</a><ol class="toc"><li id="toc-li-23"><a href="ch004-1.html?version=0.6422463797095322#判断元素是否存在"><span class="section-header-number">3.4.1</span> 判断元素是否存在</a></li><li id="toc-li-24"><a href="ch004-1.html?version=0.6422463797095322#设置获取元素勾选"><span class="section-header-number">3.4.2</span> 设置/获取元素勾选</a></li><li id="toc-li-25"><a href="ch004-1.html?version=0.6422463797095322#获取子元素"><span class="section-header-number">3.4.3</span> 获取子元素</a></li></ol></li><li id="toc-li-26"><a href="ch004-1.html?version=0.6422463797095322#ui分析器"><span class="section-header-number">3.5</span> UI分析器</a></li><li id="toc-li-27"><a href="ch004-1.html?version=0.6422463797095322#安装扩展"><span class="section-header-number">3.6</span> 安装扩展</a><ol class="toc"><li id="toc-li-28"><a href="ch004-1.html?version=0.6422463797095322#chrome浏览器"><span class="section-header-number">3.6.1</span> Chrome浏览器</a></li><li id="toc-li-29"><a href="ch004-1.html?version=0.6422463797095322#sap程序"><span class="section-header-number">3.6.2</span> SAP程序</a></li></ol></li></ol></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="界面元素自动化">
+<h1><span class="header-section-number">3</span> 界面元素自动化</h1>
+<p>我们在“RPA简介”一章中曾提到，RPA的一大特色是“无侵入”，也就是说，虽然RPA是配合其他软件一起工作的，但并不需要其他软件提供接口。而是直接针对其他软件的操作界面，模拟人的阅读和操作。但是，一般的软件界面上都会有多个输入框、按钮，计算机怎么知道我们到底要操作什么地方呢？本章所述的“界面元素”和“界面元素自动化”将解决这个问题。</p>
+<section class="level2" id="界面元素">
+<h2><span class="header-section-number">3.1</span> 界面元素</h2>
+<p>如果您之前有一定的计算机基础，了解什么是“控件”，对不起，请先暂时忘掉这个概念。因为“控件”和“界面元素”虽然有共同点，但又不完全一样，一定要尽量避免概念混淆。</p>
+<p>除了计算机专家之外，一般人在使用计算机的时候，都是在和操作系统的图形界面打交道。无论是常用的Windows或Mac OS X，还是非IT人士不太常用的Linux，都有一套自己的图形界面。随着Web浏览器的大行其道，也有越来越多的图形界面选择在浏览器上展现。这些图形界面各有各的特色，但当我们用鼠标点击的时候，其实鼠标下面都是一个小的图形部件，我们把这些图形部件称为“界面元素”。</p>
+<p>比如，下图是一个普通的Windows窗口，也是典型的图形用户界面。在这个窗口中，有哪些界面元素呢？</p>
+<figure>
+<img alt="普通的Windows窗口" src="../../doc/guide/d1/media/file27.png" style="width:70.0%"><figcaption>普通的Windows窗口</figcaption>
+</figure>
+<p>首先，上面的菜单栏里面的各个选项，如“文件”、“主页”、“共享”、“查看”都是独立的界面元素。菜单栏里面的图标和下面的文字，如“复制”、“粘贴”等都是独立的界面元素，左边的导航栏里面的“快速访问”、“桌面”、“下载”等都是独立的界面元素；当然，窗口主要区域（红框包含的范围）里面显示的每个文件也都是独立的界面元素。</p>
+<p>界面元素之间还有嵌套的组合关系。比如，红框包含的范围是一个大的界面元素，里面的每个文件又是独立的界面元素。</p>
+<p>在UiBot中，界面元素的作用，就是作为“<strong>有目标</strong>”的命令中的<strong>目标</strong>使用。</p>
+<p><a href="ch003-2.html#基本概念">前文</a>中提到，UiBot在命令区已经放置了很多作为“预制件”使用的命令。其中，最基础的是如图所示的几类：</p>
+<figure>
+<img alt="最基础的几类命令" src="../../doc/guide/d1/media/file28.png" style="width:20.0%"><figcaption>最基础的几类命令</figcaption>
+</figure>
+<p>其中，“界面元素”和“文本”类别下面的<strong>所有</strong>命令，都是有目标的；“鼠标”和“键盘”下面的包含“目标”两个字的命令，也都是有目标的。如下图红框所示。</p>
+<figure>
+<img alt="有目标的命令" src="../../doc/guide/d1/media/file29.png" style="width:40.0%"><figcaption>有目标的命令</figcaption>
+</figure>
+<p>所谓<strong>有目标</strong>的命令，就是在命令中指定了一个界面元素。在运行的时候，会先查找这个界面元素是否存在。如果存在，则操作会针对这个界面元素进行。比如界面元素是一个按钮，那么命令“点击目标”就是点击这个按钮。如果不存在，则会反复查找，直到超过指定的时间（也称为“超时”。超时时间可以在“属性”中设置），会输出一个出错信息，流程也会直接停止运行。</p>
+<p>相反，对于<strong>无目标</strong>的命令，在命令中就不需要指定界面元素了。比如“模拟点击”命令是没有目标的，在运行的时候，鼠标当前在什么位置，就点击什么位置。究竟点了什么东西，是无法验证的；再比如“模拟按键”命令也没有目标，在运行的时候，键盘的输入焦点在什么位置，就在什么位置模拟一个按键操作。到底输入到哪里去了，也无法验证。</p>
+<p>显然，在用UiBot的时候，应该优先使用有目标的命令，因为有目标的命令指定了操作的对象，会比较精准。只有当找不到目标的时候，才退而求其次，使用无目标的命令。</p>
+<p>所以，在用UiBot的时候，如何准确选取一个目标是很关键的。只要准确地选到了目标，模拟操作相对来说就比较简单了。下面介绍选取目标的方法。</p>
+</section>
+<section class="level2" id="目标选取">
+<h2><span class="header-section-number">3.2</span> 目标选取</h2>
+<p>UiBot提供了一种全自动的选取目标的方式，我们以“鼠标”类别中的“点击目标”命令为例来说明。</p>
+<p>假设我们要执行一个最简单的流程，这个流程只有一个步骤：点击Windows的开始菜单按钮（默认位置在左下角）。首先，新建一个流程，然后，打开其中唯一的流程块，接着，在“可视化”视图的“命令区”中找到“点击目标”命令，用拖动或者双击的方式将其插入组装区。以上步骤您应该已经很熟悉了，如果还不熟悉，请回过头去阅读<a href="ch003-2.html#基本概念">基本概念</a>这一章。</p>
+<p>在组装区中，现在已经有一条命令了。我们会注意到，这条命令上有一个瞄准器样子的图标，其右侧还有文字“未指定”，这两者的含义实际上是“目标还没有指定”。鼠标移动到这个图标上，自动弹出一个菜单，其中有两个选项：“从界面上选取”和“从界面库选择”。如下图所示：</p>
+<figure>
+<img alt="“点击目标”命令和“未指定目标”按钮" src="../../doc/guide/d1/media/file30.png"><figcaption>“点击目标”命令和“未指定目标”按钮</figcaption>
+</figure>
+<p>点击“从界面上选取”，UiBot的界面暂时隐藏起来了，出现了一个红边蓝底的半透明遮罩，我们称之为“目标选择器”。鼠标移动到什么地方，这个目标选择器就出现在什么地方，直到我们单击鼠标左键，目标选择器消失，UiBot的界面重新出现。在鼠标按下的时候，目标选择器所遮住的界面元素，就是我们选择的目标。</p>
+<p>前文提到，界面元素可能是嵌套的，鼠标所在的位置，可能已经落到了多个界面元素的范围之内。此时，目标选择器会自动选择您最有可能需要的界面元素，并将其遮住。所以，在按下鼠标之前，请先耐心移动鼠标，直到目标选择器不多不少的<strong>恰好</strong>遮住了您要操作的界面元素为止。在目标选择器的上方，UiBot还会显示出这个界面元素的类型，比如是一个按钮，还是一个输入框，等等，这些信息也是为了帮助您判断是否<strong>恰好</strong>选择了您需要的界面元素。因为很多比较复杂的界面，往往都会有多个位置非常接近的界面元素叠放在一起，而它们当中可能只有一个是您真正希望当作“目标”的，所以要仔细辨认，不要搞错了。</p>
+<p>我们可以试一下，用目标选择器遮住开始菜单按钮，注意是恰好遮住，不多不少。当遮罩变成了下图所示的状态时，再单击左键，完成选择。当然，下图是在Windows 10操作系统中的样子，对于其他版本的Windows操作系统，样子可能会有区别，但原理不变。</p>
+<figure>
+<img alt="用“目标选择器”选中开始菜单按钮" src="../../doc/guide/d1/media/file31.png" style="width:10.0%"><figcaption>用“目标选择器”选中开始菜单按钮</figcaption>
+</figure>
+<p>一旦选中作为目标的界面元素之后，UiBot的界面重新出现，刚才的那条“鼠标按下”的命令，其中的瞄准器已经变成了这个界面元素的名字（名字是UiBot自动取的，稍后您会学习到如何改这个名字）。把鼠标移上去，还会有一个浮窗显示出界面元素的缩略图。这个缩略图仅供参考，帮助您记得刚才选中的是哪个目标，而不会对流程的运行有任何的影响。缩略图的下面还有一个“重新从界面上选取”的按钮，按下去以后，作用和刚才的“查找目标”一模一样。如果前面选择的目标不合适，或者不小心选错了，按这个按钮重来一次就好。</p>
+<p>与此同时，这个被选取的界面元素，UiBot也会把它自动保存到一个“界面库”里。如果在<strong>同一个流程</strong>的任何一个流程块中，还需要再次使用到这个界面元素，就不必费力再选取一次了。在命令上找到“从界面库选择”，点击后，直接在界面库里保存的多个界面元素中，选择您所需要的那一个即可。注意：每个流程都会有自己专属的“界面库”，同一个流程的多个流程块中，可以共享同一个界面库。而在流程与流程之间，界面库就不会共享了。</p>
+<figure>
+<img alt="在“界面库”中直接选择之前保存的界面元素" src="../../doc/guide/d1/media/file32.png" style="width:50.0%"><figcaption>在“界面库”中直接选择之前保存的界面元素</figcaption>
+</figure>
+<p>如果您有过Windows的应用开发经验（如果没有，也没关系，这一段可以跳过去，不影响后续阅读），就会知道Windows上的应用程序实际上有很多开发框架，包括SDK、MFC、WTL、WinForm、WPF、QT、Java等等，如果再算上运行在IE和Chrome浏览器中的Web应用，类型就更多了。这些应用程序其实都提供了界面元素的查找、操作接口，从技术上来说，UiBot无非就是调用这些接口而已。但是，这些接口的调用方法各不相同，甚至差异很大，即使是IT专家，也很难在短时间内对所有这些接口都驾轻就熟，更不用说一般用户了。</p>
+<p>但如果用UiBot，它们都是一样的“界面元素”，对它们进行查找和操作没有任何差异。比如，MFC程序中可能有一个按钮，Chrome浏览器中可能也有一个按钮，看起来都是按钮，但对这两个按钮分别模拟点击，技术上的差异几乎可以说是天壤之别。而在UiBot中，您完全无需关心这些区别，UiBot已经把这些差异帮我们抹平了。从而实现了“强大”、“简单”、“快捷”三个指标的统一及平衡。</p>
+</section>
+<section class="level2" id="目标编辑">
+<h2><span class="header-section-number">3.3</span> 目标编辑</h2>
+<p>在上一节中，我们看到UiBot的目标选择器是自动工作的。只要我们把鼠标移动到希望作为目标的界面元素上，遮罩会恰好遮住这个界面元素，并且会生成一段数据，UiBot在运行的时候，用这段数据即可找到目标。</p>
+<p>当然，凡是自动工作，都难免会出错。在使用目标选择器的时候，常见的问题是：</p>
+<ul>
+<li>无论如何移动鼠标，都无法使遮罩恰好遮住要作为目标的界面元素（通常是遮罩太大，遮住了整个窗口）</li>
+<li>遮罩可以恰好遮住界面元素，但用生成的数据去查找目标时，发生了如下情况：
+<ul>
+<li>错选：能找到界面元素，但找到的界面元素不是我们当初选取的</li>
+<li>漏选：我们当初选取的界面元素明明存在，却找不到了</li>
+</ul></li>
+</ul>
+<p>对于第一种情况，也就是无法遮住目标的情况，我们会在下一章用比较多的篇幅详细叙述。这里主要讨论的是第二种情况，也就是明明可以遮住目标，但在运行的时候，却发生错选或漏选的情况。我们先来解释为什么会发生这种情况，然后再来看如何解决。</p>
+<p>下面请各位读者来试一下，<a href="https://docs.uibot.com.cn/extra/practice/res-table/table1.html">点击这里</a>打开一张表格。这个表格是笔者虚构的，它是一张“员工信息表”，其中有五个虚构的员工，在表格的第三列，也就是“SALARY”这一列，显示了员工的薪资（当然，也是虚构的）。如下图所示：</p>
+<figure>
+<img alt="虚拟的“员工信息表”" src="../../doc/guide/d1/media/file33.png" style="width:90.0%"><figcaption>虚拟的“员工信息表”</figcaption>
+</figure>
+<p>我们可以试着用UiBot来找到第三名员工，也就是“李世民”的薪资所在的单元格（在上图中用红框标出。单元格里面的数组是随机生成的，可能和您的浏览器里面显示的数值不同），并且让UiBot自动控制鼠标去双击这个单元格。</p>
+<p>这个任务实在太简单了！在UiBot里新建并打开一个流程块，在“鼠标”分类下面拖入一条“点击目标”的命令，在属性栏里把“点击类型”设为“双击”，其他属性保持默认值不变。然后，用“从界面上选取”的功能，选择“李世民”那一行，“SALARY”那一列的单元格，作为命令的目标，这个任务就完成了。运行流程，可以看到鼠标自动双击了目标的单元格，单元格里的文字也因为双击而变成了选中的状态。</p>
+<p>但是，千万别高兴得太早。试着刷新一下这个网页，再运行刚刚编写好的流程，这次，流程的运行会失败，报告找不到界面元素。界面元素明明存在，但却找不到它，这就是发生了“漏选”。</p>
+<p>这是为什么呢？</p>
+<p>我们稍微留意一下，就会发现在刚才拖入的命令的属性中，有一条属性被称为“目标”。当我们还没有选择目标的时候，这个属性的内容是“未指定”。而当选择了目标以后，这个属性的内容会变成作为目标的界面元素的名字。 当目标明明存在，但就是找不到的时候，显然是这里的“目标”出了问题。 不难发现，在这个属性的右侧，还有一个“纸和笔”形状的按钮，我们称之为“编辑”按钮，如下图：</p>
+<figure>
+<img alt="“目标”属性及其“编辑”按钮" src="../../doc/guide/d1/media/file34.png"><figcaption>“目标”属性及其“编辑”按钮</figcaption>
+</figure>
+<p>点击“编辑”按钮，会弹出一个对话框，展示这个作为目标的界面元素的一些细节，如下图所示：</p>
+<figure>
+<img alt="“目标编辑”对话框" src="../../doc/guide/d1/media/file35.png"><figcaption>“目标编辑”对话框</figcaption>
+</figure>
+<p>这个对话框里的内容，您第一次看到的时候，可能会有些发懵，因为它看起来有些复杂。稍安勿躁，我们以庖丁解牛的方式来慢慢解析。</p>
+<p>我们把这个对话框分为三个主要的区域，在上图中用区域1、2、3来表示，除了这三个区域之外，剩下的一些按钮都很容易顾名思义。</p>
+<p>区域1主要是这个界面元素的名字，前面提到过，这个名字是UiBot自动起的，您可以在这里修改它。</p>
+<p>区域3描述的实际上是这个界面的一些“<strong>特征</strong>”，这个特征分了好几组，每一组里又会包含一系列的属性和值。比如上图中，位于第三行的组名叫<code>html</code>，其中又包含了三个属性，分别是<code>tag</code>, <code>parentid</code>, <code>aaname</code>，这些属性的值依次是“<code>DIV</code>”, “<code>employee</code>”和“<code>6800</code>”。UiBot在判断一个界面元素是否存在的时候，会查找其中所有组里的所有属性和值，只有当它们<strong>全部</strong>匹配的时候，才认为这个界面元素是存在的。</p>
+<p>实际上，UiBot在描述一个界面元素的特征的时候，还有很多的备选项，它会自动从这些备选项里面，找出它认为比较合适的组，以及其中相应的属性和值。在区域2里面，UiBot会把所有的备选项都逐一列出，如果前面打勾，表示某个组或某个属性会被选入界面元素的特征。这里的值还可以修改为任意您希望的值，甚至可以是变量或者表达式，也可以用星号通配符（即 <code>*</code> 符号）来表示模糊匹配任意长度的字符串。</p>
+<p>您可能会注意到，这里有个叫<code>aaname</code>的属性，其值是“<code>6800</code>”。它是刚才造成“漏选”的“元凶”。因为大致可以猜到，这个属性代表了单元格的文字内容，把文字内容当作界面元素的特征中的一部分，固然有助于找到界面元素，但上面的这个“员工信息表”比较特殊，每次刷新，它的内容都会发生变化。如果仍然把<code>aaname</code>的属性和“<code>6800</code>”这个值作为特征的一部分，就会像“刻舟求剑”一样，表格内容稍微发生一些变化就找不到了。</p>
+<p>那怎么办呢？通常的做法是：对于这种可能造成“漏选”的属性，我们要把它从界面元素的特征中剔除。有两种方法可以剔除这个属性，一种是把属性前面的选择框的勾选状态取消，另一种是把属性的值改为星号通配符（即 <code>*</code> 符号）。如下图所示：</p>
+<figure>
+<img alt="剔除属性aaname的两种方法" src="../../doc/guide/d1/media/file36.png"><figcaption>剔除属性aaname的两种方法</figcaption>
+</figure>
+<p>我们可以实际尝试一下，用上述的任意一种方法，把<code>aaname</code>属性剔除掉，然后再运行这个流程。这次确实不会报错了，但却双击了第一行（也就是“朱元璋”那一行）的SALARY。这种情况，就是典型的“错选”。 发生“错选”的原因是：这张“员工信息表”里面的五个员工，在SALARY这一列的界面元素特征除了<code>aaname</code>属性之外，其他全都一模一样。所以剔除了这个属性之后，UiBot会找到<strong>第一个</strong>符合这个特征的界面元素，也就是“朱元璋”这一行的SALARY列。</p>
+<p>所以，当造成了“错选”的时候，还需要加入其他的属性来弥补，让UiBot避免“错选”。如何加入其他属性？我们会在后面介绍“UI分析器”的时候讲述。</p>
+<p>总而言之，如果界面元素比较复杂，或者特征经常发生变化，如何准确地编辑目标，既不发生错选也不发生漏选，还是需要一定技巧的。很遗憾，这方面并没有特定的规则，只能多多尝试，积累经验。下面有几条公共的经验，请读者先记住，然后再在实践中总结自己的经验。</p>
+<ul>
+<li>有的特征名称您可能暂时不理解，比如<code>cls、tag</code>等，可以暂时不管它们；</li>
+<li>善用通配符 <code>*</code>，这个通配符代表“匹配任意内容”。比如有一个界面元素，其<code>aaname</code>属性的值是“姓名：张三”，后面的“张三”可能会变，但前面的“姓名：”不变。所以，可以用<code>"姓名：*"</code>来作为这个属性的值，以避免“错选”；</li>
+<li>去掉特征的时候要慎重。因为去掉特征虽然可以减少漏选，但会增加错选。在流程运行的时候，漏选一般比较容易发现，但错选未必能马上发现。</li>
+</ul>
+<p>关于最后一条，值得特别说明一下：UiBot在运行一个流程的时候，大多数的“有目标”命令在找不到目标的时候，都会抛出一个异常（除非是“判断目标是否存在”这样的命令），流程会马上停下来，并且报错（除非您使用了Try…Catch来捕获异常，具体用法请参考后文）。所以比较容易发现。而当发生错选的时候，UiBot并不知道，还会继续往下运行，错误就不太容易发现了。</p>
+<p>最后，需要提醒的是：同样的界面元素，在不同的操作系统、不同的浏览器上，可能特征也会发生变化。特别是Chrome和IE浏览器，在显示同一个页面的时候，同样的界面元素可能会有完全不同的特征。如下图所示，同样用Chrome和IE打开百度的首页，并且把百度的搜索框作为目标来选取，其特征具有较大的差异。</p>
+<figure>
+<img alt="用Chrome和IE，同一目标的特征不同" src="../../doc/guide/d1/media/file37.png"><figcaption>用Chrome和IE，同一目标的特征不同</figcaption>
+</figure>
+<p>所以，在用UiBot制作流程，并且在别人的计算机上使用的时候，请尽量保持开发环境和生产环境的一致性，以减少不必要的错误。</p>
+</section>
+<section class="level2" id="界面元素操作">
+<h2><span class="header-section-number">3.4</span> 界面元素操作</h2>
+<p>UiBot提供的界面元素操作的命令列表如下图所示。</p>
+<figure>
+<img alt="界面元素操作菜单" src="../../doc/guide/d1/media/file38.png" style="width:50.0%"><figcaption>界面元素操作菜单</figcaption>
+</figure>
+<p>很多UiBot的初学者，在面对如此庞杂的命令列表时，往往显得不知所措。其实，这些命令大可不必死记硬背，只要熟练掌握一些技巧，深入理解UiBot的设计理念，就会发现其中存在一些通用的原理，掌握了这些原理，在面对特定问题时，脑中自然就会浮现出某条命令来，甚至这条命令应该有哪些属性、每个属性可以有哪些取值、每个取值的含义是什么，大概也能猜得出来，下面我们就一起来学习一下。</p>
+<p><a href="ch003-2.html#可视化视图">前文</a>讲述过，对界面元素的操作通过<strong>命令</strong>进行，除了命令本身之外，命令的属性也是组成命令不可或缺的部分。甚至可以说，只有把命令的关键属性描述清楚，一条命令才能称之为一条完整的命令。一般来说，命令由如下几个部分组成：</p>
+<pre><code>命令 = （对什么事物）+（用什么东西）+（做什么操作）+（得到什么结果）</code></pre>
+<p><strong>“对什么事物”</strong>，指的是命令的操作对象，也就是我们本节所说的<strong>目标</strong>，对于界面元素而言，操作对象包括单选框、多选框、文本框、列表框、下拉框等。前面我们已经学习了，可以通过UiBot的“从界面上选取”功能来确定命令的操作对象。</p>
+<p><strong>“做什么操作”</strong>，指的是对目标能够进行的操作。一般来说，对目标能够进行的操作是由目标本身的类型决定的，当目标确定了以后，能够对目标进行哪种操作，也就基本确定了。比如按钮，<strong>“点击”</strong>是能够进行的操作，而文本标签一般不能点击；再比如单选框，能够进行的操作，一种是获取它的选择状态（勾选还是没有勾选），一种是设置它的状态（勾选还是不勾选）。还有一些通用操作，是几乎所有界面元素都有的，比如获得界面元素的大小、位置、文字等等。</p>
+<p><strong>“用什么东西”</strong>，指的是对这个目标进行操作的时候，还需要用户提供哪些信息。这个同样取决于目标本身的类型。比如设置单选框的状态，传入的就应该是一个布尔值（True或者False）。也有少数命令，不需要用户额外提供信息，就可以执行，比如<strong>获取元素文本</strong>命令，只要告诉这条命令的目标，就可以获得元素文本，不需要其它信息。对于有编程经验的读者来说，“用什么东西”有点像编程里面的<strong>参数</strong>，不需要额外提供信息则等同于编程里的<strong>无参调用</strong>函数。</p>
+<p><strong>“得到什么结果”</strong>，指的是有的命令还会有一个“输出值”。比如获取元素文本，输出的是字符串类型的元素文本；再比如<strong>获取元素选择</strong>命令，当界面元素是多选框时，输出的是一个数组（因为用户可能进行了多选）。对于有编程经验的读者来说，“输出值”相当于编程里面函数的“返回值”。</p>
+<p>从上面的描述可以看得出来：本质上，UiBot是对真人操作的模拟，是将一个一个的操作封装成一条一条的命令，而这些命令的关键属性都是由目标决定的。 <!--因此，需要对被模拟对象非常熟悉，比如学习**界面元素操作**这一章，就应该花一些额外的力气去了解一下HTML标签和DOM（文档结构树）方面的基础知识。--></p>
+<p>下面我们以一个<a href="http://www.vrbrothers.com/cn/wqm/demo/pages/Demo-ComplexForm.aspx">具体的界面</a>，来演示如何进行界面元素操作。这个界面中有文本标签、单选框、多选框、单行文本框、多行文本框、列表框、下拉框、勾选框等，基本代表了典型的界面元素。</p>
+<figure>
+<img alt="测试界面" src="../../doc/guide/d1/media/file39.png" style="width:80.0%"><figcaption>测试界面</figcaption>
+</figure>
+<section class="level3" id="判断元素是否存在">
+<h3><span class="header-section-number">3.4.1</span> 判断元素是否存在</h3>
+<p>顾名思义，“判断元素是否存在”这一命令可以检查当前屏幕上是否出现了某个特定的界面元素，并且把检查的结果输出到一个变量里面。界面元素存在时，变量里面会保存True，否则保存False。</p>
+<p>当我们需要判断流程执行到某个步骤后，是否会出现某个特定的界面，用这个命令是比较适合的。可以用界面上一个关键的元素作为判断标准，如果这个元素存在，表明出现了该界面，否则，表明该界面不存在。</p>
+<p>例如，我们来判断上图的测试界面中是否存在“提交”元素。</p>
+<ol type="1">
+<li>通过鼠标拖动，将“判断元素是否存在”加入到可视化视图中，如图所示；</li>
+</ol>
+<figure>
+<img alt="判断元素是否存在" src="../../doc/guide/d1/media/file40.png"><figcaption>判断元素是否存在</figcaption>
+</figure>
+<ol start="2" type="1">
+<li><p>点击“判断元素是否存在”的“从界面上选取”按钮，切换到测试页面，将鼠标悬停在“提交”按钮上，使红边蓝框刚好覆盖“提交”按钮，点击鼠标左键；</p></li>
+<li><p>运行完成后，该命令的运行结果会输出到变量bRet中，如上图，我们通过一条判断语句，判断得到的结果是True还是False：True表明找到了界面元素；False表明没找到界面元素；</p></li>
+</ol>
+</section>
+<section class="level3" id="设置获取元素勾选">
+<h3><span class="header-section-number">3.4.2</span> 设置/获取元素勾选</h3>
+<p>“设置/获取元素勾选”用来自动化操作界面，自动完成表单填写、自动操作等功能，操作的元素主要是单选框和多选框。</p>
+<p>我们同样以上图的测试界面为例，说明这两条命令的用法。</p>
+<ol type="1">
+<li><p>通过鼠标拖动，将“设置元素勾选”命令加入到可视化视图中，“目标”为爱好的“音乐”选项和“运动”选项，注意需要查找的目标为音乐和运动的勾选项，而不是音乐和运动文字本身；</p></li>
+<li><p>通过鼠标拖动，将“获取元素勾选”命令加入到可视化视图中，“目标”同样为爱好的“音乐”选项和“运动”选项；</p></li>
+<li><p>运行流程，结果如图所示，输出内容为“爱好音乐”和“爱好运动”，说明成功设置元素的勾选；</p></li>
+</ol>
+<figure>
+<img alt="设置/获取元素勾选 命令及运行结果" src="../../doc/guide/d1/media/file41.png"><figcaption>设置/获取元素勾选 命令及运行结果</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>在测试界面上，我们也可以看到，原来没有勾选“音乐”和“运动”选项，而现在这两个选项都已经自动勾选上了。因此，通过这两条命令，可以达到自动填写表单的目的。</li>
+</ol>
+</section>
+<section class="level3" id="获取子元素">
+<h3><span class="header-section-number">3.4.3</span> 获取子元素</h3>
+<p>这一节需要用到一点点编程语言里面“数组”的知识。如果您还没有掌握，可以参考后续内容中对“数组”的阐述，或暂时跳过这一节。</p>
+<p>如上文所述，界面上的元素通常有嵌套的组合关系。一个大的界面元素中，还可能包含了多个小的界面元素，我们称之为“子元素”。 同样，子元素当中，也可能又包含了多个子元素，不妨称之为“孙元素”。</p>
+<p>我们回到之前用来做实验的“<a href="https://docs.uibot.com.cn/extra/practice/res-table/table1.html">员工信息表</a>”。可以想象，在这个界面上，整个表格就是一个界面元素，其中的每一行都是一个子元素，而各行的每个单元格又是一个孙元素。实际情况会比我们想象的稍微复杂一些，因为这个表格的层级关系会更多一些，比如每一行可能已经是整个表格的孙元素了，而每个单元格又是孙元素的孙元素了。</p>
+<p>可以实际测试一下，通过鼠标拖动，将“获取子元素”命令加入到可视化视图中，并仔细移动鼠标，把目标元素设为整个表格，如下图所示：</p>
+<figure>
+<img alt="把目标元素设为整个表格" src="../../doc/guide/d1/media/file42.png"><figcaption>把目标元素设为整个表格</figcaption>
+</figure>
+<p>此时，在这条命令的右侧，有一个蓝色的三角形（见下图中的红色框）。点击这个三角形，可以仅运行当前这一行。这里有一个小小的技巧：在运行某一行命令的时候，如果这一行命令有“输出到”属性，UiBot还会自动把输出的内容显示在下面的“输出”窗口上，以便调试。</p>
+<p>在这条命令的属性中，有一个非常重要的属性叫“子元素层级”（见下图中的黄色框），这个属性通常是一个整数。当这个属性为1的时候，代表“获得所有子元素”；当这个属性为2的时候，代表“获得所有孙元素”；当这个属性为3的时候，代表“获得所有曾孙元素”；以此类推。当然，这个属性还可以为0，代表“获得所有子元素、孙元素、曾孙元素等等，直到没有下一级元素为止”。</p>
+<p>我们可以试试，当“子元素层级”属性为2的时候，可以得到表格中所有的行，当“子元素层级”属性为4的时候，可以得到表格中所有的单元格。这条命令的输出值实际上是一个数组，数组的每个元素代表一个界面元素，还可以把数组中的每个元素直接用在其他的“界面元素操作”命令中。比如，我们要让鼠标依次双击这个表格中的每个单元格，可以使用下面的流程来实现（请留意右侧的“目标”属性）：</p>
+<figure>
+<img alt="点击表格中的每个单元格" src="../../doc/guide/d1/media/file43.png"><figcaption>点击表格中的每个单元格</figcaption>
+</figure>
+<p>界面元素的操作还包括设置/获取元素选择、设置/获取元素属性、设置/获取元素文本、获取元素区域、元素截图等等。其使用方法可查阅UiBot命令手册，在这里不再赘述。</p>
+</section>
+</section>
+<section class="level2" id="ui分析器">
+<h2><span class="header-section-number">3.5</span> UI分析器</h2>
+<p>在前文中提到，界面上的元素通常有嵌套的组合关系。一个界面元素中，还可能包含了多个“子元素”，而“子元素”又包含了“孙元素”。</p>
+<p>对于比较简单的界面，一般直接选择界面元素就够了。但有的界面特别复杂，比如下图所示的是某个电商网站的商品界面，其中包含了许许多多的界面元素，有图片，有图标，有各种各样的文字，甚至还有浮在图片上面的文字！这些界面元素的特征各不相同，嵌套关系也错综复杂，稍不注意，就容易搞错。</p>
+<figure>
+<img alt="某购物网站商品列表" src="../../doc/guide/d1/media/file44.png" style="width:40.0%"><figcaption>某购物网站商品列表</figcaption>
+</figure>
+<p>为了避免“错选”和“漏选”，一个有效的办法是仔细分析界面元素的嵌套关系，看看我们需要作为目标的界面元素都有哪些子元素，哪些“兄弟元素”，它的“父元素”又是谁。比如下面是两条常用的技巧：</p>
+<ul>
+<li>“错选”一般都发生在“兄弟元素”之间，本来要找某个界面元素，结果找到的是它的“兄弟”。如果我们仔细观察界面元素和它的“兄弟”的特征有何不同，就容易找到区分它们的特征，避免“错选”。</li>
+<li>“漏选”一般都是因为在界面元素的特征中，某个属性会经常变化。有的时候，虽然我们要找的界面元素的属性会经常变化，但它的父元素或子元素的属性却不容易变化。我们可以先把相对比较稳定的父元素或子元素作为目标来查找，然后再采用“获取子元素”或“获取父元素”的命令，来找到我们真正需要的界面元素（当然，“获取子元素”得到的是一个数组，其中可能有不止一个元素，还要考虑进一步区分）。以避免“漏选”。</li>
+</ul>
+<p>使用“UI分析器”，可以方便地查询界面元素及其特征，还能轻松地定位到父元素、子元素或兄弟元素。UI分析器是一个独立的应用程序，在UiBot Creator中，有好几处入口都可以用来启动UI分析器。这些入口包括：</p>
+<ul>
+<li>在UiBot Creator的首页中，点击“工具”标签，可以找到UI分析器的“启动”按钮。</li>
+<li>在编写任意一个流程时，在工具栏上，可以找到“UI分析器”的按钮。</li>
+<li>在编辑任何一个界面元素的属性时，可以找到“从UI分析器打开”的按钮。</li>
+</ul>
+<p>采用前两种方式打开UI分析器时，UI分析器中暂时未选中任何界面元素。采用第三种方式打开时，则会自动选中正在编辑的界面元素。除了上述差异之外，以上几种方式打开的UI分析器都是一模一样的。UI分析器的界面大致是下图所示的样子：</p>
+<figure>
+<img alt="UI分析器的界面" src="../../doc/guide/d1/media/file45.png"><figcaption>UI分析器的界面</figcaption>
+</figure>
+<p>看起来有些复杂，但实际上如果您阅读过前文中关于<a href="ch004-2.html#目标编辑">编辑界面元素</a>的内容，对于上图中的区域2应该已经不陌生了。稍有不同的是：在上图的区域2中，会把<strong>所有</strong>可能用到的界面元素的属性都列出来，比编辑界面元素时显示得更多，以便您仔细挑选合适的属性组合，避免“错选”和“漏选”。</p>
+<p>在UI分析器中，更重要的是上图中的区域1。这个区域是一个树形结构，称为“可视化树”，树中的每个节点代表了一个界面元素，各个节点在树中的父子关系，就代表了它们在界面上的父子关系。可以通过点击节点左边的小三角形展开下面的子节点。</p>
+<p>我们在使用UI分析器的时候，通常可以进行以下操作：</p>
+<ul>
+<li>在可视化树中，查看节点之间的父子、兄弟关系。</li>
+<li>右键单击可视化树中的某个节点，并选择“设置为目标元素”，使这个界面元素的属性显示在区域2之中。</li>
+<li>修改界面元素的属性之后，使用“校验目标”的功能，验证您的修改是否仍然能找到界面元素。</li>
+<li>通过“高亮显示元素”的功能，显示界面元素的位置。</li>
+<li>如果当前已经打开了某个流程，则可以使用“保存到界面库”的功能，将区域2里面的界面元素保存到该流程的界面库中。</li>
+</ul>
+<p>对于复杂的界面，通常需要组合以上操作，仔细分析，认真思考。也需要经常练习，积累经验，才能在实战中游刃有余。作为思考题，请读者再次考虑：如果要找到“<a href="https://docs.uibot.com.cn/extra/practice/res-table/table1.html">员工信息表</a>”中“李世民”的薪资，并进行双击。借助UI分析器，使用尽可能多种方式来实现！</p>
+</section>
+<section class="level2" id="安装扩展">
+<h2><span class="header-section-number">3.6</span> 安装扩展</h2>
+<p>在用遮罩选取目标的时候，很常见的一种情况是：遮罩无论如何只能遮住整个窗口，或窗口的客户区，而无法选取里面的具体界面元素。如下图，只能选中Chrome浏览器的整个页面，不能选取里面的输入框和按钮。</p>
+<figure>
+<img alt="用Chrome浏览器，无法选取具体目标" src="../../doc/guide/d1/media/file46.png" style="width:90.0%"><figcaption>用Chrome浏览器，无法选取具体目标</figcaption>
+</figure>
+<p>对于这种情况，有两种可能性，一种是界面真的无法选取（我们会在<a href="ch005-2.html#无目标命令">下一章</a>详细讨论），另一种是界面其实可以选取，但是还需要做一些附加的工作，比如对要操作的软件安装扩展程序之后，才可以选取之前无法选取的界面元素。目前，这些扩展程序包括Chrome浏览器扩展，Firefox浏览器扩展和Java程序扩展。安装了这些扩展以后，就可以选取Chrome浏览器中的页面元素，Firefox浏览器中的页面元素和Swing、AWT、JNPL、Applet等多种Java应用程序界面元素了。</p>
+<p>下面我们以Chrome浏览器为例，看看这些扩展程序的安装方法。</p>
+<section class="level3" id="chrome浏览器">
+<h3><span class="header-section-number">3.6.1</span> Chrome浏览器</h3>
+<p>Chrome浏览器需要安装<strong>扩展程序</strong>，并启用了扩展程序，才能正常选取。请留意您的Chrome浏览器地址栏右边的一排小图标，要有如下图所示的这个图标（颜色可能是灰色，但不影响正常工作）才行，鼠标移动上去，还有文字提示“UiBot Native Message Plugin”。</p>
+<figure>
+<img alt="UiBot在Chrome浏览器上的扩展图标" src="../../doc/guide/d1/media/file47.png" style="width:50.0%"><figcaption>UiBot在Chrome浏览器上的扩展图标</figcaption>
+</figure>
+<p>如果没有安装扩展程序，则需要遵循以下步骤进行安装：</p>
+<ol type="1">
+<li>关闭Chrome浏览器；</li>
+<li>打开UiBot Creator，随便选择一个流程。在菜单中选择“帮助”-&gt;“安装扩展”，选择“Chrome扩展”；</li>
+<li>打开Chrome浏览器，稍等片刻，浏览器会提示已添加新的扩展，如下图。此时请务必选择“启用扩展程序”；</li>
+</ol>
+<figure>
+<img alt="Chrome浏览器提示添加新的扩展" src="../../doc/guide/d1/media/file48.png" style="width:40.0%"><figcaption>Chrome浏览器提示添加新的扩展</figcaption>
+</figure>
+<ol start="4" type="1">
+<li>如果仍然有问题，请按照下图所示，打开Chrome的扩展程序管理功能，并启用UiBot Native Message Plugin。</li>
+</ol>
+<figure>
+<img alt="Chrome浏览器的扩展管理" src="../../doc/guide/d1/media/file49.png" style="width:80.0%"><figcaption>Chrome浏览器的扩展管理</figcaption>
+</figure>
+<p>除了IE、Chrome浏览器之外，我们还经常用到百度浏览器、360安全浏览器、QQ浏览器等国产浏览器。这些浏览器都采用了Chrome内核或IE内核，理论上UiBot也可以支持获取其中的界面元素。但是，由于其设置方式各不相同，还经常发生变化，为了简单起见，推荐在RPA流程中使用原生的Chrome浏览器或IE浏览器。</p>
+</section>
+<section class="level3" id="sap程序">
+<h3><span class="header-section-number">3.6.2</span> SAP程序</h3>
+<p>UiBot支持SAP产品的录制及自动化操作，为了能够识别、操作SAP控件需要在开始之前对SAP进行一些设置。</p>
+<section class="level4" id="开启sap-gui-scripting-服务端">
+<h4><span class="header-section-number">3.6.2.1</span> 开启SAP GUI Scripting (服务端)</h4>
+<p>1、登录SAP，执行事务RZ11</p>
+<figure>
+<img alt="执行事务RZ11" src="../../doc/guide/d1/media/file50.png" style="width:60.0%"><figcaption>执行事务RZ11</figcaption>
+</figure>
+<p>2、输入参数sapgui/user_scripting，并点击“显示”</p>
+<figure>
+<img alt="输入参数sapgui/user_scripting" src="../../doc/guide/d1/media/file51.png" style="width:80.0%"><figcaption>输入参数sapgui/user_scripting</figcaption>
+</figure>
+<p>3、点击“更改值”，在“新值”中输入TRUE</p>
+<figure>
+<img alt="更改值" src="../../doc/guide/d1/media/file52.png" style="width:80.0%"><figcaption>更改值</figcaption>
+</figure>
+</section>
+<section class="level4" id="开启sap-gui-scripting-客户端">
+<h4><span class="header-section-number">3.6.2.2</span> 开启SAP GUI Scripting (客户端)</h4>
+<p>1、登录SAP，点击“定制本地布局(Alt+F12)”，选择“选项”</p>
+<figure>
+<img alt="定制本地布局" src="../../doc/guide/d1/media/file53.png" style="width:80.0%"><figcaption>定制本地布局</figcaption>
+</figure>
+<p>2、切换到“辅助功能与脚本”—“脚本”选项，在“用户设置”中选中“启动脚本”，并屏蔽其他通知</p>
+<figure>
+<img alt="辅助功能与脚本" src="../../doc/guide/d1/media/file54.png" style="width:80.0%"><figcaption>辅助功能与脚本</figcaption>
+</figure>
+</section>
+<section class="level4" id="f4帮助设置为模态对话框">
+<h4><span class="header-section-number">3.6.2.3</span> F4帮助设置为模态对话框</h4>
+<p>1、登录SAP，点击“帮助”—“设置…”菜单</p>
+<p>2、切换到“F4 帮助”，在“显示”设置中选中“对话 (模式)”</p>
+<figure>
+<img alt="F4帮助设置" src="../../doc/guide/d1/media/file55.png" style="width:80.0%"><figcaption>F4帮助设置</figcaption>
+</figure>
+</section>
+</section>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

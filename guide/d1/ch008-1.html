@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>流程和任务管理_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a><ol class="toc"><li id="toc-li-49"><a href="ch008-1.html?version=0.6422463797095322#rpa的两种工作模式"><span class="section-header-number">7.1</span> RPA的两种工作模式</a></li><li id="toc-li-50"><a href="ch008-1.html?version=0.6422463797095322#流程管理"><span class="section-header-number">7.2</span> 流程管理</a></li><li id="toc-li-51"><a href="ch008-1.html?version=0.6422463797095322#人机交互模式"><span class="section-header-number">7.3</span> 人机交互模式</a></li><li id="toc-li-52"><a href="ch008-1.html?version=0.6422463797095322#无人值守模式"><span class="section-header-number">7.4</span> 无人值守模式</a></li><li id="toc-li-53"><a href="ch008-1.html?version=0.6422463797095322#机器人的协同"><span class="section-header-number">7.5</span> 机器人的协同</a></li></ol></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="流程和任务管理">
+<h1><span class="header-section-number">7</span> 流程和任务管理</h1>
+<p>我们在<a href="ch002-2.html#rpa简介">前面章节</a>已经学习过，一般RPA平台至少会包含三个组成部分：开发工具、运行工具和控制中心，在UiBot中，这三个组成部分分别叫做UiBot Creator、UiBot Worker和UiBot Commander。</p>
+<p>在上述章节中，我们只讲述了UiBot Creator的使用方法。经过学习之后，可能很多初学者也会在脑海中冒出一个问题：UiBot Creator已经足够强大了，能够完成绝大部分开发功能，当然也能运行流程。那为什么还需要用UiBot Worker和UiBot Commander？或者说，UiBot Worker和UiBot Commander到底能为我们带来哪些额外的价值？</p>
+<p>要回答这个问题，还是要回到RPA机器人流程自动化的初衷和原始概念。我们说RPA是虚拟员工、是数字劳动力，是企业雇佣一些数字员工替代人类员工来完成一些机械重复而又繁琐的工作。那么问题来了：一家正规的企业雇佣一名员工，是否会不加管理而放任其随意工作？肯定不会！在企业中，对员工的工作普遍有以下几点要求：第一、任务的贯彻执行。这就要求员工接受上级领导的指令和任务，完成上级领导布置的任务，保证企业朝着同一个目标努力；第二、员工之间的配合。多个不同层级、不同部门的员工协调配合，共同完成一个复杂的任务；第三、监督和管理机制。在工作的过程中，需要有一定的机制进行监督和管理，当出现异常的时候需要及时处理。而上述几点功能，仅仅使用UiBot Creator是无法完成的，而这正是UiBot Worker和UiBot Commander的功能点和亮点所在。</p>
+<p>因此，如果你只是用RPA完成一些个人事项，虽然这些事项也是一些机械重复而又繁琐的工作，但是既不是上级派发给你的，也不需要他人配合，更不需要监督和管理，即使出错也不是那么要紧，那么使用UiBot Creator就够了，在某些领域，例如游戏领域，我们甚至推荐使用按键精灵完成类似任务。而如果你是在一家企业里面实施RPA项目，那么UiBot Worker和UiBot Commander则是不可或缺的。本章将介绍这两者的使用方法。</p>
+<section class="level2" id="rpa的两种工作模式">
+<h2><span class="header-section-number">7.1</span> RPA的两种工作模式</h2>
+<p>当RPA在企业里面使用的时候，通常需要用UiBot Creator开发流程，并完成调试和测试，之后，再由UiBot Worker来运行流程。因为UiBot Worker有两种工作模式，是UiBot Creator所不具备的。</p>
+<p>第一种称之为“人机交互模式”，通常安装在您的桌面计算机上，以一个桌面工具的形式出现。能够根据您的需求，选择安装UiBot Creator编写好的流程，并且在您日常工作过程中，需要运行某个流程的时候，按下“运行”按钮开始运行。除此之外，还可以设置触发器，当满足一定条件时（例如到了指定的时间，或者收到了指定的邮件等），只要UiBot Worker还在运行，就会自动运行这个流程。由于是安装在桌面计算机上，因此，在运行的时候，人有可能还在计算机前面等候。可以在机器人运行的过程中进行必要的人机交互，比如机器人弹出一个对话框，由人来确认等等，如果需要停止机器人的运行，也可以直接在桌面计算机上进行操作。</p>
+<p>第二种称之为“无人值守模式”，通常安装在专门运行RPA流程的计算机上，安装之后，只要进行了必要的设置，UiBot Worker就直接在后台运行了，连界面都没有。这台计算机可以放在桌面上，也可以直接部署在服务器机房，如果是在机房的话，甚至连键盘鼠标和显示器都没有。那要如何启动流程呢？可以通过UiBot Commander，向无人值守的UiBot Worker去派发任务。通过UiBot Commander派发任务的好处是：可以非常灵活地控制一批UiBot Worker，比如同时让多个UiBot Worker运行同一个流程。甚至可以采用“抢单制”，派出去一批流程运行的任务，然后自动分配到空闲的UiBot Worker上。比如有100个任务，有10个UiBot Worker，那么可以先自动派出10个任务，哪个UiBot Worker运行完了，就自动再去取一个新的任务，直到100个任务全部做完为止。任务的运行结果和日志，也都在UiBot Commander上集中管控。</p>
+<p>在有的资料中，把“人机交互模式”也叫作RDA（Robotic Desktop Automation），而把“无人值守模式”才叫作RPA。当然，名字叫什么不重要，关键是要搞清楚这两者之前的区别。“人机交互模式”适合于个人使用或者小规模使用，简单、快捷而又直接。“无人值守模式”适合大规模使用，在UiBot Commander上集中管控多个机器人，显然机器人的数量越多，越能体现出便利性。我们在UiBot Worker的社区版中，免费提供了一个“人机交互模式”的使用授权和一个“无人值守模式”的使用授权，您可以体验到两者的差异。如果需要更多的数量，可以购买商业版的授权。</p>
+</section>
+<section class="level2" id="流程管理">
+<h2><span class="header-section-number">7.2</span> 流程管理</h2>
+<p>用UiBot Creator编写流程之后，为了在UiBot Worker中运行，通常采用的方法是将流程上传到UiBot Commander，然后再由UiBot Commander下发到UiBot Worker。这一过程大致如下图所示：</p>
+<figure>
+<img alt="流程在UiBot“三件套”内部的流转" src="../../doc/guide/d1/media/file111.png" style="width:60.0%"><figcaption>流程在UiBot“三件套”内部的流转</figcaption>
+</figure>
+<p>我们以社区版的UiBot Commander为例。您可以在浏览器的地址栏中直接输入<a href="https://commander.laiye.com">https://commander.laiye.com</a>，也可以在使用UiBot Creator的任意时刻，找到右上方的“登录信息”，点击后，在弹出的对话框里面选择“前往Commander”。两者的效果是一样的。</p>
+<p>UiBot Commander是B/S（Browser-Server）架构的软件，无需安装任何客户端，在浏览器中即可使用全部功能。打开UiBot Commander后，可以看到其主要功能都放置在左侧的菜单中，包含了设备管理、流程管理、任务管理等一系列功能。我们首先关注其“流程管理”功能，如下图所示：</p>
+<figure>
+<img alt="UiBot Commander的界面及“流程管理”功能" src="../../doc/guide/d1/media/file112.png"><figcaption>UiBot Commander的界面及“流程管理”功能</figcaption>
+</figure>
+<p>为了方便说明，在您首次登录UiBot Commnader的时候，我们已经预置了一个叫作“演示流程-UiBot自我介绍”的流程。当然，您一定还希望建立自己的流程。在右上方找到“新建”按钮并点击，在弹出的对话框中填写流程名称即可。如果有多人协作，推荐您再写一段更详细的流程说明，以便他人理解。如果担心流程运行时间太长，还可以设置一个“最大运行时长”，以分钟为单位，到了最大运行时长之后，无论流程有没有结束，都会自动结束。</p>
+<p>在UiBot Commander中创建了一个流程之后，可以回到UiBot Creator，在流程图视图下点击工具栏里面的“发布”按钮，并选择“发布至Commander”，如图所示：</p>
+<figure>
+<img alt="发布流程UiBot Commander的界面及“流程管理”功能" src="../../doc/guide/d1/media/file113.png" style="width:90.0%"><figcaption>发布流程UiBot Commander的界面及“流程管理”功能</figcaption>
+</figure>
+<p>此时，UiBot Creator中会弹出一个对话框。对话框中有一个名叫“选择流程”的下拉列表，其中会列出UiBot Commander上的所有流程。如果您使用的是社区版，这里应该会列出您刚才在UiBot Commander上新建的那个流程。这样选择之后，就把UiBot Creator中创建的流程，和UiBot Commander中创建的流程对应起来了。所以如果使用企业版的UiBot Commander，可能有多人协作，这个下拉框里的流程也会比较多，一定要仔细选择，避免张冠李戴。除了选择流程之外，还要给流程增加一个“版本号”，这个版本号的格式并无规定，可以是任意字符串，使用者方便区分就行。比如“1”或“1.0”或“1.0.0”都可以是版本号。当UiBot Creator多次发布一个流程到UiBot Commander的时候，UiBot Commander会保留每次发布的内容，并用“版本号”来区分。这样一来，如果一个流程的某个版本出了问题，还可以切换到其他版本。</p>
+<p>发布完成后，还需要在UiBot Commander上启用刚才发布的这个版本。点击流程的名字，从右侧展开一个窗口，窗口里面显示了流程的概况。切换到“版本列表”标签页，可以看到从UiBot Creator上发布的每个版本。需要使用哪个版本，就打开这个版本后面的“开关”（我们称之为“启用”），这样一来，将来运行这个流程的时候，运行的就是刚才启用的这个版本。</p>
+<figure>
+<img alt="在UiBot Commander上启用流程的某个版本" src="../../doc/guide/d1/media/file114.png" style="width:90.0%"><figcaption>在UiBot Commander上启用流程的某个版本</figcaption>
+</figure>
+<p>有的读者可能会觉得这样的操作很繁琐。明明在UiBot Creator上已经发布了，还要在UiBot Commander里面再“启用”一次，好像有些多此一举。其实不然！因为在企业内部使用的时候，UiBot Creator和UiBot Commander可能并不是同一个人在操作。如果UiBot Creator的操作人员发布了一个新的版本，而UiBot Commander的操作人员毫不知情的话，那么流程实际上已经变了，UiBot Commander的操作人员还一无所知，这是有安全隐患的。所以，在UiBot Commander上的“启用”操作相当于是一个“审批”的过程，只有经过了审批，才会被真正启用。</p>
+<p>启用后的流程，既可以在人机交互模式的UiBot Worker中运行，也可以在无人值守模式的UiBot Worker中运行。要在这两种模式下运行，您需要做的操作完全不同，下面逐个解释。</p>
+</section>
+<section class="level2" id="人机交互模式">
+<h2><span class="header-section-number">7.3</span> 人机交互模式</h2>
+<p>如果您使用的是社区版的UiBot，安装完成后，会自动在桌面上生成一个UiBot Worker Community的图标。双击这个图标，就会以人机交互模式开始运行UiBot Worker。</p>
+<figure>
+<img alt="在人机交互模式的UiBot Worker中启动流程" src="../../doc/guide/d1/media/file115.png" style="width:70.0%"><figcaption>在人机交互模式的UiBot Worker中启动流程</figcaption>
+</figure>
+<p>当在UiBot Commander上新建了流程，且在UiBot Creator中发布了流程的至少一个版本，那么，在UiBot Worker的界面上就可以直接看到这个流程。在流程的右边，还有一个“运行”按钮（如下图红框所示），按下按钮，这个流程就开始运行了。如果在运行过程中希望停止，还可以长按热键Ctrl+F12。</p>
+<p>运行后的结果可以在UiBot Worker界面左边的“运行记录”标签页下面看到，除了能看到每次运行的时间，运行结果等，后面还有两个小按钮，可以进一步查看运行的日志信息，以及运行过程中的屏幕录像。如下图：</p>
+<figure>
+<img alt="查看流程的运行记录" src="../../doc/guide/d1/media/file116.png" style="width:90.0%"><figcaption>查看流程的运行记录</figcaption>
+</figure>
+<p>看起来比用UiBot Creator运行一个流程稍微多了点儿功能，但并没有本质的区别。实际上，仅仅是“运行流程”这一件事情，UiBot Worker还能玩出不少花样。</p>
+<ul>
+<li>分身运行</li>
+</ul>
+<p>大部分自动化流程在运行的时候，都需要占用鼠标和键盘的控制权，而人机交互模式的UiBot Worker通常部署在桌面计算机上，当流程运行时，计算机前的操作人员只能等待它运行完，再进行人工的工作。白白等待，浪费了时间。“分身运行”功能能够启动一个独立的窗口，并让自动化流程在这个窗口里面运行，即使窗口被遮挡了也不会影响。这样一来，流程运行的时候，还能同时进行人工的操作，两者共用一台计算机，数据共享，却互不干扰。进一步提高了工作效率。</p>
+<p>启用分身运行之前，需要先安装分身运行的扩展程序。然后，在流程的“运行设置”对话框中，可以找到“分身运行”的选项，开启即可。</p>
+<figure>
+<img alt="开启“分身运行”的选项" src="../../doc/guide/d1/media/file117.png"><figcaption>开启“分身运行”的选项</figcaption>
+</figure>
+<p>开启了分身运行之后，在流程启动时，会弹出一个窗口，这个窗口里显示了一个独立的Windows桌面，需要您用Windows账号密码登录。登录完成后，流程就会自动在这个独立的Windows桌面上运行了。</p>
+<p>关于“分身运行”的具体功能介绍，请查看<a href="../../LaiYeProduction/ResourceFile/product/Worker.mp4">这一段视频</a>。</p>
+<ul>
+<li>触发器</li>
+</ul>
+<p>除了手动运行流程之外，UiBot Worker还提供了“触发器”的功能，可以在满足一定条件的时候，有计划地、有选择性地执行流程。UiBot Worker提供了四种触发器：定时触发器、启动触发器、邮件触发器、API接口触发器。 在UiBot Worker的界面上找到“触发器”标签页，并点击右上角的“新建”按钮，即可新建不同类型的触发器。</p>
+<ol type="1">
+<li>定时触发器：可以设定流程的启动时间，包括设定单次运行、按日期、按周、按月等等。设定完成后，UiBot Worker会持续地检查时间，发现到了启动时间，就会开始运行指定的流程。</li>
+<li>启动触发器：这个触发器相对比较简单。设定完成后，在UiBot Worker每次启动的时候，都会自动运行指定的流程。</li>
+<li>邮件触发器：可以设定一个或一组邮箱地址，并且设定一个检测周期（默认是5分钟）。设定完成后，UiBot Worker会按照固定的时间周期，持续地检查邮箱，发现收到了符合条件的邮件，就会开始运行指定的流程。</li>
+<li>API接口触发器：设定这个触发器之后，UiBot Worker会在本机上指定的TCP端口监听。可以通过HTTP请求，控制UiBot Worker运行某个流程。</li>
+</ol>
+<ul>
+<li>流程组</li>
+</ul>
+<p>在某些场景下，多个流程之间可能存在依赖关系，例如，流程B需要流程A先完成，才能继续运行。UiBot Worker提供了流程编组的功能。所谓“流程编组”，指的是将两个或多个有依赖关系的流程放置到一个编组中，编组中的流程顺序执行，一个流程执行完，再顺序执行下一个流程。当然，还可以设定更为复杂的组合关系，比如流程A运行M次以后，流程B再运行N次。或者如果流程A运行失败了，流程B还要不要继续运行，等等。通过这些设置，可以把多个流程像积木块一样搭在一起，灵活应对各种场景的需求。</p>
+<p>如下图所示，在人机交互模式的UiBot Worker的界面上方，选择“流程组”这个标签页，并且点击“添加”按钮。然后，在弹出的对话框中，选择流程进行编组即可，被选入流程组的各个流程均可设置运行次数，还可以通过拖动改变他们的运行次序。</p>
+<figure>
+<img alt="创建流程组" src="../../doc/guide/d1/media/file118.png" style="width:90.0%"><figcaption>创建流程组</figcaption>
+</figure>
+<p>当流程组创建完成后，可以把流程编组当作普通流程看待，也就是说，流程编组既可以直接立即运行，也可以通过计划任务安排运行，还可以支持分身运行。</p>
+<ul>
+<li>快速开始</li>
+</ul>
+<p>从UiBot 6.0版本开始，安装之后，还会生成一个名为UiBot Widget的图标，我们称之为“快速开始”。顾名思义，这相当于是人机交互模式下的一个流程的快速启动工具。</p>
+<p>其实，人机交互模式下的UiBot Worker已经能够非常方便快捷地启动流程了，但有的流程可能是需要在人的日常工作中时常启动的。比如呼叫中心里面的话务员，每接到一个电话，可能就需要运行一个RPA流程来帮助他自动录入相关信息。此时，UiBot Worker的窗口仍然显得太大，难免干扰话务员的正常工作。但如果每次运行完流程就把UiBot Worker关掉，需要需要流程的时候再启动，又显得非常繁琐。</p>
+<p>“快速开始”工具就是针对上述场景设计的，这个工具启动速度快，占用系统资源少，平时以可以半透明的方式置于Windows桌面一角，几乎不影响日常工作。当需要运行RPA流程的时候，鼠标移上去点击一下即可。“快速开始”工具里面总共可以容纳最多8个流程的运行按钮，如果您日常工作中用的RPA流程不超过8个，还可以把空余的按钮用来运行一些其他的常用工具。如下图所示，除了两个流程的运行按钮之外，还把运行Windows记事本、Windows画图工具、Windows截图工具和百度搜索的入口都各自放置在一个按钮上了。能有效提高工作人员的日常效率。</p>
+<figure>
+<img alt="“快速开始”工具" src="../../doc/guide/d1/media/file119.png"><figcaption>“快速开始”工具</figcaption>
+</figure>
+<p>“快速开始”工具几乎不需要任何设置，但它和UiBot Worker是联动的，UiBot Worker里面有哪些流程，这个工具里就会自动加入哪些流程。所以，在初次使用之前，可能仍然需要打开UiBot Worker，对流程进行必要的配置，比如刷新UiBot Commander上的流程，设置是否以分身的方式运行，等等。另外，“快速开始”工具上已经预置了四个常用工具（Windows记事本、Windows画图工具等）。如果您还希望预置更多的工具，或者不需要这些预置工具，目前还需要手动修改安装目录下的<code>Widget.TurnTable.config</code>文件。这个文件是JSON格式的，内容比较简单，有IT经验的读者很容易编写，因此本文不再赘述。未来我们也会将其设置功能加入到软件界面中。</p>
+</section>
+<section class="level2" id="无人值守模式">
+<h2><span class="header-section-number">7.4</span> 无人值守模式</h2>
+<p>在无人值守模式下，UiBot Worker的工作方式和操作方式都和人机交互模式完全不同。我们可以在一台计算机上建立多个无人值守的UiBot Worker（这种方式称为“高密度部署”，一台计算机上可以部署的UiBot Worker数量没有上限，仅取决于这台计算机的性能），它们的工作不会互相干扰。并且，这些UiBot Worker都以后台服务的方式存在，根本没有界面。如果要让它们运行流程，所有的操作都在UiBot Commander上进行。</p>
+<p>所以，在无人值守模式下，我们需要进行如下的配置工作：</p>
+<ul>
+<li>把安装了UiBot，且要运行无人值守模式的UiBot Worker的计算机，纳入到UiBot Commander的管理范围中；</li>
+<li>使用UiBot Commander，在被管理的计算机上建立UiBot Worker的实例。如前文所述，一台计算机上可以建立多个UiBot Worker的实例，相当于可以有多个机器人同时工作，且互不干扰。</li>
+</ul>
+<p>我们先来学习如何对运行无人值守模式的UiBot Worker的计算机进行配置。配置完成后，就不需要再去操作运行UiBot Worker的计算机了，甚至这些计算机重新启动也没有关系。后续操作都在UiBot Commander上完成。</p>
+<p>在计算机上安装UiBot后，会出现一个名为“UiBot Worker Hub”的图标，这是无人值守模式的配置程序。启动它，可以看到如下的界面：</p>
+<figure>
+<img alt="使用UiBot Worker Hub将设备加入UiBot Commander" src="../../doc/guide/d1/media/file120.png" style="width:60.0%"><figcaption>使用UiBot Worker Hub将设备加入UiBot Commander</figcaption>
+</figure>
+<p>这里需要输入密钥。密钥是什么呢？它是由UiBot Commander生成，让这台计算机和UiBot Commander能够实现身份互认的一个“密码”。可以把UiBot Commander比作您家里的WiFi路由器，路由器上有一个WiFi密码，任何要加入这个WiFi网络的设备，只要输入这个密码就行。所以，我们需要到UiBot Commander上去寻找这个密码。</p>
+<p>在UiBot Commander上，可以为所有要加入的计算机设置同样的密钥，也可以为每个要加入的计算机设置一个独立的密钥。前者更方便，后者更安全。篇幅所限，本文仅以前者为例，后者的操作方式可以举一反三。</p>
+<p>打开UiBot Commander，在左边找到并选中“设备”标签页，点击右上方的“通用密钥”按钮，在弹出的对话框中就显示了当前的密钥。将它填入到UiBot Worker Hub的密钥框中，并选择“立即激活”。</p>
+<figure>
+<img alt="在UiBot Commander中进行设备管理并找到密钥" src="../../doc/guide/d1/media/file121.png" style="width:90.0%"><figcaption>在UiBot Commander中进行设备管理并找到密钥</figcaption>
+</figure>
+<p>以上激活步骤相当于向UiBot Commander发出了一个连接申请，在UiBot Commander的“设备”标签页中也能看到当前待处理的连接申请，当然，也可以选择同意或拒绝该申请。如果同意，就能看到新增了一台设备，与此同时，UiBot Worker Hub的界面上也会显示已经和UiBot Commander建立了连接。</p>
+<p>接下来的操作基本上都是在UiBot Commander上完成了。首先，需要在刚刚连接的这台计算机上建立起一个或多个UiBot Worker的实例。只需要在UiBot Commander下面的“UiBot Worker”标签页下选择“无人值守”，并选择“新建Worker”，按照弹出对话框的提示，分别输入UiBot Worker的实例的名称、基于哪个设备创建实例、本地账户和密码等信息，如下图所示：</p>
+<figure>
+<img alt="通过UiBot Commander新建UiBot Worker的实例" src="../../doc/guide/d1/media/file122.png" style="width:90.0%"><figcaption>通过UiBot Commander新建UiBot Worker的实例</figcaption>
+</figure>
+<p>注意：这里的“本地账户”是指Windows的账户，“密码”也是指这个账户对应的Windows密码。通过以下方法，可以很容易地看到当前的Windows都有哪些账户：在Windows开始菜单中找到“命令提示符”并打开，输入命令<code>net user</code>，在横线下列出的就是所有可用的本地账户了，如下图所示：</p>
+<figure>
+<img alt="通过“命令提示符”查看本机上所有的Windows账户" src="../../doc/guide/d1/media/file123.png" style="width:60.0%"><figcaption>通过“命令提示符”查看本机上所有的Windows账户</figcaption>
+</figure>
+<p>把某个Windows账户和对应的密码填写到“本地账户”和“密码”栏中之后，新建的UiBot Worker会以后台服务的方式，准备接收UiBot Commander发来的命令。当UiBot Commander命令它运行某个流程的时候，即使UiBot Worker Hub程序已经关闭了，即使当时Windows刚刚重新启动完成，还没有任何账户在登录的时候，UiBot Worker也会使用您预设的Windows账户和密码，自动登录Windows，然后再进行自动化操作。从而做到真正的“无人值守”。</p>
+<p>下面我们来实际尝试一下，在UiBot Commander中发起一个运行流程的命令。我们把运行中的流程称为一个“任务”（显然，使用一个流程可以运行多个“任务”），因此，在UiBot Commmander的“任务-个人任务”标签页中，选择“新建”按钮，建立起一个任务，也就相当于是运行流程了。在“新建”任务时，首先需要选择流程，其实也就是指定要运行哪个流程；其次选择“部门”，是指这个任务可以被某个部门的用户看到；然后选择“Worker组”或“指定Worker”，前者是指在一组UiBot Worker中，随机选取一个空闲的UiBot Worker来“抢单”，后者则是指派特定的UiBot Worker来运行这个流程。</p>
+<figure>
+<img alt="新建一个任务" src="../../doc/guide/d1/media/file124.png" style="width:90.0%"><figcaption>新建一个任务</figcaption>
+</figure>
+<p>按上述方式新建任务后，流程会马上开始运行。当然，还可以选择“触发器”功能，在指定的时间自动建立任务，并运行流程。具体用法显而易见，本文不再赘述。</p>
+<p>无论是立即建立任务，还是在触发器中自动建立任务，所有待运行、正在运行、已运行完成的任务都会在“任务”标签页中一览显示。对于已运行完成的任务，无论运行结果是成功还是失败，都可以通过点击任务所在行，并在弹出的窗口中查看任务运行过程中的日志。如果使用企业版的UiBot，还可以在编写流程时加入“上传屏幕截图”命令，并且在这里看到运行过程中的截图。通过日志和截图等信息，在流程运行失败的时候，可以比较方便地定位到具体原因。</p>
+<p>另外，在无人值守模式下，我们不能像在人机交互模式下那样，亲眼看到UiBot Worker的运行状况，可能会觉得心里不踏实。如果使用企业版的UiBot，可以在“UiBot Worker”标签页中找到“实时监控”功能，像观看监控室里面的摄像头画面一样，一览当前正在运行的所有UiBot Worker的画面，当然，也可以放大其中某个画面进行查看，甚至对其进行远程控制，等等。有兴趣的读者，可以通过<a href="../../LaiYeProduction/ResourceFile/product/bot-commander.mp4">这一视频</a>观看实际演示。</p>
+</section>
+<section class="level2" id="机器人的协同">
+<h2><span class="header-section-number">7.5</span> 机器人的协同</h2>
+<p>无论是人机交互模式，还是无人值守模式，多个UiBot Worker（或者简称之为RPA机器人）在运行流程的时候，彼此之间还可以传递数据。善用这一机制，可以实现多个RPA机器人之间的协同工作。比如，一个机器人专门收取邮件，并下载附件里的票据，另一个机器人专门把票据内容读出来，填写到业务系统里面去。</p>
+<p>对于上述场景，可能有的读者会有疑虑：明明可以把收邮件、下载票据、读取票据内容、填写业务系统放在一个流程里面，用一个机器人去运行就好了，为什么要拆成多个流程，还要让多个机器人分别去运行呢？如果工作量不大，用一个流程当然是最简单也最清晰的。但如果工作量很大，比如每天要处理上万份票据，就需要多个机器人来并行处理了。更合理的方式是把整个工作拆分为几个步骤，每个步骤配比不同数量的机器人，比如收邮件的速度比较快，可以少配一些机器人，读取票据内容的速度比较慢，需要多配一些机器人。</p>
+<p>无论是把多个任务分配给多个机器人，还是把任务分成不同阶段，不同的机器人来做不同阶段，都需要涉及到机器人之间的协同。UiBot提供了“数据队列”的机制，可以方便地在多个机器人之间传递数据，进而实现协同工作。一个数据队列就相当于是把一组数据放在UiBot Commander上排队，有队头和队尾。UiBot Creator和UiBot Worker可以把数据添加到队尾，也可以从队头取走一个数据。目前的数据队列还不支持“插队”、“查看队头数据但不取走”或者“从队列中间取走数据”等复杂操作，但简单的设计也能符合大多数的需求，并且大大降低了开发的难度。</p>
+<p>为了使用数据队列，首先打开UiBot Commander，在左边的标签页中选择“数据-队列”，然后选择“新建队列”，设置一个队列名称，一个队列就建好了，如下图所示。当然，我们还可以新建多个队列，每个队列中存放不同类型的数据。</p>
+<figure>
+<img alt="新建一个数据队列" src="../../doc/guide/d1/media/file125.png" style="width:90.0%"><figcaption>新建一个数据队列</figcaption>
+</figure>
+<p>对于建好的数据队列，还要对其进行“授权”操作。如果您使用的是社区版的UiBot，“授权”操作并不重要，因为都是您自己在使用。但如果是企业版，需要认真设置，究竟以哪个用户身份登录的UiBot Creator和UiBot Worker可以使用这个数据队列。</p>
+<p>授权完成后，即可在UiBot Creator中设计流程，实现数据队列的“放入”和“取出”操作。所谓的“放入”操作，是指把一个数据排到队尾，而所谓的“取出”操作，是指从队头取出一条数据，如果队列中没有数据，则取出的值是<code>Null</code>即空值。这两个操作在UiBot Creator中都有对应的命令，命令的位置如下图所示：</p>
+<figure>
+<img alt="数据队列的相关命令" src="../../doc/guide/d1/media/file126.png" style="width:30.0%"><figcaption>数据队列的相关命令</figcaption>
+</figure>
+<p>假设已经在UiBot Commander上创建了名为<code>“我的队列”</code>的数据队列，那么下图中的两条命令分别是把字符串<code>"我的数据"</code>放入队列，以及从队列中取出一条数据。可以选中一条命令，并按命令右侧的三角形“运行”按钮，单独运行这一命令，以方便测试。先测试第一条命令，单独运行它，貌似运行后并不能直观地看到结果，但如果我们刷新一下UiBot Commander的界面，就会看到队列中有“未消费”的数据，这里的“未消费”是指数据被放入了队列，但还没有被取走，因此会暂存在UiBot Commander的队列中，而一旦被取走后，就变成了“已消费”的数据。单独运行第二条命令，一方面在UiBot Creator上会显示：被取出的就是我们刚才放入的那条数据，另一方面也可以在UiBot Commander上看到：数据从“未消费”变成了“已消费”。</p>
+<figure>
+<img alt="数据队列的放入和取出" src="../../doc/guide/d1/media/file127.png" style="width:90.0%"><figcaption>数据队列的放入和取出</figcaption>
+</figure>
+<p>利用数据队列的机制，可以实现机器人之间的协同。比如，我们先设置一个所有机器人都能访问到的公共网盘，然后由<code>M</code>个机器人去收邮件，下载附件里的票据文件，保存在这个网盘上，并把文件的完整地址放入数据队列。再由<code>N</code>个机器人去数据队列里取到票据文件的地址，拿到文件并进行识别和填报。如果数据队列里的数据越堆积越多，说明<code>N</code>的取值小了，可以适当增加<code>N</code>的数量，让多个机器人能高效地协同工作。</p>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

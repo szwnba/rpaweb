@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>基本概念_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a><ol class="toc"><li id="toc-li-9"><a href="ch003-1.html?version=0.6422463797095322#概念"><span class="section-header-number">2.1</span> 概念</a></li><li id="toc-li-10"><a href="ch003-1.html?version=0.6422463797095322#流程图"><span class="section-header-number">2.2</span> 流程图</a></li><li id="toc-li-11"><a href="ch003-1.html?version=0.6422463797095322#可视化视图"><span class="section-header-number">2.3</span> 可视化视图</a></li><li id="toc-li-12"><a href="ch003-1.html?version=0.6422463797095322#源代码视图"><span class="section-header-number">2.4</span> 源代码视图</a></li><li id="toc-li-13"><a href="ch003-1.html?version=0.6422463797095322#小结"><span class="section-header-number">2.5</span> 小结</a></li><li id="toc-li-14"><a href="ch003-1.html?version=0.6422463797095322#进阶内容"><span class="section-header-number">2.6</span> 进阶内容</a><ol class="toc"><li id="toc-li-15"><a href="ch003-1.html?version=0.6422463797095322#流程图变量"><span class="section-header-number">2.6.1</span> 流程图变量</a></li><li id="toc-li-16"><a href="ch003-1.html?version=0.6422463797095322#流程块的输入输出"><span class="section-header-number">2.6.2</span> 流程块的输入输出</a></li><li id="toc-li-17"><a href="ch003-1.html?version=0.6422463797095322#复杂流程图的实现"><span class="section-header-number">2.6.3</span> 复杂流程图的实现</a></li></ol></li></ol></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="基本概念">
+<h1><span class="header-section-number">2</span> 基本概念</h1>
+<p>是不是已经开始跃跃欲试，就想赶快装上UiBot软件，实现您的流程自动化了？</p>
+<p>别急，别急，磨刀不误砍柴功。本章要介绍UiBot的四个基本概念：流程、流程块、命令、属性。这四个概念，贯穿本文的始终，在后面的章节中，也会反复的使用这四个概念作为基本术语，所以请务必牢记。这一章的内容不会太长，请务必耐心，不要轻易跳过哦！</p>
+<section class="level2" id="概念">
+<h2><span class="header-section-number">2.1</span> 概念</h2>
+<p>我们先来看下这四个基本概念。这几个概念之间都是包含关系，一个流程包含多个流程块，一个流程块包含多个命令，一个命令包含多个属性。</p>
+<ul>
+<li>流程</li>
+<li>流程块</li>
+<li>命令</li>
+<li>属性</li>
+</ul>
+<p>第一个概念是<strong>流程</strong>。所谓流程，是指要用UiBot来完成的一项任务，一个任务对应一个流程。虽然可以用UiBot陆续建立多个流程，但同一时刻，只能编写和运行一个流程。将来在使用UiBot Worker和UiBot Commander的时候，也是以流程为基本单元来使用的。</p>
+<p>如果您之前用过按键精灵，那么“流程”大致相当于按键精灵中的“脚本”。当然，UiBot中的“流程”和按键精灵中的“脚本”又有一定的差异，比如“流程”包含一个文件夹，而不只是一个文件。更重要的差异是：UiBot中的流程，都是采用流程图的方式来显示的。</p>
+<p>俗话说得好，“纸上得来终觉浅，绝知此事要躬行”，UiBot是一种实践性很强的工具，所以我们建议在学习本教程的同时，打开UiBot软件，亲自将里面的内容实践一下，相信学到的知识会更加深刻。</p>
+<p>UiBot内置了一些经典流程的范例，初学者可以打开这些流程范例，试试运行这些流程，进行仿照学习，当然也可以自己新建一个流程。</p>
+</section>
+<section class="level2" id="流程图">
+<h2><span class="header-section-number">2.2</span> 流程图</h2>
+<p>新建或打开UiBot中的流程后，可以看到，每个流程都用一张流程图来表示。</p>
+<p>在流程图中，包含了一系列的“组件”，其中最常用的是“开始”、“流程块”、“判断”和“结束”这四种组件，其他的如“辅助流程”、“子流程”对于初学者来说可以先不掌握，留待后续内容中再学习。</p>
+<p>用鼠标把一个组件从左边的“组件区”拖到中间空白的“画布”上，即可新建一个组件，如新建一个流程块等。在画布上的组件边缘上拖动鼠标（此时鼠标的形状会变成一个十字型），可以为组件之间设置箭头连接。</p>
+<p>把多个组件放在一张画布上，用箭头把它们连起来，则构成一张流程图。如下图所示：</p>
+<figure>
+<img alt="UiBot的流程图" src="../../doc/guide/d1/media/file3.png" style="width:80.0%"><figcaption>UiBot的流程图</figcaption>
+</figure>
+<p>每个流程图中必须有一个、且只能有一个“开始”组件。顾名思义，流程从这里开始运行， 并且沿着箭头的指向，依次运行到后续的各个组件。</p>
+<p>每个流程图中，可以有一个或多个“结束”组件，流程一旦运行遇到“结束”组件，自然就会停止运行。当然也可以没有“结束”组件，当流程运行到某个流程块，而这个流程块没有箭头指向其它流程块时，流程也会停止运行。</p>
+<p>每个流程图中，可以有一个或多个“判断”组件，当然也可以没有“判断”组件。在流程运行的过程中，“判断”组件将根据一定的条件，使后面的运行路径产生分叉。条件为真的时候，沿着“是”箭头运行后续组件；否则，沿着“否”箭头运行后续组件。如果您是UiBot的新手，可能暂时还用不到“判断”组件。本章后续部分会详细叙述“判断”组件。</p>
+<p>最后，也是最重要的，流程图中<strong>必须</strong>有一个或多个“流程块”，<strong>流程块</strong>是本章要介绍的第二个重要概念。</p>
+<p>我们可以把一个任务分为多个步骤来完成，其中的每个步骤，在UiBot用一个“流程块”来描述。比如，假设我们的任务是“把大象装进冰箱里”，那么，可以把这个任务分为三个步骤：</p>
+<ul>
+<li>把冰箱门打开</li>
+<li>把大象塞进去</li>
+<li>把冰箱门关上</li>
+</ul>
+<p>上述每个步骤就是一个流程块。当然，这个例子只是以玩笑的方式打个比方，UiBot并不能帮我们把冰箱门打开。但通过这个例子可以看出，在UiBot中，一个步骤，或者说一个流程块，只是大体上描述了要做的事情，而暂时不涉及到如何去做的细节。</p>
+<p>UiBot并没有规定一个流程块到底要详细到什么程度：流程块可以很粗，甚至一个流程里面甚至可以只有一个流程块，在这种情况下，流程和流程块实际上已经可以看作是同一个概念了；流程块也可以很细，把一个流程拆分成很多流程块。那么究竟拆分成多少个最合适？这取决于您的个人喜好。但是，我们有两个建议：一是把相对比较独立的流程逻辑放在一个流程块里；二是流程块的总数不宜太多，在一个流程中，建议不要超过20个流程块。</p>
+<p>为什么这样建议呢？其实UiBot并未规定流程块的数量上限，如果您愿意，放200个、2000个流程块都没有问题。但是，UiBot中“流程图”的初衷，是为了让设计RPA流程的“业务专家”和使用RPA的“一般工作人员”能够更好的沟通。双方在设计初期就确定大致步骤，划分流程块，然后，业务专家再负责填写每个流程块里面的细节，而一般工作人员就无需关注这些细节了。显然，在这个阶段，如果流程块的数量过多，沟通起来自然也会更加困难。</p>
+<p>在UiBot的工具栏上，有一个“运行”按钮。按下这个按钮以后，会从“开始”组件开始，依次运行流程中的各个组件。而每个流程块上还有一个三角形状的按钮，按下之后，就会只运行当前的流程块。这个功能方便我们在开发RPA流程时，把每个流程块拿出来单独测试。</p>
+<p>每个流程块上还有一个形状类似于“纸和笔”的按钮，按下之后，可以查看和编写这个流程块里面的具体内容。具体的编写方法，通过“可视化视图”来完成。</p>
+</section>
+<section class="level2" id="可视化视图">
+<h2><span class="header-section-number">2.3</span> 可视化视图</h2>
+<p>上一节提到，每个流程块上还有一个形状类似于“纸和笔”的按钮，点击该按钮，可以查看和编写这个流程块里面的具体内容，UiBot的界面会从“流程视图”切换到“可视化视图”。</p>
+<figure>
+<img alt="流程图中点击编辑流程块" src="../../doc/guide/d1/media/file4.png" style="width:80.0%"><figcaption>流程图中点击编辑流程块</figcaption>
+</figure>
+<p>UiBot编写流程块的“可视化视图”，其界面如下图所示：</p>
+<figure>
+<img alt="流程块编辑界面(可视化视图)" src="../../doc/guide/d1/media/file5.png" style="width:100.0%"><figcaption>流程块编辑界面(可视化视图)</figcaption>
+</figure>
+<p>图中用三个红框标明了三个主要区域，从左到右分别是命令区、组装区、属性区。</p>
+<p>这里引入第三个重要概念：<strong>命令</strong>。所谓命令，是指在一个流程块当中，需要告知UiBot具体每一步该做什么动作、如何去做。UiBot会遵循我们给出的一条条命令，去忠实的执行。继续前面的例子，假如流程块是“把冰箱门打开”，那么具体的命令可能是：</p>
+<ul>
+<li>找到冰箱门把手</li>
+<li>抓住冰箱门把手</li>
+<li>拉开冰箱门</li>
+</ul>
+<p>当然，和前面一样，这个例子只是打个比方，UiBot并不能把冰箱门打开。UiBot所能完成的几乎所有命令，都分门别类地列在左侧的“命令区”，也就是上图中的第一个红框。包括模拟鼠标、键盘操作，对窗口、浏览器操作等等多个类别，每个类别包含的具体的命令还可以进一步展开查看。</p>
+<p>图中第二个红框所包含的区域，称之为“组装区”，我们可以把命令在这里进行排列组合，形成流程块的具体内容。可以从左侧的“命令区”，双击鼠标左键或者直接拖动，把命令添加到“组装区”，也可以在组装区拖动命令，调整它们的先后顺序，或者包含关系。</p>
+<p>命令是我们要求UiBot做的一个动作，但只有命令还不够，还需要给这个动作加上一些细节，这些细节就是我们要引入的第四个概念：<strong>属性</strong>。如果说命令只是一个动词的话，那么属性就是和这个动词相关的名词、副词等，它们组合在一起，UiBot才知道具体如何做这个动作。</p>
+<p>还用上面的例子来说，对于命令“拉开冰箱门”，它的属性包括：</p>
+<ul>
+<li>用多大力气</li>
+<li>用左手还是右手</li>
+<li>拉开多大角度</li>
+</ul>
+<p>在编写流程块的时候，只需要在“组装区”用鼠标左键单击某条命令，将其置为高亮状态，右边的属性变量区即可显示当前命令的属性，属性包含“必选”和“可选”两大类。一般来说，UiBot会为您自动设置每一个属性的默认值，但“必选”的属性还是请关注一下，可能经常需要您根据需要进行修改。对于“可选”的属性，一般保持默认值就好，只有特殊需求的时候才要修改。</p>
+<p>您目前看到的组装区的展示方式，称为“可视化视图”。在这种视图中，所有命令的顺序、包含关系都以方块堆叠的形式展现，且适当的隐藏了其中的部分细节，比较容易理解。“可视化视图”体现出UiBot作为RPA平台的“简单”这一重要特点，为此，UiBot的设计者们在“可视化视图”的表现方式、详略程度、美观程度方面都有过认真的思考和碰撞，达到了相对比较均衡的状态。即使是没有任何编程经验的新手，看到“可视化视图”，也可以大致掌握其中的逻辑。</p>
+<p>将命令区、组装区、属性区从左到右进行排列，是UiBot的默认排列方式。您也可以拖动每个区域上的标签，将其调整到您喜欢的排列方式。</p>
+</section>
+<section class="level2" id="源代码视图">
+<h2><span class="header-section-number">2.4</span> 源代码视图</h2>
+<p>您也许已经注意到了，在组装区的上面，有一个可以左右拨动的开关，左右两边的选项分别是“可视化”和“源代码”，默认是在“可视化”状态。我们可以将其切换到“源代码”状态，此时，属性变量区会消失，组装区会变成如下图所示的样子：</p>
+<figure>
+<img alt="流程块编辑界面(源代码视图)" src="../../doc/guide/d1/media/file6.png" style="width:100.0%"><figcaption>流程块编辑界面(源代码视图)</figcaption>
+</figure>
+<p>采用这种方式展现的组装区，称为“源代码视图”。与“可视化视图”类似，“源代码视图”实际上也展现了当前流程块中所包含的命令，以及每条命令的属性。但没有方块把每个命令标识出来了，也没有属性区把每个属性整齐的罗列出来了，而是全部以程序代码的形式来展现。</p>
+<p>如果您对UiBot已经比较熟悉了，那么切换到源代码视图，手不离开键盘即可书写命令和属性。UiBot对源代码视图进行了很多体验上的优化，能帮您快速选择所需的命令，快速填写各个属性，让您以快意的心情书写一条条的命令。</p>
+<figure>
+<img alt="在源代码视图中添加命令" src="../../doc/guide/d1/media/file7.png" style="width:70.0%"><figcaption>在源代码视图中添加命令</figcaption>
+</figure>
+<p>可视化视图和源代码视图描述的都是同一个流程块，它们实际上是同一事物的两种不同展现方式，其内涵都是一模一样的。可视化视图以图形化的方式，突出了各个命令，以及它们之间的关系，适合展现流程块的整体逻辑；源代码视图以程序代码的方式，突出了流程块的本质，并充分展现了其中的所有细节。</p>
+<figure>
+<img alt="飞机的两种视图" src="../../doc/guide/d1/media/file8.png" style="width:60.0%"><figcaption>飞机的两种视图</figcaption>
+</figure>
+<p>打个比方，可视化视图和源代码视图就像是上面这张飞机的视图一样。其实这架F-16飞机的左右两翼是基本对称的，但为什么看起来不一样呢？因为它的右翼采用外观视图绘制，展现整体造型，左翼采用透视视图绘制，展现内部构造。同一架飞机，用两种视图展现不同的内容，才能兼顾不同观众的关注点。同样道理，同一个流程块，用两种视图展现不同的内容，才能兼顾RPA平台的“简单”和“快捷”两大指标。</p>
+<p>有的读者会问，究竟我要使用可视化视图，还是源代码视图来进行RPA流程开发呢？其实，您大可不必纠结于此，因为无论您使用哪种视图，都可以<strong>随时</strong>切换到另一种视图。您在一种视图上无论编写了什么内容，切换到另一种视图以后，这些内容都会<strong>100%</strong>保留，并以另一种视图的形式展现出来，反之亦然。所以，您完全可以先用可视化视图，稍微熟悉一点儿以后，切换到源代码视图尝尝鲜，也了解一下内部原理，如果觉得暂时还有困难，再切换回可视化视图就好了。完全没有选择恐惧症！这也是UiBot的强大之处！</p>
+<p>另外，源代码视图还有一个好处，当您在论坛上、QQ群里向其他人求助的时候，只要切换到源代码视图，把源代码复制粘贴，即可以文本的方式展现您的流程块。对方可以直接阅读源代码，也可以把源代码的文本粘贴到自己的UiBot中，并切换到可视化视图查看。这样交流的效率会大大提高。</p>
+<p>在源代码视图中使用的编程语言，是UiBot自研的BotScript语言，具体的语言特性，将在后文详细描述。</p>
+</section>
+<section class="level2" id="小结">
+<h2><span class="header-section-number">2.5</span> 小结</h2>
+<p>我们在这一章学习了四个重要概念：流程、流程块、命令、属性。一个流程包含多个流程块，一个流程块包含多个命令，一个命令包含多个属性。我们还看到了三种视图：流程视图、可视化视图、源代码视图。流程视图是流程的展现，可视化视图和源代码视图都是流程块的展现。它们之间的关系如下图所示：</p>
+<figure>
+<img alt="四个概念和三个视图的关系" src="../../doc/guide/d1/media/file9.png" style="width:80.0%"><figcaption>四个概念和三个视图的关系</figcaption>
+</figure>
+</section>
+<section class="level2" id="进阶内容">
+<h2><span class="header-section-number">2.6</span> 进阶内容</h2>
+<p>本节是进阶内容，当您需要在多个流程块之间共享和传递数据、在流程图中使用“判断”组件的时候，请阅读本节内容。如果您是UiBot的初学者，可以跳过不读。</p>
+<section class="level3" id="流程图变量">
+<h3><span class="header-section-number">2.6.1</span> 流程图变量</h3>
+<p>流程图和流程块中都可以使用“变量”来存储数据：流程块中的变量，使用范围仅限于当前流程块中，在流程图和其它流程块中无法直接使用；从UiBot Creator 5.0版本开始，在流程图中也可以定义变量。如果在流程图中定义了一个变量，那么在流程图所包含的所有流程块中，都可以直接使用这个变量。</p>
+<p>下面，我们将举例说明流程图变量的具体用法。</p>
+<p>假设有一张流程图，包含两个流程块，分别命名为“流程块1”和“流程块2”，如下图所示。“流程块1”先运行，它的功能是获得当前系统时间，并将系统时间转换为字符串格式。“流程块2”后运行，它的功能是把“流程块1”生成的字符串格式的系统时间，以调试信息的方式显示出来。</p>
+<figure>
+<img alt="两个依次运行的流程块" src="../../doc/guide/d1/media/file10.png" style="width:70.0%"><figcaption>两个依次运行的流程块</figcaption>
+</figure>
+<p>由于“流程块1”和“流程块2”之间需要传递“字符串格式的系统时间”这一数据，可以将其保存在流程图变量中，进行传递。我们首先在流程图中定义这个变量。在“流程图”视图，找到并点击位于右侧的“变量”标签，可以看到所有的流程图变量，点击“添加”按钮，输入变量名<code>x</code>（不区分大小写），即可增加一个流程图变量。</p>
+<p>每个流程图变量还可以指定“使用方向”，包括“输入”、“输出”、“无”这三种使用方向。其中“输入”和“输出”都是高阶功能，在子流程中才需要使用的。我们只考虑当前这一个流程的话，将使用方向设为“无”就好。</p>
+<figure>
+<img alt="在流程图视图添加变量" src="../../doc/guide/d1/media/file11.png" style="width:40.0%"><figcaption>在流程图视图添加变量</figcaption>
+</figure>
+<p>点击流程块1的“纸和笔”图标进入流程块1的可视化视图，插入一条“获取本机当前时间”和一条“获取指定格式的时间文本”命令（在“时间”分类下），并把“获取指定格式的时间文本”中的“时间”属性设为“获取系统时间”的结果，即可得到当前时间，并以容易阅读的字符串格式保存在流程图变量<code>x</code>中。由于<code>x</code>是流程图变量，因此，在下一个流程块中，可以直接使用<code>x</code>的值。</p>
+<figure>
+<img alt="流程块1的实现" src="../../doc/guide/d1/media/file12.png" style="width:60.0%"><figcaption>流程块1的实现</figcaption>
+</figure>
+<p>如果觉得输入变量名称太麻烦，或者变量名太长记不住。也可以在流程块的“可视化视图”的“属性”区域，找到一个标有字母<code>fx</code>的按钮或者下拉按钮，按下后，会弹出一个菜单，列出所有可用的流程块变量、流程图变量和系统变量，用鼠标点选即可。如上所述：“流程块变量”仅限于当前流程块使用，“流程图变量”可以在整个流程图的任意一个流程块中使用，此外还有“系统变量”，是您不需要定义也不需要赋值的，可以直接使用里面预置的值。</p>
+<figure>
+<img alt="在下拉菜单中选择变量" src="../../doc/guide/d1/media/file13.png" style="width:40.0%"><figcaption>在下拉菜单中选择变量</figcaption>
+</figure>
+<p>下面，再点击“纸和笔”图标进入流程块2，插入一条“输出调试信息”命令，并把“输出内容”属性设为<code>x</code>（如前所述，变量<code>x</code>为流程图变量，可以直接使用，而不需要再定义）。</p>
+<figure>
+<img alt="流程块2的实现" src="../../doc/guide/d1/media/file14.png" style="width:40.0%"><figcaption>流程块2的实现</figcaption>
+</figure>
+<p>回到流程图界面，然后点击“运行”按钮，即可看到运行结果，显示出当前时间。</p>
+</section>
+<section class="level3" id="流程块的输入输出">
+<h3><span class="header-section-number">2.6.2</span> 流程块的输入输出</h3>
+<p>上一节展示了用流程图变量在两个流程块之间传递数据。这种方式简单易懂，但略有些麻烦：明明是两个流程块之间传递数据，非要把流程图也牵扯进来，显得多此一举。其实，不依靠流程图变量，两个相邻的流程块之间，也可以传递数据。前一个流程块运行结束的时候，可以将一个值“输出”，这个输出值通过两个流程块之间连接的箭头，直接“传导”到下一个流程块中。</p>
+<p>那么，如何在前一个流程块里面输出一个值，并且在后一个流程块里面获得这个值呢？</p>
+<p>很简单，首先，进入前一个流程块，在“命令区”里面找到“词法语法”下面的“跳出返回”命令，将其拖拽到“组装区”，并在“属性区”里面设置其输出值，可以是数值、字符串，也可以是变量或表达式。或者，如果您习惯使用源代码视图，在流程中书写<code>Return &lt;输出值&gt;</code>，效果也是一样的。在运行的时候，遇到这条命令，就会跳出当前流程块，并且把输出值传到后一个流程块。</p>
+<p>下面，进入后一个流程块，当其中有某条命令需要使用前一个流程块的输出值（也就是当前流程块的输入）的时候，直接在“属性区”里面，找到相应的属性，点击右侧标有字母<code>fx</code>的按钮，并在弹出的菜单中选择“系统变量”中的“流程块的输入”（如下图所示），即可在运行的时候自动获得这个值。当然，如果您习惯使用源代码视图，也可以直接书写<code>$BlockInput</code>（变量前面的<code>$</code>符号表示这是一个系统变量）。</p>
+<figure>
+<img alt="选择系统变量“流程块的输入”" src="../../doc/guide/d1/media/file15.png" style="width:40.0%"><figcaption>选择系统变量“流程块的输入”</figcaption>
+</figure>
+<p>下面，我们仍将用上一节的例子说明在流程块之间直接输出和输入的具体方法。</p>
+<p>首先进入“流程块1”，它的功能是获得当前系统时间，并将系统时间转换为字符串格式。假设转换后的结果保存在变量sRet中，那么下面只需要拖入一条“跳出返回”命令，并把sRet作为其输出值即可。这里还有一个技巧：当“获取指定格式的时间文本”命令和“跳出返回”命令相邻的时候，甚至连变量sRet都不需要，直接在“跳出返回”的属性里面按<code>fx</code>按钮，并选择系统变量“上一条命令的结果”即可，这样可以省去一个变量，并且效果也是一样的。</p>
+<figure>
+<img alt="选择系统变量“上一条命令的结果”" src="../../doc/guide/d1/media/file16.png" style="width:85.0%"><figcaption>选择系统变量“上一条命令的结果”</figcaption>
+</figure>
+<p>然后进入“流程块2”，插入一条“输出调试信息”命令，并把“输出内容”属性设为系统变量“流程块的输入”。运行整个流程图，可以看到，也得到了预期的结果。当然，这里不能只运行流程块2，否则，由于缺乏流程块1的输出，结果就会不正确了。</p>
+<p>采用流程图变量，或者使用流程块之间的输出和输入，是流程块之间传递数据的两种方式。前者使用起来更加直观，且当流程块之间的箭头发生变化的时候，也不会影响流程图变量的值。后者依赖于两个次序相邻的流程块，逻辑上更加清晰一些。采用哪种方式，取决于读者的习惯。</p>
+</section>
+<section class="level3" id="复杂流程图的实现">
+<h3><span class="header-section-number">2.6.3</span> 复杂流程图的实现</h3>
+<p>有人可能会有这样的疑惑，UiBot只提供了“开始”、“流程块”、“选择”和“结束”四种组件，其中“开始”和“结束”还不是真正的业务流程组件，仅仅通过“流程块”和“选择”这两种组件，能够胜任复杂的流程图吗？就好比下图：</p>
+<figure>
+<img alt="复杂流程图" src="../../doc/guide/d1/media/file17.jpg" style="width:70.0%"><figcaption>复杂流程图</figcaption>
+</figure>
+<p>您还真别小看UiBot这几种组件，再复杂的流程图，也可以通过这四种组件的简单排列组合来实现！</p>
+<p>我们来透过现象看本质：再复杂的流程图，按照其结构组成来分类，大致可以分为三种：顺序结构、选择结构和循环结构，下面我们就分别来看看这三类流程图如何用UiBot来实现。</p>
+<p><strong>顺序结构</strong></p>
+<p>在顺序结构中，各个步骤是按先后顺序执行的，这是一种最简单的基本结构。如图所示，A、B、C是三个连续的步骤，它们是按顺序执行的，即完成上一个框中指定的操作才能再执行下一个动作。</p>
+<figure>
+<img alt="顺序结构" src="../../doc/guide/d1/media/file18.jpg" style="width:60.0%"><figcaption>顺序结构</figcaption>
+</figure>
+<p>UiBot中实现顺序结构的顺序流程图如图所示。</p>
+<figure>
+<img alt="顺序流程图" src="../../doc/guide/d1/media/file19.png" style="width:40.0%"><figcaption>顺序流程图</figcaption>
+</figure>
+<p><strong>选择结构</strong></p>
+<p>选择结构又称分支结构，选择结构根据某些条件来判断结果，根据判断结果来控制程序的流程。在实际运用中，某一条分支路线可以为空（如图二、图三）。</p>
+<figure>
+<img alt="选择结构" src="../../doc/guide/d1/media/file20.jpg" style="width:60.0%"><figcaption>选择结构</figcaption>
+</figure>
+<p>UiBot中实现选择结构的选择流程图如图所示。</p>
+<figure>
+<img alt="用UiBot实现选择结构图一、图二和图三" src="../../doc/guide/d1/media/file21.png" style="width:100.0%"><figcaption>用UiBot实现选择结构图一、图二和图三</figcaption>
+</figure>
+<p><strong>循环结构</strong></p>
+<p>循环结构又称为重复结构，指的是流程在一定的条件下，反复执行某一操作的流程结构。循环结构下又可以分为当型结构和直到型结构。</p>
+<p>循环结构可以看成是一个条件判断和一个向回转向的组合，使用流程图表示时，判断框内写上条件，两个出口分别对应着条件成立和条件不成立时的执行路径，其中一条路径要回到条件判断本身。</p>
+<p><em>当型结构</em>：先判断所给条件P是否成立，若P成立，则执行A（步骤）；再判断条件P是否成立；若P成立，则又执行A，若此反复，直到某一次条件P不成立时为止。流程结束。</p>
+<figure>
+<img alt="当型结构" src="../../doc/guide/d1/media/file22.jpg" style="width:60.0%"><figcaption>当型结构</figcaption>
+</figure>
+<p><em>直到型结构</em>：先执行A，再判断所给条件P是否成立，若p不成立，则再执行A，如此反复，直到P成立，该循环过程结束。</p>
+<figure>
+<img alt="直到型结构" src="../../doc/guide/d1/media/file23.jpg" style="width:60.0%"><figcaption>直到型结构</figcaption>
+</figure>
+<p>UiBot中实现循环结构的循环流程图如图所示。</p>
+<figure>
+<img alt="用UiBot实现循环流程图" src="../../doc/guide/d1/media/file24.png" style="width:60.0%"><figcaption>用UiBot实现循环流程图</figcaption>
+</figure>
+<p>具体使用上，UiBot使用“判断”组件来实现上述功能，把“判断”组件拖到流程图中，并且用鼠标左键选中，即可在属性栏中看到该组件的属性。如图所示。其中“条件表达式”这一栏很关键，您可以填写一个变量或者表达式（这里只能使用流程图变量）。在流程运行到此判断时，将根据这个变量或表达式的值是否为真，来决定后面沿着“是”所示的出箭头继续运行，还是沿着“否”所示的出箭头继续运行。</p>
+<figure>
+<img alt="判断表达式" src="../../doc/guide/d1/media/file25.png" style="width:35.0%"><figcaption>判断表达式</figcaption>
+</figure>
+<p>“判断”组件有两个出箭头，一个标有“是”，一个标有“否”，当其属性中的“条件表达式”为真时，沿着“是”箭头往后运行，否则，沿着“否”箭头往后运行。如图所示。</p>
+<figure>
+<img alt="根据条件表达式来决定流程" src="../../doc/guide/d1/media/file26.png" style="width:90.0%"><figcaption>根据条件表达式来决定流程</figcaption>
+</figure>
+</section>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>

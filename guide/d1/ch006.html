@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>软件自动化_UiBot开发者指南</title>
+    <link rel="stylesheet" href="../../tutorials/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/tpl.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-fixed navbar-dark bg-primary">
+    <a class="navbar-brand pd0" href="#"><img src="https://forum.uibot.com.cn/view/img/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="//www.uibot.com.cn" target="_blank">官网 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/guide/d1">初级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/guide/d2">中级开发者指南</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//docs.uibot.com.cn/" target="_blank">命令手册</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//forum.uibot.com.cn" target="_blank">开发者社区</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row flex-xl-nowrap">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            <nav class="bd-links">
+                <!--<h1 id="toc-title">UiBot开发者指南</h1>-->
+                <ol class="toc"><li id="toc-li-2"><a href="ch002-1.html?version=0.6422463797095322#rpa简介"><span class="section-header-number">1</span> RPA简介</a></li><li id="toc-li-8"><a href="ch003-1.html?version=0.6422463797095322#基本概念"><span class="section-header-number">2</span> 基本概念</a></li><li id="toc-li-18"><a href="ch004-1.html?version=0.6422463797095322#界面元素自动化"><span class="section-header-number">3</span> 界面元素自动化</a></li><li id="toc-li-30"><a href="ch005-1.html?version=0.6422463797095322#界面图像自动化"><span class="section-header-number">4</span> 界面图像自动化</a></li><li id="toc-li-36"><a href="ch006-1.html?version=0.6422463797095322#软件自动化"><span class="section-header-number">5</span> 软件自动化</a><ol class="toc"><li id="toc-li-37"><a href="ch006-1.html?version=0.6422463797095322#excel自动化"><span class="section-header-number">5.1</span> Excel自动化</a></li><li id="toc-li-38"><a href="ch006-1.html?version=0.6422463797095322#word自动化"><span class="section-header-number">5.2</span> Word自动化</a></li><li id="toc-li-39"><a href="ch006-1.html?version=0.6422463797095322#邮件客户端自动化"><span class="section-header-number">5.3</span> 邮件客户端自动化</a></li><li id="toc-li-40"><a href="ch006-1.html?version=0.6422463797095322#浏览器自动化"><span class="section-header-number">5.4</span> 浏览器自动化</a></li><li id="toc-li-41"><a href="ch006-1.html?version=0.6422463797095322#数据库自动化"><span class="section-header-number">5.5</span> 数据库自动化</a></li></ol></li><li id="toc-li-42"><a href="ch007-1.html?version=0.6422463797095322#逻辑控制"><span class="section-header-number">6</span> 逻辑控制</a></li><li id="toc-li-48"><a href="ch008-1.html?version=0.6422463797095322#流程和任务管理"><span class="section-header-number">7</span> 流程和任务管理</a></li><li id="toc-li-54"><a href="ch009-1.html?version=0.6422463797095322#结束语"><span class="section-header-number">8</span> 结束语</a></li><li id="toc-li-55"><a href="ch010-1.html?version=0.6422463797095322#附录编程基础知识">附录：编程基础知识</a></li></ol>
+            </nav>
+        </div>
+        <div class="col-12 col-md-9 col-xl-10 bd-content">
+            
+<section class="level1" id="软件自动化">
+<h1><span class="header-section-number">5</span> 软件自动化</h1>
+<p>在RPA流程中，我们经常需要对Excel、Word等办公软件，或者浏览器等常用软件进行自动化操作。当然，这些软件都是有界面，也可以得到界面元素。理论上，学习了<a href="ch004-2.html#界面元素自动化">界面元素自动化</a>这一章，就可以对这些软件进行自动化操作了，但这样做起来会比较繁琐。因此，UiBot特地把Excel、Word、Outlook、浏览器、数据库等软件的自动化操作封装成为专门的命令，通过这些命令来操作，会比界面上的模拟更高效、更方便。比如，虽然我们可以通过界面模拟来模拟真人的操作，打开、读写一个Excel文档，但是这样非常麻烦，而通过Excel自动化的命令，只需要一两条命令就可以做到。</p>
+<p>用UiBot自动化操作这些软件之前，您的计算机需要安装相应的软件。对于Excel、Word自动化，需要安装Office 2007以上版本，或者WPS 2016以上版本；对于浏览器自动化，需要安装Internet Explorer（IE）、Google Chrome或者火狐浏览器。</p>
+<p>本章假设读者对<strong>浏览器</strong>、<strong>Word</strong>、<strong>Excel</strong>、<strong>数据库</strong>等软件及相关知识已经有初步的了解，最好是在工作中使用过这些软件。如果还缺乏了解，市面上有大量书籍可以参考，本文不另行介绍。</p>
+<section class="level2" id="excel自动化">
+<h2><span class="header-section-number">5.1</span> Excel自动化</h2>
+<p>Excel是Office办公软件的重要组成成员，它具有强大的计算、分析和图表功能，也是最常用、最流行的电子表格处理软件之一。对Excel实现自动化，是RPA流程中经常遇到的场景。</p>
+<p>在实现Excel自动化之前，我们先明确几个概念：<strong>工作簿</strong>和<strong>工作表</strong>。工作簿是处理和存储数据的文件，一个Excel文件对应一个工作薄，Excel软件标题栏上显示的是当前工作簿的名字。工作表是指工作簿中的一张表格。每个工作簿默认包含三张工作表，分别叫Sheet1、Sheet2、Sheet3，当然也可以删除或者新增工作表，就是说工作薄和工作表是一对多的关系。</p>
+<figure>
+<img alt="Excel工作薄和工作表" src="../../doc/guide/d1/media/file74.png" style="width:70.0%"><figcaption>Excel工作薄和工作表</figcaption>
+</figure>
+<p>Excel中的工作表是一个二维表格，其中包含很多<strong>单元格</strong>,使用行号和列号可以确定一个单元格的具体位置，行号通常用1,2,3,4……这样的数字序列表示；列号通常用A,B,C,D……这样的字母序列表示。这样就可以用 <strong>列号+行号</strong> 来表示一个单元格，比如B3单元格，就是指第3行第2列交界位置的那个单元格。</p>
+<figure>
+<img alt="Excel的行和列" src="../../doc/guide/d1/media/file75.png" style="width:70.0%"><figcaption>Excel的行和列</figcaption>
+</figure>
+<p>用UiBot自动化操作Excel表格的时候，首先需要打开工作簿，后面的对工作表或单元格的各种操作，都是针对某个已经打开的工作簿进行的。另外，当自动化操作Excel表格结束以后，还需要关闭已经打开的工作簿。</p>
+<p>我们来尝试用UiBot打开一个工作簿。在UiBot Creator的命令列表中，选中“软件自动化”并展开，再选中“Excel”并打开，排在第一位的就是“打开Excel”命令，用这条命令可以打开一个Excel工作簿。</p>
+<p>这条命令有五个属性，如下图所示。我们先看“文件路径”属性，这里需要指定一个Excel工作簿文件的路径，文件可以是xls、xlsx、xlsm等格式。前面说过，这个路径可以是绝对路径，也可以切换到专业模式，用诸如<code>@res"模拟数据.xlsx"</code>的格式来指代一个相对路径下的文件，相对的是您的流程所在的文件夹中，名为res的文件夹。请注意，如果使用绝对路径，推荐切换到普通模式，并点击右侧的文件夹图标的按钮，直接选取文件即可，比较简便且不容易出错。否则，如果切换到专业模式，就需要按照字符串的格式来写，不仅要用引号表示这是一个字符串，还需要把路径中的<code>\</code>符号写为<code>\\</code>。</p>
+<figure>
+<img alt="打开Excel工作簿" src="../../doc/guide/d1/media/file76.png" style="width:40.0%"><figcaption>打开Excel工作簿</figcaption>
+</figure>
+<p>如果我们指定的工作簿文件存在，在流程运行的时候，会对这个文件进行操作。如果文件不存在，在流程运行的时候，会自动创建一个空白的Excel工作簿文件，并对这个新创建的文件进行操作。</p>
+<p>下一个属性是“是否可见”，这是一个布尔类型的属性，其值只能是“是（True）”或者“否（False）”。当选择“是”的时候，这条命令会打开Excel软件，并且把这个工作簿显示出来。否则，可以在不显示Excel软件界面的情况下，仍然正常读取或修改这个工作簿文件的内容。</p>
+<p>另外两条属性是指定要打开的Excel工作簿的密码，如果没有密码，保存空白即可。</p>
+<p>在上面的“输出到”属性中，必须填写一个变量名，这个变量指代了我们打开的Excel工作簿，我们称之为一个“工作簿对象”。后面在对工作簿进行各种读取、修改操作的时候，仍然需要把这个变量填入到相应命令的“工作簿对象”属性中，表明操作是针对这个工作簿进行的。比如，上图中我们在打开工作簿的时候，“输出到”变量是<code>objExcelWorkBook</code>，后续的Excel操作命令，其“工作簿对象”属性都需要填写<code>objExcelWorkBook</code>。</p>
+<p>我们来尝试读取这个工作簿的<code>Sheet1</code>工作表里面的A1单元格的内容。插入一条“读取单元格”命令，可以看到这条命令的属性如下图所示：</p>
+<figure>
+<img alt="读取单元格" src="../../doc/guide/d1/media/file77.png" style="width:40.0%"><figcaption>读取单元格</figcaption>
+</figure>
+<p>如上所述，这里的“工作簿对象”属性，应该和“打开Excel命令”的“输出到”属性是一样的，所以我们需要填写<code>objExcelWorkBook</code>，表明我们是从刚才打开的工作簿中读取单元格内容。</p>
+<p>另外，我们需要指定“工作表”和“单元格”属性，来告诉UiBot要读取哪个工作表中的哪个单元格。“工作表”和“单元格”的指定方式也分两种：一种是按照Excel的习惯，用<code>"Sheet1"</code>和<code>"A1"</code>，分别指代名为“Sheet1”的工作表，以及名为“A1”的单元格。</p>
+<p>还有第二种方式，就是用一个整数来指代工作表。UiBot中通常是从0开始编号的，所以整数0代表的是第一张工作表，整数1代表的是第二张工作表，以此类推，而不管这个工作表实际上叫什么名字。也可以用中括号里面的两个整数，例如<code>[x, y]</code>这种方式（实际上是一个数组，如果不了解数组的概念，可以暂时不用关心这个细节），来指代单元格。其中<code>x</code>和<code>y</code>都是以1开始编号（这里以1开始编号，是为了适应Excel的习惯）的整数，<code>x</code>代表的是行，<code>y</code>代表的是列。例如<code>[1, 1]</code>其实就是<code>"A1"</code>单元格，<code>[1, 2]</code>其实就是<code>"B1"</code>单元格。</p>
+<p>用字符串的形式来指代工作表和单元格，符合Excel的一般习惯，比较容易让业务人员读懂。用整数的形式来指代工作表和单元格，可以把整数保存在变量里，根据业务逻辑的需要随时变化。例如可以用<code>[x, y]</code>来指代单元格，这里的<code>x</code>和<code>y</code>可以是变量名，随着循环而依次递增，就可以依次把多个单元格都读出来，显然灵活性更好。具体用哪种形式，可以根据实际需要来选择。</p>
+<p>“输出到”属性中还需要填写一个变量名，表示把读取到的单元格内容输出到这个变量中。如果单元格的内容是数值，那么这个变量的值也会是一个数值；如果单元格的内容是字符串，那么变量的值自然也是字符串。</p>
+<p>在我们的工作中，经常需要读取Excel工作簿的多个单元格里面的数据，如果用UiBot每次读取一个单元格，既低效又麻烦。实际上，UiBot已经考虑到了读取一个区域的需求，提供了“读取区域”的命令，可以一次性的把一个矩形范围内所有单元格的内容全部读取出来。我们试着插入一条“读取区域”命令，它的属性如下图所示。</p>
+<figure>
+<img alt="读取区域" src="../../doc/guide/d1/media/file78.png" style="width:40.0%"><figcaption>读取区域</figcaption>
+</figure>
+<p>从上图可以看出，“读取区域”命令与“读取单元格”命令相比，有两个属性完全一致，即“工作薄对象”和“工作表”，这两个属性表示需要读取哪个工作薄的哪个工作表的内容。</p>
+<p>“区域”属性同样采用字符串的形式（需要加双引号表示这是一个字符串），同样按照Excel的习惯来填写，这里填写的是<code>"A1:B2"</code>，表示读取的是从左上角A1单元格到右下角B2单元格，共计2行2列，4条数据。</p>
+<p>当然，除了用字符串之外，还可以用一个“二维数组”来指代要读取的区域，例如<code>"A2:B6"</code>可以写为<code>[[2,1], [6,2]]</code>，这里的几个整数都可以写为变量，这样的话，读取的范围就可以根据业务逻辑来变化了，灵活性更好。当然，如果您还不了解二维数组，可以暂时先忽略这种指代方式，先用字符串来指代就好。</p>
+<p>“输出到”属性中填写了一个变量名<code>arrayRet</code>，读取到的内容将会输出到这个变量中。例如，对于下图所示的表格，我们要求UiBot读取<code>"A1:F2"</code>的区域，并且在“读取区域”命令之后，加入一条“输出调试信息”命令，将arrayRet这个变量的值打印出来。</p>
+<figure>
+<img alt="要读取的Excel表格内容" src="../../doc/guide/d1/media/file79.png" style="width:50.0%"><figcaption>要读取的Excel表格内容</figcaption>
+</figure>
+<p>从输出信息可以看到，“读取区域”命令输出的是一个二维数组，在上图的例子中，输出的结果是：<code>[[ "刘备", "关羽", "张飞", "赵云", "马超", "黄忠" ], [ "20K", "18K", "15K", "12K", "10K", "10K" ]]</code></p>
+<p>对于编程的概念不熟的读者，可能还不了解“数组”、“二维数组”是什么，这些概念会在后文中详细讲解，现在我们只需要知道：利用Excel的“读取区域”命令，可以将一个Excel表格某块区域内的数据全部读取出来，并放到了一个变量<code>arrayRet</code>中。</p>
+<p>既然能读取，同样也能够写入。UiBot提供了一系列的Excel写入命令来修改工作薄的内容。我们来尝试将上述工作簿的<code>Sheet1</code>工作表里面的A7单元格的内容写为<code>“张三”</code>。在“打开Excel”命令之后插入一条“写入单元格”命令，可以看到这条命令的属性如下图所示：</p>
+<figure>
+<img alt="写入单元格" src="../../doc/guide/d1/media/file80.png" style="width:40.0%"><figcaption>写入单元格</figcaption>
+</figure>
+<p>其中，“工作簿对象”、“工作表”和“单元格”三个属性的含义与“读取单元格”命令一致，表示本条命令操作的是哪个“工作簿对象”的哪个“工作表”的哪个“单元格”。</p>
+<p>“数据”属性中填入的是即将写入单元格的数据，如果在普通模式下填写这个属性，会以文本格式写入Excel的单元格。如果切换到高级模式，还可以填写数值、字符串，变量或者表达式。</p>
+<p>Excel写入类命令，还有一个很重要的属性叫作“立即保存”。如果这个属性选择“是”，那么写入操作会被立即保存，就好比我们手动修改Excel文件内容后，立即按<code>“Ctrl+S”</code>进行保存一样；而如果这个属性选择“否”，那么写入操作将不会被立即保存，除非单独调用一次“保存Excel”命令，或者在“关闭Excel”命令的“立即保存”属性选择“是”，两种方法效果一样，都可以保存Excel修改的内容。</p>
+<p>其它的Excel写入类命令的用法与“写入单元格”命令类似，在此不再赘述。需要注意的是：每个写入类命令的“数据”属性，必须与这条写入命令的写入范围一致，这样才能保证数据能够正确写入。就是说，写入一个单元格，“数据”属性就应该是一个单元格的数据；写入一行，“数据”属性就应该是一行单元格的数据（一维数组），且数组的长度与该工作表数据的列数相等；写入区域，“数据”属性就应该是几行几列单元格的数据（二维数组）。如果不一致，很容易报错或者出现写入Excel数据错位的情况。UiBot中还提供了“创建多维数组”命令，可以快速创建一维、二维甚至更高维的数组，以便写入。</p>
+<p>在Excel操作完成后，建议使用UiBot的“关闭Excel工作簿”功能，把当前操作的Excel工作簿关掉。否则，即使UiBot的流程运行结束了，Excel仍然是打开状态的，还会消耗系统资源。特别是当我们在打开Excel工作簿时选择了“不可见”的时候，虽然Excel的界面被隐藏了，但其实一直还处于打开状态，不仅会消耗系统资源，还不太容易被发现。</p>
+</section>
+<section class="level2" id="word自动化">
+<h2><span class="header-section-number">5.2</span> Word自动化</h2>
+<p>与Excel类似，Word也是Office办公软件的重要组成成员。Word格式的文档几乎是办公文档的事实标准，对Word实现自动化，也是RPA流程中经常会遇到的。</p>
+<p>和Excel类似，用UiBot自动化操作Word文档的时候，首先需要打开这个Word文档，后面对文档内容的各种操作，都是针对这个已经打开的文档进行的。当操作Word文档结束以后，还需要关闭已经打开的文档。</p>
+<p>我们来尝试用UiBot打开一个Word文档。在UiBot Creator的命令列表中，选中“软件自动化”并展开，再选中“Word”并打开，排在第一位的就是“打开文档”命令，用这条命令可以打开一个Word文档。</p>
+<p>这条命令有五个属性，如下图所示。我们先看“文件路径”属性，这里需要指定一个Word文件的路径，文件可以是doc、docx等格式，其它注意事项与上一节的“打开Excel”命令的“文件路径”属性一致。这里我们打开的是res目录下的 <code>模拟数据.docx</code> 文件。</p>
+<figure>
+<img alt="打开Word文档" src="../../doc/guide/d1/media/file81.png" style="width:40.0%"><figcaption>打开Word文档</figcaption>
+</figure>
+<p>接下来是“访问时密码”和“编辑时密码”两个属性。有时候，出于隐私的考虑，我们的文档不希望他人能够打开，或者打开后不能修改，因此就给Word文档设置密码，密码分为两个：一个叫“访问密码”，输入正确的访问密码就可以打开这个文档；一个叫“编辑密码”，输入正确的编辑密码就可以修改这个文档。这里的“访问时密码”和“编辑时密码”两个属性就是用来自动化访问带密码的Word文档的。如果所操作的Word文档没有设置密码，那么这两个属性保持为空即可。</p>
+<p>“是否可见”属性与“打开Excel”的“是否可见”属性含义相同，表示在进行Word文档自动化操作时，是否显示Word软件界面。</p>
+<p>还有最后一条“输出到”属性，与“打开Excel”的“输出到”属性含义类似，这里必须填写一个变量名，这个变量指代了我们打开的Word文档，后面在对该文档进行各种读取、修改操作的时候，仍然需要把这个变量填入到相应命令的“文档对象”属性中，表明操作是针对这个打开的文档进行的。比如，上图中我们在打开文档的时候，“输出到”变量是<code>objWord</code>，后续的Word操作命令，其“文档对象”属性都需要填写<code>objWord</code>。</p>
+<p>接下来，我们读取这个Word文档的内容。在“打开文档”命令之后，插入一条“读取文档”命令，这条命令的属性如下图所示：</p>
+<figure>
+<img alt="读取Word文档" src="../../doc/guide/d1/media/file82.png" style="width:40.0%"><figcaption>读取Word文档</figcaption>
+</figure>
+<p>如上所述，“文档对象”属性和“打开文档”的“输出到”属性一致，都为<code>objWord</code>，表明我们是从刚才打开的文档中读取内容。</p>
+<p>“输出到”属性填写了一个变量名<code>sRet</code>，表示把读取到的内容输出到变量<code>sRet</code>中。我们再添加一条“输出调试信息”命令，将<code>sRet</code>的内容显示出来，运行后，可以看到如下结果：</p>
+<figure>
+<img alt="读取Word文档的输出结果" src="../../doc/guide/d1/media/file83.png" style="width:60.0%"><figcaption>读取Word文档的输出结果</figcaption>
+</figure>
+<p>我们打开原始文档来对比一下，可以看到：原始Word文档包括文字、表格和图片，且文字带格式信息，“读取文档”命令会将文档中的文字内容全部读取出来，但是暂时不支持读取文字的格式、表格的状态和图片。</p>
+<figure>
+<img alt="原始Word文档" src="../../doc/guide/d1/media/file84.png" style="width:60.0%"><figcaption>原始Word文档</figcaption>
+</figure>
+<p>“读取文档”命令操作的是整个文档，类似命令还有“重写文档”、“保存文档”、“文档另存为”、“关闭文档”、“获取文档路径”等，这些命令都是对整个文档的操作。如果需要对文档进行更细粒度的操作，就需要涉及到Word中一个重要的概念：<strong>焦点</strong>。所谓焦点，指的是当前选中的区域，这块区域在Word中通常会高亮显示；如果没有选中区域，当前光标位置即为焦点。即：<code>“焦点”=“选中”或“光标”</code>。Word的操作大都针对焦点进行，例如，要改变一段文字的字体，首先要选中这段文字，才能修改文字的大小、颜色、样式等；在Word中插入文字、图片等内容，也需要先将光标移动到插入点。</p>
+<p>我们来看看UiBot中如何实现焦点的设置和切换。插入一条“设置光标位置”命令，这条命令可以将光标焦点设置到指定位置。这条命令有三个属性：“文档对象”属性，就是上文所述的文档对象<code>objWord</code>；“移动次数”属性需要与可选属性中的“移动方式”属性配合使用，指的是光标按照“移动方式”移动多少次，“移动方式”属性有三个选项，分别是“字符”、“行”和“段落”，分别代表光标向右移动一个字符、向下移动一行和向下移动一个段落。在这里，“移动方式”设置为“行”，“移动次数”设置为2，表示焦点设置为初始焦点下移两行，也就是第三行。需要注意的是：移动次数不能为负数，也就是说，光标不能向左移动、向上移动。</p>
+<figure>
+<img alt="设置焦点" src="../../doc/guide/d1/media/file85.png" style="width:40.0%"><figcaption>设置焦点</figcaption>
+</figure>
+<p>我们再插入一条“选择行”命令，这条命令可以选中特定的行。这条命令有三个属性：“文档对象”属性，就是上文所述的文档对象<code>objWord</code>；“起始行”属性和“结束行”属性限定了选中的范围，在这里，“起始行”设置为1，“结束行”设置为2，表示选中第1行到第2行，一共2行。</p>
+<figure>
+<img alt="选择行" src="../../doc/guide/d1/media/file86.png" style="width:40.0%"><figcaption>选择行</figcaption>
+</figure>
+<p>但是，在实际的应用中，单独使用“设置光标位置”命令和“选择行”命令进行光标焦点的设定，实际效果并不好，这是为什么呢？原来，Word虽然是一个所见即所得的可视化图文混排软件，但是Word中同样存在一些看不见的格式标记，这些格式表示或多或少会影响Word文档中“字符”、“行”和“段落”的计算，导致焦点定位不准的问题。那如何来解决这个问题呢？这里教给大家一个技巧：首先，我们在Word文档中，需要插入或者编辑的地方设置一个特殊的标记，例如插入名称字段，就设置在<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">Name</annotation></semantics></math>；然后，使用“查找文本后设置光标位置”命令，这条命令有两个关键属性，一个是“文本内容”属性，填写前面的<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">Name</annotation></semantics></math>即可，一个是相对位置属性，选择“选中文本”，这样就可以找到<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>a</mi><mi>m</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">Name</annotation></semantics></math>这个标记并选中这个标记的内容；最后，使用“写入文字”命令将选中内容替换成需要的内容。我们可以在Word文档中多设置几个这样的特殊标记，然后重复利用“查找文本后设置光标位置”命令，达到Word文档填写的目的。</p>
+<p>继续前述内容，将光标移动到指定位置或者选中指定内容后，就可以执行具体的编辑操作了，包括插入内容、读取内容、删除内容、设置内容的格式、剪切/复制/粘帖等等，我们这里以“设置文字大小”命令为例。在“选择行”命令之后，插入一条“设置文字大小”命令。这条命令有两个属性：“文档对象”属性，就是上文所述的文档对象<code>objWord</code>；“字号大小”属性指定选中文字的字号大小，在这里，“字号大小”设置为9，表示选中文字的字号大小统一设置为9。</p>
+<figure>
+<img alt="设置文字大小" src="../../doc/guide/d1/media/file87.png" style="width:50.0%"><figcaption>设置文字大小</figcaption>
+</figure>
+</section>
+<section class="level2" id="邮件客户端自动化">
+<h2><span class="header-section-number">5.3</span> 邮件客户端自动化</h2>
+<p>我们在日常工作中，经常需要发送或接收邮件。让RPA流程来自动发送或接受邮件，是很常见的需求。为了实现邮件的自动发送和接收，通常有两种方法：一种是直接通过SMTP/POP3/IMAP等邮件协议来实现，一种是通过邮件客户端来实现。前者不需要在计算机上安装任何客户端软件即可完成，但配置较为繁琐。后者需要依赖于邮件客户端软件，但相对比较简单。本章先介绍后者，即依赖邮件客户端的方式。UiBot支持两种常见的邮件客户端：Microsoft Outlook和IBM Notes。</p>
+<p>Outlook是微软公司的主打邮件传输和协作客户端产品，也是Office软件套装的组件之一。下图是使用Outlook2019编写一封新邮件的界面展示：</p>
+<figure>
+<img alt="Outlook" src="../../doc/guide/d1/media/file88.png" style="width:80.0%"><figcaption>Outlook</figcaption>
+</figure>
+<p>使用UiBot自动化操作Outlook客户端，可直接使用“发送邮件”、“获取邮件列表”、“回复邮件”、“下载附件”这些命令，与用户平时在Outlook客户端上操作邮件的习惯基本相同，填写发件人、收件人、标题、正文、附件等信息即可，只是填写“发件人邮箱”、“邮箱地址”属性时，该邮箱地址一定事先在Outlook中绑定好(支持绑定多个邮箱地址）。</p>
+<p>例如，在UiBot中插入一条“发送邮件”的命令，并对命令的属性进行适当的设置即可。这些设置和您人工发邮件时填写的内容几乎没有区别，非常简单。</p>
+<figure>
+<img alt="发送邮件" src="../../doc/guide/d1/media/file89.png" style="width:50.0%"><figcaption>发送邮件</figcaption>
+</figure>
+<p>如果要收邮件，可以插入一条“获取邮件列表”的命令，并对命令的属性进行适当的设置。用一条命令可以收下多封邮件，“邮件数量”属性就是指定您需要收的邮件的数量，如果为0，代表收下邮箱中所有的邮件。</p>
+<figure>
+<img alt="收取邮件" src="../../doc/guide/d1/media/file90.png" style="width:50.0%"><figcaption>收取邮件</figcaption>
+</figure>
+<p>另外，也支持比较低频的邮件操作，如“移动邮件”、“删除邮件”命令。需要注意的是，当前Outlook自动化命令主要适配Outlook的2010、2013、2016、2019版本。</p>
+<p>同Outlook一样，UiBot还支持对IBM Notes 邮件客户端进行自动化操作，发送邮件、回复邮件、获取邮件、下载附件这些操作同样直接使用“发送邮件”、“回复邮件”、“获取邮件列表”、“下载附件”这几个命令就可以实现；前提条件一样，都需要事先绑定发件人邮箱，而不同点在于配置属性：IBM Notes 不需要填写发件人邮箱，但存在“密码模式”，所有自动化命令都要配置密码，包括“移动邮件”、“删除邮件”命令。下图以“发送邮件”为例进行展示。其他各个命令也比较类似，不再赘述。</p>
+<figure>
+<img alt="用IBM Notes发送邮件" src="../../doc/guide/d1/media/file91.png" style="width:50.0%"><figcaption>用IBM Notes发送邮件</figcaption>
+</figure>
+<p>UiBot在自动化操作IBM Notes的时候，对IBM Notes版本也存在一定要求，目前主要适配了9.0.1和11.1的中文版。IBM Notes的版本号在如下的界面中可以查到。</p>
+<figure>
+<img alt="IBM Notes 9.0" src="../../doc/guide/d1/media/file92.png" style="width:50.0%"><figcaption>IBM Notes 9.0</figcaption>
+</figure>
+</section>
+<section class="level2" id="浏览器自动化">
+<h2><span class="header-section-number">5.4</span> 浏览器自动化</h2>
+<p>浏览器的自动化是软件自动化的一个重要组成部分，从特定上的网站上抓取数据、自动化操作Web形态的业务系统都需要基于浏览器进行自动化操作。</p>
+<p>首先，我们需要打开一个浏览器，这个功能是通过“启动新的浏览器”命令来实现的。当然，如果计算机此时已经打开了一个浏览器，我们也可以直接利用这个打开的浏览器进行后续操作，此时，只需要一条“绑定浏览器”命令，其效果和“启动新的浏览器”命令是一样的。</p>
+<figure>
+<img alt="启动新的浏览器" src="../../doc/guide/d1/media/file93.png" style="width:50.0%"><figcaption>启动新的浏览器</figcaption>
+</figure>
+<p>“启动新的浏览器”命令的属性如下：“浏览器类型”属性指定启动哪个浏览器。UiBot目前支持IE浏览器、Google Chrome浏览器、UiBot浏览器等多种类型的浏览器，其中，UiBot浏览器是UiBot Creator 5.0版本后自带的，不需要额外安装。在这里，我们选择的是“UiBot Brower”，即UiBot自带的浏览器。相比其它三种浏览器，UiBot浏览器有如下优点：第一、无需安装任何浏览器扩展，即可选取目标元素（Google Chrome和Firefox都需要安装扩展，在这个过程中，有时候会有一些意外的情况发生，例如被杀毒软件拦截等）；第二、UiBot浏览器可以选取到跨域网页中的目标元素（使用其它浏览器登录网易、QQ等邮箱时无法找到用户名和密码输入框）；第三、UiBot浏览器可以直接调用所访问页面内的JavaScript方法。基于上述优点，我们推荐优先使用UiBot浏览器。当然，也有些比较特殊的网站，只能使用特定的浏览器才能正确打开和操作，比如某些国内银行网站，某些政府网站等，都只能使用IE浏览器才能正确打开和操作，这个时候，“浏览器类型”属性就只能选择“IE浏览器”了。</p>
+<p>“打开链接”属性表示打开浏览器时，同时打开哪个网址。在这里填写的是<code>"www.baidu.com"</code>，表示打开浏览器时，同时打开百度网站。当然，这里也可以暂时不填，后面再使用“打开网页”命令单独打开一个网址。</p>
+<p>“超时时间”属性的意思是，如果出现异常情况，比如浏览器找不到，或者指定的链接打不开时，UiBot会反复进行尝试，直到超过指定的时间，也就是“超时时间”。</p>
+<p>有两个可选属性也比较常用：一个是“浏览器路径”属性。有时候，我们会在同一台电脑上安装了两个不同版本的浏览器软件，这时，我们可以通过指定“浏览器路径”属性来打开某个特定版本的浏览器。如果不指定这个属性，系统会去浏览器默认安装目录下查找并启动浏览器软件；另一个是“浏览器参数”属性，我们知道，浏览器其实是非常强大的，浏览器除了能够默认启动外，还可以通过自定义启动参数，包括默认打开某些网页、展现方式（全屏等）、启用或禁用某些功能等，来启动一个个性化的浏览器。具体每种浏览器可以配置哪些启动参数，请参见相应的说明文档。</p>
+<p>启动浏览器后，就可以针对浏览器及浏览器中显示的网页进行一系列的操作，我们可以浏览网页、在网页中输入文字、点击网页中的链接和按钮等。比如，打开了百度网站，我们可以在百度主页的输入框中，输入“UiBot”，并点击“百度一下”按钮，就可以得到“UiBot”在百度中的搜索结果。这些操作都可以通过前面章节的“有目标命令”完成，搜索结果也可以通过“数据处理”命令进行处理，完成数据抓取、数据分析等功能，这些功能将在后续教程“数据处理”中详细讲解，这里就不再展开。</p>
+</section>
+<section class="level2" id="数据库自动化">
+<h2><span class="header-section-number">5.5</span> 数据库自动化</h2>
+<p>一个信息系统中，最重要的就是数据，现在，几乎所有的信息系统都将数据存储在数据库中。除了使用客户端访问数据库之外，有时候，也需要直接对数据库进行访问和操作，因此，针对数据库的自动化操作也成为了RPA中不可或缺的一环。所谓数据库自动化操作，指的是在保证数据安全的前提下，直接使用用户名和密码登录数据库，并使用SQL语句对数据库进行操作。关于SQL的基础知识，请参见网络上的<a href="https://www.w3school.com.cn/sql/sql_intro.asp">SQL教程</a></p>
+<p>我们来看一下具体如何操作数据库。首先，需要连接数据库。在“软件自动化”的“数据库”目录下，选择并插入一条“创建数据库对象”命令，该命令将创建一个连接指定数据库的数据库对象。</p>
+<figure>
+<img alt="创建数据库对象" src="../../doc/guide/d1/media/file94.png" style="width:40.0%"><figcaption>创建数据库对象</figcaption>
+</figure>
+<p>“创建数据库对象”命令有三个属性：“数据库类型”属性指定了创建的数据库对象的类型，UiBot目前支持MySQL、SQL Server、Oracle、Sqlite3、PostgreSQL共五种数据库类型。“数据库配置”属性描述了创建数据库对象时的一些关键信息，这段信息比较长，也不太容易看懂，不过没关系，点击右边的“纸和笔”按钮，会弹出一个窗口，显示“数据库配置”的更多属性，如下图所示：</p>
+<figure>
+<img alt="数据库配置" src="../../doc/guide/d1/media/file95.png" style="width:55.0%"><figcaption>数据库配置</figcaption>
+</figure>
+<p>“host”和“port”指的是数据库的IP地址和端口号，这里填写的是“192.168.0.1”和“3306”，表明数据库可以通过“192.168.0.1:3306”这个地址进行访问；“user”和“password”指的是访问数据库的用户名和密码；“database”指的是我们连接的数据库的名称；“charset”指的是数据库的字符集，通常保持默认“utf8”即可。数据库的具体配置各有不同，以上信息的配置，可以询问您要访问的数据库的管理员。</p>
+<p>当然，每种类型的数据库，其配置属性可能不完全相同，比如Oracle数据库，没有“database”参数，只有“sid”参数，但其含义是类似的。Sqlite3数据库跟另外三个数据库差别比较大：MySQL、SQL Server、Oracle是典型的关系型数据库，而Sqlite3是文件型数据库，因此Sqlite3的“数据库配置”属性，只有“filepath”一个子属性，指明了所操作的Sqlite3数据库文件的路径。对于PostgreSQL数据库，“数据库配置”属性与MySQL比较略有不同，但当前仅支持关系型特性的自动化操作，PostgreSQL其他的现代特性暂不支持。</p>
+<p>和其他的软件自动化命令类似，可以在“输出到”属性这里填写一个变量名，这个变量会保存创建的数据库对象，在这里我们填写<code>objDatabase</code>，后续的所有数据库操作都针对<code>objDatabase</code>数据库对象进行。</p>
+<p>成功创建数据库对象后，接下来可以对数据库进行操作了。UiBot提供两种数据库操作：一种是查询数据，对应“执行单SQL查询”和“执行全SQL查询”两条命令；一种是对数据库、表和表中数据进行修改，对应“执行SQL语句”和“批量执行SQL语句”两条命令。</p>
+<p>我们先来看看“执行单SQL查询”命令，这条命令可以执行一条SQL查询语句，并且返回查询到的第一条结果。插入一条“执行单SQL查询”命令，可以看到这条命令有三个属性：一个是“数据库对象”属性，这个属性填入刚刚得到的数据库对象<code>objDatabase</code>；一个是“SQL语句”属性，这个属性填入将要执行的查询语句，这里填入的是<code>"select * from table1"</code>，意思是查询<code>table1</code>表的所有数据，并返回第一条结果；第三个属性是“输出到”属性，这里填入一个变量iRet，表示SQL语句的执行结果，我们通过判断iRet的值来判断SQL语句是否成功执行。</p>
+<figure>
+<img alt="执行单SQL查询" src="../../doc/guide/d1/media/file96.png" style="width:40.0%"><figcaption>执行单SQL查询</figcaption>
+</figure>
+<p>最后切记，一定要记得使用“关闭连接”命令，关闭数据库连接。这条命令的唯一属性——“数据库对象”属性，填入数据库对象<code>objDatabase</code>，即可关闭数据库连接。</p>
+<figure>
+<img alt="关闭连接" src="../../doc/guide/d1/media/file97.png" style="width:40.0%"><figcaption>关闭连接</figcaption>
+</figure>
+</section>
+</section>
+
+        </div>
+    </div>
+   <script src="../../tutorials/js/jquery.slim.min.js"></script>
+    <script src="../../tutorials/js/popper.min.js"></script>
+    <script src="../../tutorials/js/bootstrap.min.js"></script>
+     <script>
+        $(function () {
+            // $('#toc a').prop('target', 'main');
+            $('.toc a').click(function () {
+                $('.toc a.active').removeClass('active');
+                var self = $(this);
+                if (!self.hasClass('active')) {
+                    $(this).addClass('active')
+                }
+            })
+            var hash = window.location.hash;
+            if(hash) {
+                hash = hash.substring(1);
+                hash = decodeURIComponent(hash);
+                console.log(hash);
+                $('.toc a[href$="' +hash+'"]').addClass('active');
+            }
+        })
+    </script>
+</div></body>
+</html>
