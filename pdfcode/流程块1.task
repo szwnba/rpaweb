@@ -1,0 +1,197 @@
+Dim markdown_content,objPoint,bRet,objUiElement,item,resp
+Import html2markdown
+Dim bdResp,hWeb,iRet,dictRet,arrRet,dictScrollPostion,sRet
+dictRet = Dialog.UDFDialog("输入仿写的公众号文章",@res"1710863839347.json",{},{"iTimeout": 0, "strTimoutClick": "ok", "bInterruptTimeout": true})
+TracePrint($PrevResult)
+is_rewrite_title = CInt(dictRet['是否重写标题'])
+//发表方式：0=每一个链接发表一次；1=最多累计8篇一起发；
+publish_type = CInt(dictRet['发表方式'])
+article_tails = dictRet['小尾巴']
+articleUrlArr=Split(dictRet['文章链接'],'\n')
+auto_publish = CInt(dictRet['自动发布文章'])
+TracePrint(articleUrlArr)
+hWeb = WebBrowser.Create("chrome","about:blank",30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200,"sBrowserPath":"","sStartArgs":"--start-maximized"})
+objUiElement = Window.GetActive()
+Window.Show(objUiElement,"max")
+Keyboard.Press("T", "press", ["Ctrl"],{"iDelayAfter": 300, "iDelayBefore": 200, "sSimulate": "simulate"})
+//切换为英文输入模式，看个人习惯修改
+articleUrlLen=Len(articleUrlArr)
+For i = 0 To articleUrlLen-1 step 1
+//非第一个，那就打开新的标签页，防止将当前编辑页面关闭掉
+articleItem = articleUrlArr[i]
+prompt = ''
+if StartsWith(articleItem,"http") = True
+    //说明是公众号链接，那么就先采集，再去仿写
+    If i > 0 
+        Keyboard.Press("T", "press", ["Ctrl"],{"iDelayAfter": 300, "iDelayBefore": 200, "sSimulate": "simulate"})
+    End If
+    iRet = WebBrowser.GoURL(hWeb,articleUrlArr[i],true,{},30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    title=Text.Get(@ui"文章标题",3000,{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":200,"bSetForeground":true})
+    TracePrint('title='+title)
+    If title = '' 
+        title = WebBrowser.GetTitle(hWeb,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    End If
+    TracePrint('title2='+title)
+    prompt = '你是一位公众号爆款文章创作者，非常注重文章开头吸引读者注意力，风格要风趣幽默，但内容又要很专业，只需要输出markdown的内容，不要其他额外的提示性文字，文章内容需适当配图，配图关键词尽量是中文，文章内容不能被识别出ai创作，内容满足1500字以上。另外不要引入原文的公众号或ID，现在请根据这个网址仿写一篇爆款文章：'+articleItem
+WebBrowser.Close(hWeb,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+Else 
+    //走按标题生成内容的逻辑
+    hWeb = WebBrowser.BindBrowser("chrome",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    title = articleItem //生成标题时，需要用到
+    prompt = '你是一位公众号爆款文章创作者，非常注重文章开头吸引读者注意力，风格要风趣幽默，但内容又要很专业，只需要输出markdown的内容，不要其他额外的提示性文字，文章内容需适当配图，文章内容不能被识别出ai创作，内容满足1500字以上。现在请根据这个标题写一篇爆款文章：'+articleItem
+End If
+//开始通过kimichat网页请求提示词
+TracePrint('开始切换到kimichat')
+bRet = WebBrowser.SwitchTab(hWeb,"url","https://kimi.moonshot.cn/chat/*",{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":200})
+If bRet = False //不存在，需要新建标签页打开kimichat
+    iRet = WebBrowser.GoURL(hWeb,'https://kimi.moonshot.cn/',true,{},30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+End If
+Clipboard.SetText(prompt)
+Mouse.Action(@ui"kimichat-聊天-输入框","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+
+Keyboard.Press("V", "press", ["Ctrl"],{"iDelayAfter": 1000, "iDelayBefore": 200, "sSimulate": "simulate"})
+Keyboard.Press("Enter", "press", [],{"iDelayAfter": 2000, "iDelayBefore": 200, "sSimulate": "simulate"})
+
+UiElement.Wait(@ui"kimichat_按钮-停止输出","hide",120000,{"bContinueOnError":false,"iDelayAfter":1000,"iDelayBefore":200})
+
+Mouse.Action(@ui"kimichat-最底部-按钮","left","click",10000,{"bContinueOnError": true, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"kimichat_按钮-复制","left","click",180000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+markdown_content = Clipboard.GetText()
+TracePrint($PrevResult)
+startIndex=InStr(markdown_content,"```markdown",1,false) + 11
+// endIndex=InStr(markdown_content,"```",4,false)
+endIndex = InStrRev(markdown_content,"```",1,false)
+markdown_content = Mid(markdown_content,startIndex,endIndex - startIndex) 
+TracePrint($PrevResult)
+File.WriteFile(@res"article_origin.md",markdown_content,"utf-8")
+
+//开始逐个查找图片，并对链接替换
+//获取markdown_content中所有的img标签，并返回数组
+markdown_imgs = html2markdown.extract_imgmd_from_markdown(markdown_content)
+//由于生成的格式为 ![关键词](图片url)  关键词是对的，但是url是访问不了，因此我们需要自行修改
+    // markdown_imgs = ['![git](http://example.com/image1.png)', '![美女](http://example.com/image2.jpg)']
+TracePrint('开始自动找图片素材')
+For Each imgItem In markdown_imgs
+    //先找出关键词，再去百度搜索，再修改链接
+    startIndex=InStr(imgItem,"[",1,false) + 1
+    endIndex=InStr(imgItem,"]",1,false)
+    TracePrint('startIndex=' + startIndex + ';endIndex=' + endIndex)
+    keyword = Mid(imgItem,startIndex,endIndex - startIndex)
+    keyword = Replace(keyword,'.',' ',false)
+    TracePrint('keyword=' + keyword)
+    //去百度找一下该关键词对应的图片
+    Keyboard.Press("T", "press", ["Ctrl"],{"iDelayAfter": 300, "iDelayBefore": 200, "sSimulate": "simulate"})
+    iRet = WebBrowser.GoURL(hWeb,'https://image.baidu.com/search/index?tn=baiduimage&ipn=r&word='+keyword+'&pn=&spn=&istype=2&ie=utf-8&oe=utf-8&cl=2&lm=-1&st=-1&fr=&fmq=1712200971900_R&ic=0&se=&sme=&width=&height=&face=0&hd=0&latest=0&copyright=0&cs=&os=&objurl=&di=&gsm=1e&dyTabStr=',true,{},30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    TracePrint($PrevResult)  
+    itemImgSrc=''
+    //注意：某些关键词可能搜不到图片 
+    itemImgSrc = UiElement.GetAttribute(@ui"百度搜图的第一张","data-imgurl",{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":1000})
+    WebBrowser.Close(hWeb,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    newImgItem = imgItem
+    //替换为百度图片的src
+    startIndex=InStr(imgItem,"(",1,false) + 1
+    endIndex=InStr(imgItem,")",1,false)
+    oldImgSrc = Mid(imgItem,startIndex,endIndex - startIndex) 
+    //将百度搜图的url通过字符串替换写入到正文中
+    markdown_content = Replace(markdown_content,oldImgSrc,itemImgSrc,false)
+Next
+//添加小尾巴
+markdown_content = markdown_content + '\n\n' + article_tails
+
+File.WriteFile(@res"article_result.md",markdown_content,"utf-8")
+//判断标题是否重写
+if is_rewrite_title = 1
+    Mouse.Action(@ui"kimichat-最底部-按钮","left","click",2000,{"bContinueOnError": true, "iDelayAfter": 500, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+    prompt = '你是一位公众号爆文作者，帮我根据下面这个标题重新生成一个吸引人的标题，注意只需要输出标题即可，原标题为：'+title
+    Clipboard.SetText(prompt)
+    Mouse.Action(@ui"kimichat-聊天-输入框","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+
+    Keyboard.Press("V", "press", ["Ctrl"],{"iDelayAfter": 1000, "iDelayBefore": 200, "sSimulate": "simulate"})
+    Keyboard.Press("Enter", "press", [],{"iDelayAfter": 2000, "iDelayBefore": 200, "sSimulate": "simulate"})
+
+    UiElement.Wait(@ui"kimichat_按钮-停止输出","hide",120000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+    
+Mouse.Action(@ui"kimichat_按钮-复制","left","click",180000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    title = Clipboard.GetText()
+    TracePrint($PrevResult)
+    title = Replace(title,'"','',false)
+End If
+bRet = WebBrowser.SwitchTab(hWeb,"url","https://editor.mdnice.com/*",{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":200})
+//没有找到打开过的墨滴页面，那就打开新的页面
+If bRet = False 
+    Keyboard.Press("T", "press", ["Ctrl"],{"iDelayAfter": 300, "iDelayBefore": 200, "sSimulate": "simulate"})
+    iRet = WebBrowser.GoURL(hWeb,"https://editor.mdnice.com/",true,{},30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+End If
+
+hWeb = WebBrowser.BindBrowser("chrome",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+Mouse.Action(@ui"墨滴的第一篇","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 3000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"墨滴-编辑框","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Keyboard.Press("A", "press", ["Ctrl"],{"iDelayAfter": 1000, "iDelayBefore": 200, "sSimulate": "simulate"})
+Keyboard.Press("Delete", "press", [],{"iDelayAfter": 1000, "iDelayBefore": 200, "sSimulate": "simulate"})
+
+Clipboard.SetText(markdown_content)
+Keyboard.Press("V", "press", ["Ctrl"],{"iDelayAfter": 3000, "iDelayBefore": 200, "sSimulate": "simulate"})
+Mouse.Action(@ui"墨滴-赋值到公众号","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+
+Log.Debug("开始同步到公众号")
+bRet = WebBrowser.SwitchTab(hWeb,"url","https://mp.weixin.qq.com/cgi-bin/appmsg?t=media/appmsg_edit*",{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":200})
+    TracePrint($PrevResult)
+    If bRet = False
+        //是否存在已打开的公众号页面
+        bExistMp = WebBrowser.SwitchTab(hWeb,"url","https://mp.weixin.qq.com/cgi-bin/home*",{"bContinueOnError":true,"iDelayAfter":300,"iDelayBefore":200})
+        If bExistMp = False 
+            Keyboard.Press("T", "press", ["Ctrl"],{"iDelayAfter": 300, "iDelayBefore": 200, "sSimulate": "simulate"})
+            iRet = WebBrowser.GoURL(hWeb,"https://mp.weixin.qq.com/",true,{},30000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+        End If
+        Mouse.Action(@ui"公众号_新建图文消息","left","click",180000,{"bContinueOnError": false, "iDelayAfter": 3000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    Else 
+        hWeb = WebBrowser.BindBrowser("chrome",10000,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":1000})
+        Mouse.Hover(@ui"公众号-编辑页-第一篇",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 10, "iCursorOffsetY": 10, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+        Mouse.Wheel(2,"down", [],{"iDelayAfter":2000, "iDelayBefore":200})
+        Mouse.Hover(@ui"公众号-编辑页-新建消息",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 10, "iCursorOffsetY": 10, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+        Mouse.Action(@ui"公众号-编辑页-浮层菜单-写新图文","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 3000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    End If
+
+    Keyboard.InputText(@ui"公众号-编辑页-标题",title,true,20,10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 500, "bSetForeground": true, "sSimulate": "message", "bValidate": false, "bClickBeforeInput": false})
+    Keyboard.PressKey(@ui"公众号-编辑页-输入内容","v",20,10000,{"bContinueOnError": false, "iDelayAfter": 3000, "iDelayBefore": 200, "bSetForeground": true, "sSimulate": "simulate", "sKeyModifiers": ["Ctrl"], "bClickBeforeInput": true})
+
+Log.Debug("开始设置封面")
+// Mouse.Action(@ui"文章设置","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+Mouse.Hover(@ui"封面图片-选择封面图",10000,{"bContinueOnError": false, "iDelayAfter": 1500, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 10, "iCursorOffsetY": 10, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"封面图片-从正文选择","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Hover(@ui"选择封面-第一张正文图",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 10, "iCursorOffsetY": 10, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"选择封面-第一张正文图","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"选择封面图_下一步","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+Mouse.Action(@ui"选择封面图-确定-完成","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 3000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+
+Log.Debug("开始设置合集")
+// Mouse.Action(@ui"合集-复选框","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+// Mouse.Action(@ui"选择合集-第一个推荐合集","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 300, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+// Mouse.Action(@ui"选择合集_确定","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 500, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "simulate", "bMoveSmoothly": false})
+//单独发表
+If  publish_type = 0
+    If auto_publish = 1 
+        Mouse.Action(@ui"发表","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+        Mouse.Action(@ui"发表-再次确认发表","left","click",10000,{"bContinueOnError": true, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+        Mouse.Action(@ui"发表-确认发表-继续发表","left","click",10000,{"bContinueOnError": true, "iDelayAfter": 8000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    Else 
+         Mouse.Action(@ui"公众号-保存为草稿","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 8000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    End If
+    
+    WebBrowser.Close(hWeb,{"bContinueOnError":false,"iDelayAfter":300,"iDelayBefore":200})
+End If
+Next
+//publish_type不为0时，才需要统一发一次
+If  publish_type <> 0
+    If auto_publish = 1 
+        Mouse.Action(@ui"发表","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+        Mouse.Action(@ui"发表-再次确认发表","left","click",10000,{"bContinueOnError": true, "iDelayAfter": 1000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+        Mouse.Action(@ui"发表-确认发表-继续发表","left","click",10000,{"bContinueOnError": true, "iDelayAfter": 8000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    Else
+        Mouse.Action(@ui"公众号-保存为草稿","left","click",10000,{"bContinueOnError": false, "iDelayAfter": 8000, "iDelayBefore": 200, "bSetForeground": true, "sCursorPosition": "Center", "iCursorOffsetX": 0, "iCursorOffsetY": 0, "sKeyModifiers": [],"sSimulate": "uia", "bMoveSmoothly": false})
+    End If
+End If
+
+
+
+
