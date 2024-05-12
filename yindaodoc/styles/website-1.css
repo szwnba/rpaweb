@@ -1,0 +1,98 @@
+.video-js {
+  width:100%;
+  height: 100%;
+}
+.gitbook-link{
+  display: none !important;
+}
+.intopic-toc h3{
+  display: none !important;
+}
+nav.intopic-toc .navbar-nav{
+  margin: 0;
+}
+nav.intopic-toc .nav > li.active > a{
+  color: #008cff;
+  border-left: 2px solid #008cff;
+}
+nav.intopic-toc .nav > li.active > a:hover{
+  color: #008cff;
+  border-left: 2px solid #008cff;
+  text-decoration: none;
+}
+nav.intopic-toc .nav > li > a{
+  font-weight:normal;
+  color: #364149;
+}
+nav.intopic-toc .navbar-nav {
+  font-weight:normal;
+  color: #364149;
+}
+nav.intopic-toc .nav > li > a:hover, nav.intopic-toc .nav > li > a:focus{
+  font-weight:normal;
+  color: #364149;
+  text-decoration: underline;
+}
+versions-select select {
+  height: 2em;
+  line-height: 2em;
+  border-radius: 4px;
+  background: #efefef;
+}
+.page-wrapper{
+  display: block;
+}
+.book.font-size-2 .book-body .page-inner section{
+  font-size: inherit;
+}
+.page-inner{
+  padding: 20px 15px 40px 20px;
+}
+@media screen and (max-width:640px) {
+  .book-header{
+    display: none;
+  }
+  .markdown-section h1{
+    font-size: 1.3em;
+  }
+  .markdown-section h2{
+    font-size: 1.2em;
+  }
+  .markdown-section h3{
+    font-size: 1em;
+  }
+  .markdown-section h4{
+    font-size: 1em;
+  }
+  .markdown-section h5{
+    font-size: 1em;
+  }
+  .markdown-section h6{
+    font-size: 1em;
+  }
+  .markdown-section p{
+    font-size: 12px;
+  }
+  .markdown-section *{
+    font-size: 12px;
+  }
+  .book-body::-webkit-scrollbar {
+    width: 4px;    
+    /*height: 4px;*/
+  }
+  .book-body::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
+  }
+  .book-body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(0,0,0,0);
+    border-radius: 0;
+    background: rgba(0,0,0,0);
+  }
+}
+.copyright{
+  height: 23px;
+  overflow: hidden;
+  display: block;
+}
